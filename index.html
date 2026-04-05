@@ -20,17 +20,17 @@ body{background:#0c0d10;color:#e8e6df;font-family:'Courier New',Courier,monospac
 .ss{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
 .mm{font-family:'Courier New',Courier,monospace}
 button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent}
-.tbtn{border-radius:4px;padding:7px 13px;font-size:11px;font-weight:600;letter-spacing:.7px;transition:all .15s}
-.pbtn{border-radius:4px;padding:7px 12px;font-size:10px;font-weight:500;letter-spacing:.7px;line-height:1.4;transition:all .15s}
-.sbtn{border-radius:4px;padding:5px 10px;font-size:10px;letter-spacing:.7px;transition:all .15s}
-.dbtn{border-radius:4px;padding:6px 9px;font-size:10px;font-weight:600;letter-spacing:.4px;line-height:1.3;min-width:42px;transition:all .12s}
+.tbtn{border-radius:4px;padding:9px 16px;font-size:14px;font-weight:600;letter-spacing:.7px;transition:all .15s}
+.pbtn{border-radius:4px;padding:9px 13px;font-size:13px;font-weight:500;letter-spacing:.7px;line-height:1.4;transition:all .15s}
+.sbtn{border-radius:4px;padding:8px 13px;font-size:13px;letter-spacing:.7px;transition:all .15s}
+.dbtn{border-radius:4px;padding:9px 11px;font-size:13px;font-weight:600;letter-spacing:.4px;line-height:1.3;min-width:50px;transition:all .12s}
 .dbtn:active,.pbtn:active,.sbtn:active{transform:scale(.96)}
 .rbtn{width:100%;text-align:left;display:grid;padding:11px 12px;border-bottom:1px solid #1a1c23;transition:background .1s}
 .rbtn:hover,.rbtn:active{background:rgba(255,255,255,.04)!important}
 .webtn{border:1px dashed #3a3d46;color:#666;border-radius:3px;padding:3px 7px;font-family:'Courier New',Courier,monospace;font-size:10px;transition:all .12s}
 .webtn:hover{border-color:#e8c547;color:#e8c547}
 .wsbtn{background:#e8c547;color:#0c0d10;border-radius:3px;padding:3px 8px;font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:700;margin-left:4px}
-.rpebtn{border:1px solid #22252e;border-radius:4px;padding:5px 11px;font-size:10px;letter-spacing:.7px;transition:all .15s}
+.rpebtn{border:1px solid #22252e;border-radius:4px;padding:8px 13px;font-size:13px;letter-spacing:.7px;transition:all .15s}
 .savbtn{background:#e8c547;color:#0c0d10;border-radius:4px;padding:6px 12px;font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:700}
 .delbtn{border:1px solid #2a2d36;color:#555;border-radius:3px;padding:3px 7px;font-family:'Courier New',Courier,monospace;font-size:10px;transition:all .12s}
 .delbtn:hover{border-color:#e05252;color:#e05252}
@@ -61,7 +61,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-ta
 /* ── WORKOUT FLOW OVERLAY ── */
 #wf-overlay{position:fixed;inset:0;z-index:200;background:#0c0d10;display:flex;flex-direction:column;overflow:hidden}
 #wf-header{background:#0e0f13;border-bottom:1px solid #1e2028;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}
-#wf-body{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:14px}
+#wf-body{flex:1;overflow-y:auto;padding:28px 14px 16px;display:flex;flex-direction:column;gap:14px}
 #wf-elapsed{font-family:'Courier New',Courier,monospace;font-size:12px;color:#555;min-width:38px;text-align:right}
 .wf-label{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:3px;font-size:11px;color:#555}
 .wf-set-counter{font-family:'Courier New',Courier,monospace;font-size:13px;color:#e8c547;letter-spacing:1px}
@@ -81,7 +81,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-ta
 .wf-timer-big{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:80px;color:#e8c547;letter-spacing:4px;line-height:1}
 .wf-prog-bar{width:100%;height:8px;background:#1a1c23;border-radius:4px;overflow:hidden}
 .wf-prog-fill{height:100%;background:#e8c547;border-radius:4px;transition:width .25s linear}
-.wf-next-label{font-family:'Courier New',Courier,monospace;font-size:11px;color:#666;text-align:center}
+.wf-next-label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:18px;font-weight:600;color:#aaa;text-align:center;line-height:1.3;padding:4px 0}
 .wf-rest-btns{display:flex;gap:10px;width:100%}
 .wf-rest-btn{flex:1;height:48px;border:1px solid #22252e;border-radius:8px;background:#14161c;color:#aaa;font-family:'Courier New',Courier,monospace;font-size:12px;letter-spacing:.5px;cursor:pointer;transition:all .12s}
 .wf-rest-btn:active{background:#1e2028;transform:scale(.97)}
@@ -522,15 +522,15 @@ function buildSchedule(phaseNum, schedMode, bwMode){
   const la = isTravel ? travelLowerA() : {day:"Tuesday", label:`Lower A — Quad & Glute Primary`,type:"lift",estTime:"~47 min",ss:false,why:"Lower A is quad and glute primary. Core has moved to Monday, Wednesday, and Saturday — Lower A is now purely lifting.",sessions:lowerA(phaseNum)};
 
   const coreBeforeZ2 = {
-    day:"Wednesday", label:"Core + Peloton Zone 2", type:"cardio",
+    day:"Wednesday", label:"Core + Peloton Zone 2", type:"lift",
     estTime: phaseNum>=3?"~60 min":"~55 min", ss:false,
     why:"Core circuit first (~14 min covering all five patterns), then Zone 2 ride. Zone 2 is low enough intensity that doing core immediately before doesn't impair performance. Wednesday sits between two heavy lifting days — Zone 2 only (not HIIT).",
     sessions:[
-      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",notes:"Rotation/obliques (bicycle crunch) + anti-extension (hollow body). Slow bicycle crunch — 2s per rep, full rotation, elbow toward knee. Hollow body: arms by sides to start, lower back stays completely flat."},
-      {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",notes:"45 crunches: 15 standard, 15 left oblique (right elbow toward left knee), 15 right oblique (left elbow toward right knee). Chin tucked, hands lightly behind ears — don't pull the neck. Leg raise: control the descent — don't drop."},
-      {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",notes:"Anti-extension (dead bug) + sustained anti-extension (plank). Dead bug: opposite arm and leg extend while lower back stays pressed to floor. Plank: squeeze glutes and abs actively — don't just hang there. Then get on the bike."},
-      {exercise:"Peloton Power Zone Endurance Ride",sets:1,reps:phaseNum>=3?"40 min":"35 min",rest:"—",sw:"—",notes:"50–65% FTP. Conversational pace — you should be able to speak full sentences. Matt Wilpers PZE rides recommended."},
-      {exercise:"Post-ride Stretch",sets:1,reps:"5 min",rest:"—",sw:"—",notes:"Hip flexors, quads, lower back."},
+      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Rotation/obliques (bicycle crunch) + anti-extension (hollow body). Slow bicycle crunch — 2s per rep, full rotation, elbow toward knee. Hollow body: arms by sides to start, lower back stays completely flat."},
+      {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"45 crunches: 15 standard, 15 left oblique (right elbow toward left knee), 15 right oblique (left elbow toward right knee). Chin tucked, hands lightly behind ears — don't pull the neck. Leg raise: control the descent — don't drop."},
+      {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Anti-extension (dead bug) + sustained anti-extension (plank). Dead bug: opposite arm and leg extend while lower back stays pressed to floor. Plank: squeeze glutes and abs actively — don't just hang there. Then get on the bike."},
+      {exercise:"Peloton Power Zone Endurance Ride",sets:1,reps:phaseNum>=3?"40 min":"35 min",rest:"—",sw:"—",peloton:true,notes:"50–65% FTP. Conversational pace — you should be able to speak full sentences. Matt Wilpers PZE rides recommended."},
+      {exercise:"Post-ride Stretch",sets:1,reps:"5 min",rest:"—",sw:"—",peloton:true,notes:"Hip flexors, quads, lower back."},
     ]
   };
   const wed = isTravel ? travelPeloton() : coreBeforeZ2;
@@ -539,28 +539,28 @@ function buildSchedule(phaseNum, schedMode, bwMode){
   const lb = isTravel ? travelLowerB() : {day:"Friday",  label:`Lower B — Hamstring Primary`,type:"lift",estTime:"~47 min",ss:false,why:"Hamstring primary, quad secondary. Core has moved off lower days — Lower B is now purely lifting.",sessions:lowerB(phaseNum)};
 
   const coreBlock = [
-    {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",notes:"Same as Wednesday. Slow bicycle crunch — 2s per rep, full rotation. Hollow body: lower back stays flat."},
-    {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",notes:"45 crunches: 15 standard, 15 left oblique, 15 right oblique. Leg raise: control the descent — don't drop."},
-    {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",notes:"Dead bug: lower back pressed to floor throughout. Plank: actively squeeze glutes and abs. Then get on the bike."},
+    {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Same as Wednesday. Slow bicycle crunch — 2s per rep, full rotation. Hollow body: lower back stays flat."},
+    {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"45 crunches: 15 standard, 15 left oblique, 15 right oblique. Leg raise: control the descent — don't drop."},
+    {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Dead bug: lower back pressed to floor throughout. Plank: actively squeeze glutes and abs. Then get on the bike."},
   ];
   let sat;
-  if(phaseNum===1) sat = {day:"Saturday",label:"Core + Peloton HIIT",type:"cardio",estTime:"~55 min",ss:false,sessions:[
+  if(phaseNum===1) sat = {day:"Saturday",label:"Core + Peloton HIIT",type:"lift",estTime:"~55 min",ss:false,sessions:[
     ...coreBlock,
-    {exercise:"Peloton HIIT Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any HIIT class — the class has a built-in warm-up. 20–30 min is plenty. Optional: follow with a separate 5-min cool-down class."},
+    {exercise:"Peloton HIIT Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",peloton:true,notes:"Pick any HIIT class — the class has a built-in warm-up. 20–30 min is plenty. Optional: follow with a separate 5-min cool-down class."},
   ]};
-  else if(phaseNum===2) sat = {day:"Saturday",label:"Core + Peloton Climb",type:"cardio",estTime:"~55 min",ss:false,sessions:[
+  else if(phaseNum===2) sat = {day:"Saturday",label:"Core + Peloton Climb",type:"lift",estTime:"~55 min",ss:false,sessions:[
     ...coreBlock,
-    {exercise:"Peloton Climb Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any Climb class — high resistance, low cadence (60–70 RPM). Class has a built-in warm-up. Optional: follow with a 5-min cool-down class."},
+    {exercise:"Peloton Climb Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",peloton:true,notes:"Pick any Climb class — high resistance, low cadence (60–70 RPM). Class has a built-in warm-up. Optional: follow with a 5-min cool-down class."},
   ]};
-  else if(phaseNum===3) sat = {day:"Saturday",label:"Core + Peloton HIIT + Zone 2",type:"cardio",estTime:"~60 min",ss:false,sessions:[
+  else if(phaseNum===3) sat = {day:"Saturday",label:"Core + Peloton HIIT + Zone 2",type:"lift",estTime:"~60 min",ss:false,sessions:[
     ...coreBlock,
-    {exercise:"Peloton HIIT Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any HIIT class. Built-in warm-up included."},
-    {exercise:"Peloton Zone 2 Cool-Down Ride",sets:1,reps:"20 min",rest:"—",sw:"—",notes:"Stay on bike after HIIT — drop to easy Zone 2 immediately. Extended fat-burning window."},
+    {exercise:"Peloton HIIT Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",peloton:true,notes:"Pick any HIIT class. Built-in warm-up included."},
+    {exercise:"Peloton Zone 2 Cool-Down Ride",sets:1,reps:"20 min",rest:"—",sw:"—",peloton:true,notes:"Stay on bike after HIIT — drop to easy Zone 2 immediately. Extended fat-burning window."},
   ]};
-  else sat = {day:"Saturday",label:"Core + Peloton Climb + Sprint",type:"cardio",estTime:"~60 min",ss:false,sessions:[
+  else sat = {day:"Saturday",label:"Core + Peloton Climb + Sprint",type:"lift",estTime:"~60 min",ss:false,sessions:[
     ...coreBlock,
-    {exercise:"Peloton Climb Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any Climb class. Built-in warm-up included."},
-    {exercise:"Peloton Sprint Class or Sprint Intervals",sets:1,reps:"10–15 min",rest:"—",sw:"—",notes:"Follow the climb with a short sprint class, or do your own: 20s all-out / 40s easy × 5 rounds. Pre-fatigued legs make this disproportionately effective."},
+    {exercise:"Peloton Climb Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",peloton:true,notes:"Pick any Climb class. Built-in warm-up included."},
+    {exercise:"Peloton Sprint Class or Sprint Intervals",sets:1,reps:"10–15 min",rest:"—",sw:"—",peloton:true,notes:"Follow the climb with a short sprint class, or do your own: 20s all-out / 40s easy × 5 rounds. Pre-fatigued legs make this disproportionately effective."},
   ]};
 
   if(schedMode==="mf" && phaseNum>=3 && !isTravel){
@@ -644,30 +644,59 @@ function set(o,re=true){Object.assign(S,o);if(re)render();}
 // ═══════════════════════════════════════════
 // AUDIO / HAPTICS / WAKE LOCK
 // ═══════════════════════════════════════════
+// ── Single AudioContext singleton, created on first user gesture ──
 let _audioCtx=null;
+function _createAudioCtx(){
+  if(_audioCtx)return;
+  try{
+    _audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    // Play a silent 1-sample buffer — required on iOS to fully unlock the context
+    const buf=_audioCtx.createBuffer(1,1,22050);
+    const src=_audioCtx.createBufferSource();
+    src.buffer=buf;src.connect(_audioCtx.destination);src.start(0);
+  }catch(e){}
+}
+// Unlock on any user interaction so the context is ready before workouts start
+['click','touchstart','keydown'].forEach(evName=>{
+  document.addEventListener(evName,function handler(){
+    _createAudioCtx();
+    if(_audioCtx&&_audioCtx.state!=="running")_audioCtx.resume().catch(()=>{});
+    document.removeEventListener(evName,handler,true);
+  },{capture:true,once:true});
+});
+
 function unlockAudio(){
-  if(!_audioCtx){
-    try{_audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}
+  _createAudioCtx();
+  if(_audioCtx&&_audioCtx.state!=="running")_audioCtx.resume().catch(()=>{});
+}
+
+function playTone(durationSec=2,freq=880){
+  _createAudioCtx();
+  const ctx=_audioCtx;
+  if(!ctx)return;
+  function _play(){
+    try{
+      const osc=ctx.createOscillator();
+      const gain=ctx.createGain();
+      osc.connect(gain);gain.connect(ctx.destination);
+      osc.frequency.value=freq;
+      osc.type="sine";
+      const t=ctx.currentTime;
+      const d=Math.max(0.05,durationSec);
+      gain.gain.setValueAtTime(0.4,t);
+      gain.gain.setValueAtTime(0.4,t+d-0.05);
+      gain.gain.linearRampToValueAtTime(0,t+d);
+      osc.start(t);osc.stop(t+d);
+    }catch(e){}
   }
-  if(_audioCtx&&_audioCtx.state==="suspended"){_audioCtx.resume();}
+  // Handle suspended, interrupted, or any non-running state
+  if(ctx.state==="running"){
+    _play();
+  }else{
+    ctx.resume().then(_play).catch(()=>{});
+  }
 }
-function beepDone(){
-  unlockAudio();
-  if(!_audioCtx)return;
-  const beeps=[[660,0],[880,0.2],[660,0.4]];
-  beeps.forEach(([freq,t])=>{
-    const osc=_audioCtx.createOscillator();
-    const gain=_audioCtx.createGain();
-    osc.connect(gain);gain.connect(_audioCtx.destination);
-    osc.frequency.value=freq;
-    osc.type="sine";
-    gain.gain.setValueAtTime(0,_audioCtx.currentTime+t);
-    gain.gain.linearRampToValueAtTime(0.4,_audioCtx.currentTime+t+0.01);
-    gain.gain.linearRampToValueAtTime(0,_audioCtx.currentTime+t+0.15);
-    osc.start(_audioCtx.currentTime+t);
-    osc.stop(_audioCtx.currentTime+t+0.2);
-  });
-}
+function beepDone(){playTone(2);}
 function vibrate(){navigator.vibrate&&navigator.vibrate([150,80,150,80,200]);}
 
 let _wakeLock=null;
@@ -750,11 +779,20 @@ const WU_LOWER_EXS=[
   {name:"Bodyweight good morning",duration:30},
   {name:"Deep squat hold",duration:30},
 ];
+const WU_CORE_EXS=[
+  {name:"Cat-cow stretch",duration:30},
+  {name:"Child's pose",duration:30},
+  {name:"Supine knee hug",duration:30},
+  {name:"Bird dog — slow",duration:30,switchAt:15,switchPrompt:"SWITCH SIDES"},
+  {name:"Spinal twist stretch",duration:30,switchAt:15,switchPrompt:"SWITCH SIDES — drop knees to other side"},
+  {name:"Hip flexor stretch",duration:30,switchAt:15,switchPrompt:"SWITCH SIDES"},
+];
 
 function getWarmupExercises(dayLabel){
   const lower=dayLabel.toLowerCase();
   if(lower.includes("lower"))return WU_LOWER_EXS;
   if(lower.includes("upper"))return WU_UPPER_EXS;
+  if(lower.includes("core")||lower.includes("peloton"))return WU_CORE_EXS;
   return null;
 }
 
@@ -763,20 +801,21 @@ function startWarmupStep(){
   if(!w||w.phase!=="warmup")return;
   const step=w.warmupExercises[w.warmupIdx];
   if(!step){
-    // All warmup steps done — go straight to first exercise
     w.phase="active";
     render();
     return;
   }
   w.warmupEnd=Date.now()+step.duration*1000;
   w.warmupTotal=step.duration;
+  w.warmupSwitchFired=false;
+  w.warmupSwitchActive=false;
   clearInterval(_timerInterval);
   _timerInterval=setInterval(()=>{
     const remaining=Math.ceil((w.warmupEnd-Date.now())/1000);
     if(remaining<=0){
       clearInterval(_timerInterval);_timerInterval=null;
-      // soft beep for warmup transition
-      beepDone();
+      playTone(2);
+      w.warmupSwitchActive=false;
       w.warmupIdx++;
       if(w.warmupIdx>=w.warmupExercises.length){
         w.phase="active";
@@ -785,10 +824,17 @@ function startWarmupStep(){
       }
       render();
     } else {
-      // In-place DOM updates — no full re-render
+      // Fire switch-sides tone+prompt at switchAt seconds remaining
+      if(step.switchAt&&remaining===step.switchAt&&!w.warmupSwitchFired){
+        w.warmupSwitchFired=true;
+        w.warmupSwitchActive=true;
+        playTone(2);
+        render(); // show switch prompt; subsequent ticks update DOM in place
+        return;
+      }
+      // In-place DOM updates
       const te=document.getElementById("wf-wu-timer");
       const pb=document.getElementById("wf-wu-fill");
-      const nm=document.getElementById("wf-wu-name");
       if(te){
         te.textContent=String(remaining);
         if(remaining<=5)te.classList.add("last5");
@@ -797,6 +843,48 @@ function startWarmupStep(){
       if(pb){
         const pct=((w.warmupEnd-Date.now())/(w.warmupTotal*1000))*100;
         pb.style.width=Math.max(0,Math.min(100,pct))+"%";
+      }
+    }
+  },250);
+}
+
+// ═══════════════════════════════════════════
+// LOG-PHASE REST TIMER (lifting days)
+// ═══════════════════════════════════════════
+function startLogTimer(secs){
+  const w=S.workout;
+  if(!w)return;
+  clearInterval(_timerInterval);_timerInterval=null;
+  w.logRestEnd=Date.now()+secs*1000;
+  w.logRestTotal=secs;
+  _timerInterval=setInterval(()=>{
+    const remaining=Math.ceil((w.logRestEnd-Date.now())/1000);
+    const te=document.getElementById("wf-log-timer");
+    const pb=document.getElementById("wf-log-fill");
+    if(remaining<=0){
+      clearInterval(_timerInterval);_timerInterval=null;
+      playTone(2);vibrate();
+      // save whatever is in inputs if not already manually saved
+      if(!w._logSaved&&w._logInputs){
+        const logMap={};
+        Object.entries(w._logInputs).forEach(([name,inp])=>{
+          if(inp.value.trim())logMap[name]=inp.value.trim();
+        });
+        commitLogWeights(logMap);
+      }
+      advanceToNextExercise();
+      render();
+    } else {
+      if(te){
+        te.textContent=String(remaining);
+        const col=remaining<=5?"#e05252":"#e8c547";
+        te.style.color=col;
+        if(te.parentElement)te.parentElement.style.borderColor=col;
+      }
+      if(pb){
+        const pct=((w.logRestEnd-Date.now())/(w.logRestTotal*1000))*100;
+        pb.style.width=Math.max(0,Math.min(100,pct))+"%";
+        pb.style.background=remaining<=5?"#e05252":"#e8c547";
       }
     }
   },250);
@@ -856,7 +944,8 @@ function buildWorkoutQueue(sessions){
   // Each step: {sessionIdx, parts:[{name,reps,weight}], sets, restSecs, type:'exercise'}
   const queue=[];
   sessions.forEach((sess,si)=>{
-    if(sess.sets<1)return; // skip rest/cardio sets=0
+    if(sess.sets<1)return; // skip sets=0
+    if(sess.peloton)return; // Peloton ride handled in separate app
     const parts=parseExerciseEntry(sess);
     const restSecs=parseRestTime(sess.rest);
     queue.push({sessionIdx:si, parts, sets:sess.sets, restSecs, exercise:sess.exercise||sess.name||""});
@@ -865,12 +954,14 @@ function buildWorkoutQueue(sessions){
 }
 
 function startWorkout(dayObj, phaseKey, schedMode, bwMode, deloadMode, dayIdx){
+  unlockAudio(); // must be called during user gesture so iOS AudioContext is ready
   const sessions=dayObj.sessions;
   const queue=buildWorkoutQueue(sessions);
   if(queue.length===0)return;
 
   const warmupExs=getWarmupExercises(dayObj.label);
   const hasWarmup=(dayObj.type==="lift"||dayObj.type==="deload")&&warmupExs!==null;
+  const isCoreDay=dayObj.label.toLowerCase().includes("core");
 
   S.workout={
     dayLabel:dayObj.label,
@@ -888,11 +979,15 @@ function startWorkout(dayObj, phaseKey, schedMode, bwMode, deloadMode, dayIdx){
     loggedWeights:{},
     exerciseSets:{},
     cardioChecked:[],
+    coreDay:isCoreDay,
+    restAdvancesQueue:false,
     // warmup
     warmupExercises:warmupExs||[],
     warmupIdx:0,
     warmupEnd:null,
     warmupTotal:30,
+    warmupSwitchFired:false,
+    warmupSwitchActive:false,
   };
 
   // For cardio/rest days use checklist mode
@@ -930,13 +1025,19 @@ function getNextDescription(){
   if(!w)return "";
   const item=w.queue[w.qIdx];
   if(!item)return "";
-  const nextSet=w.setNum+1;
-  const nextItemIdx=w.qIdx+(nextSet>item.sets?1:0);
-  const nextSetNum=nextSet>item.sets?1:nextSet;
-  const nextItem=w.queue[nextItemIdx];
-  if(!nextItem)return "Session complete";
-  const label=nextItem.parts.map(p=>p.name).join(" + ");
-  return `Set ${nextSetNum} of ${nextItem.sets} — ${label}`;
+  // restAdvancesQueue is true when the rest follows the LAST set of an exercise.
+  // In that case the next thing to do is Set 1 of the next exercise.
+  // Otherwise setNum has already been incremented to the upcoming set number.
+  if(w.restAdvancesQueue){
+    const nextItem=w.queue[w.qIdx+1];
+    if(!nextItem)return "Session complete";
+    const label=nextItem.parts.map(p=>p.name).join(" + ");
+    return `Set 1 of ${nextItem.sets} — ${label}`;
+  } else {
+    // setNum was already incremented in completeCurrentPart; it IS the next set
+    const label=item.parts.map(p=>p.name).join(" + ");
+    return `Set ${w.setNum} of ${item.sets} — ${label}`;
+  }
 }
 
 function completeCurrentPart(){
@@ -953,12 +1054,22 @@ function completeCurrentPart(){
   const isLastSet=(w.setNum>=item.sets);
 
   if(isLastSet){
-    // Go to logging phase
-    w.setNum=item.sets; // keep for display
-    w.phase="logging";
-    render();
+    w.setNum=item.sets;
+    if(w.coreDay){
+      // Core days: skip logging, rest then advance to next exercise
+      w.restAdvancesQueue=true;
+      w.phase="resting";
+      startRestTimer(item.restSecs);
+      render();
+    } else {
+      // Lifting days: show log screen with embedded rest timer
+      w.phase="logging";
+      w.logRestSecs=item.restSecs;
+      w._logSaved=false;
+      render();
+      startLogTimer(item.restSecs);
+    }
   } else {
-    // Start rest timer
     w.setNum++;
     w.phase="resting";
     startRestTimer(item.restSecs);
@@ -969,9 +1080,13 @@ function completeCurrentPart(){
 function advanceAfterRest(){
   const w=S.workout;
   if(!w)return;
-  w.phase="active";
-  w.partIdx=0;
-  // setNum already incremented before rest
+  if(w.restAdvancesQueue){
+    w.restAdvancesQueue=false;
+    advanceToNextExercise();
+  } else {
+    w.phase="active";
+    w.partIdx=0;
+  }
 }
 
 function skipExercise(){
@@ -996,7 +1111,8 @@ function advanceToNextExercise(){
   }
 }
 
-function saveLogAndContinue(logMap){
+// Saves weights to workout state without advancing (used by log-timer flow)
+function commitLogWeights(logMap){
   const w=S.workout;
   if(!w)return;
   const item=getCurrentItem();
@@ -1009,6 +1125,11 @@ function saveLogAndContinue(logMap){
       }
     });
   }
+  w._logSaved=true;
+}
+
+function saveLogAndContinue(logMap){
+  commitLogWeights(logMap);
   advanceToNextExercise();
   render();
 }
@@ -1091,31 +1212,33 @@ function renderHdr(phase){
   const h=el("div",{id:"hdr"});
   const inn=dv({cls:"inn"});
 
-  const top=dv({cls:"f fw jb ac g8 mb8"});
-  top.appendChild(dv({},
-    dv({cls:"bb",style:{fontSize:"25px",color:"#fff",lineHeight:1}},"16-WEEK UPPER/LOWER RECOMP"),
-    dv({cls:"ss",style:{fontSize:"10px",color:"#888",marginTop:"3px",letterSpacing:".5px"}},"42 YRS · 189 LBS · 24%→15% BF · DUMBBELLS + BENCH · UPPER ~44 MIN · LOWER ~47 MIN · WED/SAT CORE+BIKE ~55 MIN")
+  inn.appendChild(dv({cls:"mb8"},
+    dv({cls:"bb",style:{fontSize:"25px",color:"#fff",lineHeight:1}},"16-WEEK UPPER/LOWER RECOMP")
   ));
-  const stats=dv({cls:"f fw g6"});
-  [["STARTED","223 LBS"],["NOW","189 LBS"],["LOST","34 LBS"],["BF GOAL","15%"]].forEach(([l,v])=>{
-    stats.appendChild(dv({cls:"stc"},
-      dv({cls:"bb",style:{fontSize:"15px",color:phase.color}},v),
-      dv({cls:"mm",style:{fontSize:"8px",color:"#555",letterSpacing:"1px"}},l)
-    ));
-  });
-  top.appendChild(stats);
-  inn.appendChild(top);
 
-  // Main tabs
-  const tabs=dv({cls:"f g6 mb8"});
+  // Main tabs + test tone button
+  const tabs=dv({cls:"f g6 mb8",style:{alignItems:"center"}});
   [["PLAN","plan","#e8c547"],["HISTORY","history","#6cc97e"],["PROGRESS","progress","#6cc97e"]].forEach(([l,t,a])=>{
     const act=S.tab===t;
     tabs.appendChild(bt({cls:"tbtn ss",style:{background:act?a:"#14161c",color:act?"#0c0d10":"#666",border:act?"none":"1px solid #22252e",fontWeight:600},onClick:()=>set({tab:t})},l));
   });
+  // Small audio test button — tap to confirm tones are working before a workout
+  tabs.appendChild(bt({cls:"mm",style:{
+    marginLeft:"auto",border:"1px solid #2a2d36",borderRadius:"4px",
+    padding:"5px 10px",fontSize:"11px",color:"#555",background:"none",letterSpacing:".5px",
+  },onClick:(e)=>{
+    e.stopPropagation();
+    unlockAudio();
+    playTone(1.5,880);
+    const b=e.currentTarget;
+    const orig=b.textContent;
+    b.textContent="♪ playing…";b.style.color="#e8c547";
+    setTimeout(()=>{b.textContent=orig;b.style.color="#555";},1800);
+  }},"♪ TEST TONE"));
   inn.appendChild(tabs);
 
   inn.appendChild(dv({cls:"ibox mb8",style:{borderLeft:`3px solid ${phase.color}`}},
-    sp({cls:"ss",style:{fontSize:"11px",color:"#bbb"}},
+    sp({cls:"ss",style:{fontSize:"14px",color:"#bbb"}},
       sp({style:{color:phase.color,fontWeight:600}},"HOW IT WORKS: "),
       "Browse the program below and tap START WORKOUT to begin a guided session. Use ",
       sp({style:{color:"#e8c547"}},"+ LOG WEIGHT")," in plan view to save planned weights."
@@ -1157,20 +1280,20 @@ function renderPlanTab(phase,pk){
   f.appendChild(pt);
 
   const mc=dv({cls:"f fw g6 mb8 ac"});
-  mc.appendChild(sp({cls:"mm",style:{fontSize:"9px",color:"#555",marginRight:"3px"}},"SCHEDULE:"));
+  mc.appendChild(sp({cls:"mm",style:{fontSize:"13px",color:"#555",marginRight:"3px"}},"SCHEDULE:"));
   [["MON–SAT (STANDARD)","std"],["MON–FRI ONLY","mf"]].forEach(([l,v])=>{
     const act=S.sched===v;
     mc.appendChild(bt({cls:"sbtn mm",style:{background:act?"#e8c547":"#14161c",color:act?"#0c0d10":"#666",border:act?"none":"1px solid #22252e"},
       onClick:()=>set({sched:v,dayIdx:0,expandedRow:null})},l));
   });
   if(pNum===1){
-    mc.appendChild(sp({cls:"mm",style:{fontSize:"9px",color:"#333",margin:"0 4px"}},"·"));
+    mc.appendChild(sp({cls:"mm",style:{fontSize:"13px",color:"#333",margin:"0 4px"}},"·"));
     const act=S.bw;
     mc.appendChild(bt({cls:"sbtn mm",style:{background:act?"#9b7fd4":"#14161c",color:act?"#fff":"#666",border:act?"none":"1px solid #22252e"},
       onClick:()=>set({bw:!S.bw,dayIdx:0,expandedRow:null,deload:false})},act?"✓ TRAVEL WEEK (BW)":"TRAVEL WEEK MODE"));
   }
   if(pNum===2||pNum===3){
-    mc.appendChild(sp({cls:"mm",style:{fontSize:"9px",color:"#333",margin:"0 4px"}},"·"));
+    mc.appendChild(sp({cls:"mm",style:{fontSize:"13px",color:"#333",margin:"0 4px"}},"·"));
     const wkLabel=pNum===2?"WEEK 8 DELOAD":"WEEK 12 DELOAD";
     const act=S.deload;
     mc.appendChild(bt({cls:"sbtn mm",style:{background:act?"#e05252":"#14161c",color:act?"#fff":"#666",border:act?"none":"1px solid #22252e"},
@@ -1179,17 +1302,17 @@ function renderPlanTab(phase,pk){
   f.appendChild(mc);
 
   if(S.deload){
-    const d=dv({cls:"ibox ss fade mb10",style:{borderLeft:"3px solid #e05252",fontSize:"12px",color:"#bbb",lineHeight:"1.6"}});
+    const d=dv({cls:"ibox ss fade mb10",style:{borderLeft:"3px solid #e05252",fontSize:"14px",color:"#bbb",lineHeight:"1.6"}});
     d.appendChild(sp({style:{color:"#e05252",fontWeight:600}},"DELOAD WEEK: "));
     d.appendChild(document.createTextNode("Same exercises, same weight, 2 sets per exercise only. This is not optional — it's when supercompensation happens. Performance rebounds ABOVE pre-deload levels after a proper deload. Resist the urge to add sets."));
     f.appendChild(d);
   } else if(pNum===1&&S.bw){
-    f.appendChild(dv({cls:"ibox ss fade mb10",style:{borderLeft:"3px solid #9b7fd4",fontSize:"12px",color:"#bbb",lineHeight:"1.6"}},
+    f.appendChild(dv({cls:"ibox ss fade mb10",style:{borderLeft:"3px solid #9b7fd4",fontSize:"14px",color:"#bbb",lineHeight:"1.6"}},
       sp({style:{color:"#9b7fd4",fontWeight:600}},"TRAVEL WEEK (APRIL 13): "),
       "All exercises swapped for hotel-room bodyweight versions. A backpack with 10–15 lbs of books dramatically upgrades this week. One week of BW training will not set you back — it may actually improve Week 4 performance."
     ));
   } else {
-    f.appendChild(dv({cls:"ibox ss fade mb10",style:{borderLeft:`3px solid ${phase.color}`,fontSize:"12px",color:"#bbb",lineHeight:"1.6"}},
+    f.appendChild(dv({cls:"ibox ss fade mb10",style:{borderLeft:`3px solid ${phase.color}`,fontSize:"14px",color:"#bbb",lineHeight:"1.6"}},
       sp({style:{color:phase.color,fontWeight:600}},"PHASE GOAL: "),phase.goal));
   }
 
@@ -1213,15 +1336,15 @@ function renderPlanTab(phase,pk){
   // Day header with START WORKOUT button
   const dhdr=dv({style:{padding:"12px",borderBottom:"1px solid #1e2028",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"7px"}});
   dhdr.appendChild(dv({},
-    dv({cls:"bb",style:{fontSize:"19px",color:"#fff",letterSpacing:"2px"}},day.day+" — "+day.label),
-    dv({cls:"ss",style:{fontSize:"10px",color:ts.ac,letterSpacing:"1.5px",marginTop:"2px"}},
+    dv({cls:"bb",style:{fontSize:"22px",color:"#fff",letterSpacing:"2px"}},day.day+" — "+day.label),
+    dv({cls:"ss",style:{fontSize:"13px",color:ts.ac,letterSpacing:"1.5px",marginTop:"2px"}},
       (ts.lb||"")+" · "+day.sessions.filter(x=>x.sets>0).length+" EXERCISES")
   ));
   const dhdrRight=dv({style:{display:"flex",gap:"7px",alignItems:"center"}});
   if(day.estTime&&day.estTime!=="—"){
     dhdrRight.appendChild(dv({style:{background:`${ts.ac}18`,border:`1px solid ${ts.ac}40`,borderRadius:"4px",padding:"3px 8px",fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"13px",color:ts.ac,letterSpacing:"1px"}},"⏱ "+day.estTime));
   }
-  dhdrRight.appendChild(dv({cls:"mm",style:{fontSize:"8px",color:"#444",border:"1px solid #1e2028",borderRadius:"3px",padding:"3px 7px"}},phase.weeks));
+  dhdrRight.appendChild(dv({cls:"mm",style:{fontSize:"11px",color:"#444",border:"1px solid #1e2028",borderRadius:"3px",padding:"4px 9px"}},phase.weeks));
   dhdr.appendChild(dhdrRight);
   card.appendChild(dhdr);
 
@@ -1244,8 +1367,8 @@ function renderPlanTab(phase,pk){
     ));
   }
 
-  card.appendChild(dv({style:{display:"grid",gridTemplateColumns:"1.9fr .4fr .8fr .95fr .55fr",padding:"7px 12px",background:"rgba(255,255,255,.05)",borderBottom:"1px solid #1e2028"}},
-    ...["EXERCISE","SETS","REPS","WEIGHT","REST"].map(h=>dv({cls:"mm",style:{fontSize:"8px",color:"#555",letterSpacing:"1.5px"}},h))
+  card.appendChild(dv({style:{display:"grid",gridTemplateColumns:"1.9fr .4fr .8fr .95fr .55fr",padding:"9px 12px",background:"rgba(255,255,255,.05)",borderBottom:"1px solid #1e2028"}},
+    ...["EXERCISE","SETS","REPS","WEIGHT","REST"].map(h=>dv({cls:"mm",style:{fontSize:"11px",color:"#555",letterSpacing:"1.5px"}},h))
   ));
 
   day.sessions.forEach((sess,i)=>{
@@ -1258,14 +1381,14 @@ function renderPlanTab(phase,pk){
     const row=bt({cls:"rbtn",style:{gridTemplateColumns:"1.9fr .4fr .8fr .95fr .55fr",background:i%2===0?"transparent":"rgba(255,255,255,.018)"},
       onClick:()=>set({expandedRow:isExp?null:i})});
 
-    const nm=dv({cls:"ss",style:{fontSize:"12px",color:"#ddd",paddingRight:"5px",display:"flex",flexWrap:"wrap",alignItems:"center",gap:"4px"}},
+    const nm=dv({cls:"ss",style:{fontSize:"15px",color:"#ddd",paddingRight:"5px",display:"flex",flexWrap:"wrap",alignItems:"center",gap:"4px"}},
       sp({},sess.exercise));
     if(sess.superset)nm.appendChild(sp({cls:"ssbadge"},"SS"));
-    if(hasTip)nm.appendChild(sp({style:{fontSize:"9px",color:ts.ac,opacity:".5"}},"▾"));
+    if(hasTip)nm.appendChild(sp({style:{fontSize:"11px",color:ts.ac,opacity:".5"}},"▾"));
     row.appendChild(nm);
 
-    row.appendChild(dv({cls:"bb",style:{fontSize:"15px",color:sess.sets>0?ts.ac:"#444",letterSpacing:"1px",alignSelf:"center"}},sess.sets>0?String(sess.sets):"—"));
-    row.appendChild(dv({cls:"mm",style:{fontSize:"10px",color:"#ccc",alignSelf:"center"}},sess.reps));
+    row.appendChild(dv({cls:"bb",style:{fontSize:"18px",color:sess.sets>0?ts.ac:"#444",letterSpacing:"1px",alignSelf:"center"}},sess.sets>0?String(sess.sets):"—"));
+    row.appendChild(dv({cls:"mm",style:{fontSize:"13px",color:"#ccc",alignSelf:"center"}},sess.reps));
 
     const wc=dv({style:{alignSelf:"center"}});
     wc.addEventListener("click",e=>e.stopPropagation());
@@ -1283,7 +1406,7 @@ function renderPlanTab(phase,pk){
         setTimeout(()=>fi.focus(),30);
       } else if(logged){
         wc.appendChild(dv({style:{display:"flex",alignItems:"center",gap:"4px"}},
-          sp({style:{fontFamily:"'Courier New',Courier,monospace",fontSize:"10px",color:"#0c0d10",background:ts.ac,padding:"2px 6px",borderRadius:"3px",fontWeight:700}},logged),
+          sp({style:{fontFamily:"'Courier New',Courier,monospace",fontSize:"13px",color:"#0c0d10",background:ts.ac,padding:"3px 7px",borderRadius:"3px",fontWeight:700}},logged),
           bt({cls:"webtn",onClick:()=>set({editKey:wk,editVal:logged})},"edit")
         ));
       } else {
@@ -1294,10 +1417,10 @@ function renderPlanTab(phase,pk){
         ));
       }
     } else {
-      wc.appendChild(sw&&sw!=="—"?sp({cls:sw==="BW"?"bwbadge":"sbadge"},sw==="BW"?"BODYWEIGHT":sw):sp({cls:"mm",style:{fontSize:"10px",color:"#444"}},"—"));
+      wc.appendChild(sw&&sw!=="—"?sp({cls:sw==="BW"?"bwbadge":"sbadge"},sw==="BW"?"BODYWEIGHT":sw):sp({cls:"mm",style:{fontSize:"13px",color:"#444"}},"—"));
     }
     row.appendChild(wc);
-    row.appendChild(dv({cls:"mm",style:{fontSize:"10px",color:"#666",alignSelf:"center"}},sess.rest));
+    row.appendChild(dv({cls:"mm",style:{fontSize:"13px",color:"#666",alignSelf:"center"}},sess.rest));
     card.appendChild(row);
 
     if(isExp&&hasTip){
@@ -1348,12 +1471,12 @@ function renderPlanTab(phase,pk){
   }
 
   f.appendChild(dv({style:{marginTop:"16px"}},
-    dv({cls:"bb",style:{fontSize:"11px",letterSpacing:"3px",color:"#444",marginBottom:"9px"}},"PROGRAM MILESTONES"),
+    dv({cls:"bb",style:{fontSize:"13px",letterSpacing:"3px",color:"#444",marginBottom:"9px"}},"PROGRAM MILESTONES"),
     dv({cls:"gas"},...MS.map(m=>{
       const isDl=m.note.includes("DELOAD");
       return dv({cls:"msc",style:{borderLeft:isDl?"3px solid #e05252":"1px solid #1e2028"}},
-        dv({cls:"bb",style:{fontSize:"10px",color:isDl?"#e05252":phase.color,letterSpacing:"1.5px"}},m.wk),
-        dv({cls:"ss",style:{fontSize:"10px",color:isDl?"#aaa":"#666",marginTop:"2px",lineHeight:"1.5"}},m.note)
+        dv({cls:"bb",style:{fontSize:"13px",color:isDl?"#e05252":phase.color,letterSpacing:"1.5px"}},m.wk),
+        dv({cls:"ss",style:{fontSize:"13px",color:isDl?"#aaa":"#666",marginTop:"2px",lineHeight:"1.5"}},m.note)
       );
     }))
   ));
@@ -1422,6 +1545,18 @@ function renderWarmupPhase(body,w){
 
   const box=dv({cls:"wf-warmup-box"});
   box.appendChild(dv({id:"wf-wu-name",cls:"wf-warmup-exname"},step.name));
+
+  if(w.warmupSwitchActive){
+    box.appendChild(dv({id:"wf-wu-switch",style:{
+      background:"#e8c54730",border:"2px solid #e8c547",borderRadius:"8px",
+      padding:"10px 16px",textAlign:"center",margin:"6px 0",
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",
+      letterSpacing:"3px",color:"#e8c547",
+    }},step.switchPrompt||"SWITCH SIDES"));
+  } else {
+    box.appendChild(dv({id:"wf-wu-switch",style:{display:"none"}}));
+  }
+
   box.appendChild(dv({id:"wf-wu-timer",cls:"wf-warmup-count"+(remaining<=5?" last5":"")},String(remaining)));
 
   const pb=dv({cls:"wf-prog-bar",style:{width:"100%"}});
@@ -1622,8 +1757,11 @@ function renderRestPhase(body,w,item){
 
   const rbtns=dv({cls:"wf-rest-btns"});
   rbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
-    w.restEnd=Date.now()+(remaining+30)*1000;
-    w.restTotal=(w.restTotal||60)+30;
+    // Always add to current remaining, never to the original total
+    const now=Date.now();
+    const cur=Math.max(0,Math.ceil((w.restEnd-now)/1000));
+    w.restEnd=now+(cur+30)*1000;
+    w.restTotal=cur+30;
   }},"+30s"));
   rbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
     clearInterval(_timerInterval);_timerInterval=null;
@@ -1640,33 +1778,126 @@ function renderLoggingPhase(body,w,item){
   const titleName=item.parts.map(p=>p.name).join(" + ");
   logBox.appendChild(dv({cls:"wf-log-title"},"LOG WEIGHTS — "+titleName.toUpperCase()));
 
+  // Embedded rest timer (lifting days only)
+  const hasTimer=!w.coreDay&&w.logRestSecs;
+  if(hasTimer){
+    const restEnd=w.logRestEnd||Date.now();
+    const remaining=Math.max(0,Math.ceil((restEnd-Date.now())/1000));
+    const pct=w.logRestTotal?((restEnd-Date.now())/(w.logRestTotal*1000))*100:100;
+    const isLast5=remaining<=5&&remaining>0;
+    const timerBox=dv({style:{
+      background:"#0c0d10",border:"2px solid "+(isLast5?"#e05252":"#e8c547"),
+      borderRadius:"10px",padding:"18px 14px 14px",marginBottom:"14px",
+      display:"flex",flexDirection:"column",alignItems:"center",gap:"4px",
+    }});
+    timerBox.appendChild(dv({style:{
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",letterSpacing:"4px",
+      fontSize:"12px",color:"#555",
+    }},"REST — AUTO-ADVANCE WHEN ZERO"));
+    timerBox.appendChild(dv({id:"wf-log-timer",style:{
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+      fontSize:"160px",color:isLast5?"#e05252":"#e8c547",
+      letterSpacing:"4px",lineHeight:"1",
+    }},String(remaining)));
+    const pb=dv({cls:"wf-prog-bar",style:{width:"100%",height:"6px",marginTop:"4px"}});
+    pb.appendChild(dv({id:"wf-log-fill",cls:"wf-prog-fill",style:{
+      width:Math.max(0,Math.min(100,pct))+"%",
+      background:isLast5?"#e05252":"#e8c547",
+    }}));
+    timerBox.appendChild(pb);
+
+    // +30s / Skip Rest controls
+    const logRbtns=dv({cls:"wf-rest-btns",style:{marginTop:"8px"}});
+    logRbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
+      const now=Date.now();
+      const cur=Math.max(0,Math.ceil((w.logRestEnd-now)/1000));
+      w.logRestEnd=now+(cur+30)*1000;
+      w.logRestTotal=cur+30;
+    }},"+30 SECONDS"));
+    logRbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
+      clearInterval(_timerInterval);_timerInterval=null;
+      // save whatever is entered, then advance
+      const logMap={};
+      if(w._logInputs){
+        Object.entries(w._logInputs).forEach(([name,inp])=>{
+          if(inp.value&&inp.value.trim())logMap[name]=inp.value.trim();
+        });
+      }
+      if(!w._logSaved)commitLogWeights(logMap);
+      advanceToNextExercise();
+      render();
+    }},"SKIP REST"));
+    timerBox.appendChild(logRbtns);
+    logBox.appendChild(timerBox);
+  }
+
   const inputs={};
-  item.parts.forEach(part=>{
-    const row=dv({cls:"wf-log-row"});
-    row.appendChild(dv({cls:"wf-log-exname"},part.name));
-    // Pre-fill: extract number only from last used or planned weight
-    const lastUsed=S.exerciseWeights[part.name];
-    const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
-    const numMatch=rawWeight.match(/(\d+\.?\d*)/);
-    const prefill=numMatch?numMatch[1]:"";
-    const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
-    inputs[part.name]=inp;
-    const inputWrap=dv({style:{display:"flex",alignItems:"center",gap:"5px"}});
-    inputWrap.appendChild(inp);
-    inputWrap.appendChild(sp({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",color:"#555",letterSpacing:"1px"}},"lbs"));
-    row.appendChild(inputWrap);
-    logBox.appendChild(row);
-  });
 
-  logBox.appendChild(bt({cls:"wf-save-btn",onClick:()=>{
-    const logMap={};
-    Object.entries(inputs).forEach(([name,inp])=>{
-      if(inp.value.trim())logMap[name]=inp.value.trim();
+  if(w._logSaved){
+    // Show saved confirmation — timer still running
+    logBox.appendChild(dv({style:{
+      background:"#0d1f12",border:"2px solid #6cc97e",borderRadius:"8px",
+      padding:"14px 16px",marginBottom:"12px",
+      display:"flex",flexDirection:"column",gap:"10px",
+    }},
+      dv({style:{
+        fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"20px",
+        letterSpacing:"3px",color:"#6cc97e",textAlign:"center",
+      }},"✓ WEIGHTS SAVED"),
+      ...item.parts.map(part=>{
+        const logged=w.loggedWeights[part.name];
+        return dv({style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+          dv({cls:"ss",style:{fontSize:"20px",fontWeight:"700",color:"#aaa"}},part.name),
+          dv({style:{
+            fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"24px",
+            color:"#6cc97e",letterSpacing:"1px",
+          }},logged?logged+" lbs":"—")
+        );
+      })
+    ));
+  } else {
+    // Show input rows
+    item.parts.forEach(part=>{
+      const row=dv({cls:"wf-log-row"});
+      row.appendChild(dv({cls:"wf-log-exname"},part.name));
+      const lastUsed=S.exerciseWeights[part.name];
+      const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
+      const numMatch=rawWeight.match(/(\d+\.?\d*)/);
+      const prefill=numMatch?numMatch[1]:"";
+      const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
+      inputs[part.name]=inp;
+      const inputWrap=dv({style:{display:"flex",alignItems:"center",gap:"5px"}});
+      inputWrap.appendChild(inp);
+      inputWrap.appendChild(sp({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",color:"#555",letterSpacing:"1px"}},"lbs"));
+      row.appendChild(inputWrap);
+      logBox.appendChild(row);
     });
-    saveLogAndContinue(logMap);
-  }},"SAVE & CONTINUE"));
 
-  logBox.appendChild(bt({cls:"wf-skip-log-btn",onClick:skipLog},"SKIP"));
+    if(hasTimer){
+      // Save weights only — timer keeps running, page stays, advances automatically
+      logBox.appendChild(bt({cls:"wf-save-btn",style:{marginTop:"10px"},onClick:()=>{
+        const logMap={};
+        Object.entries(inputs).forEach(([name,inp])=>{
+          if(inp.value.trim())logMap[name]=inp.value.trim();
+        });
+        commitLogWeights(logMap);
+        render(); // re-render to show saved state; timer interval keeps running
+      }},"SAVE WEIGHTS"));
+    } else {
+      logBox.appendChild(bt({cls:"wf-save-btn",onClick:()=>{
+        const logMap={};
+        Object.entries(inputs).forEach(([name,inp])=>{
+          if(inp.value.trim())logMap[name]=inp.value.trim();
+        });
+        saveLogAndContinue(logMap);
+      }},"SAVE & CONTINUE"));
+      logBox.appendChild(bt({cls:"wf-skip-log-btn",onClick:skipLog},"SKIP"));
+    }
+  }
+
+  // Store inputs ref so timer auto-save can read them (even after saved, keep ref for fallback)
+  if(Object.keys(inputs).length>0) w._logInputs=inputs;
+
   body.appendChild(logBox);
 }
 
