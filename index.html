@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Workout">
+<meta name="theme-color" content="#0c0d10">
+<title>16-Week Recomp</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-tap-highlight-color:transparent}
+body{background:#0c0d10;color:#e8e6df;font-family:'Courier New',Courier,monospace;min-height:100vh}
+::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+#hdr{background:#0e0f13;border-bottom:1px solid #1e2028;padding:14px 14px 10px;position:sticky;top:0;z-index:100}
+#main{max-width:980px;margin:0 auto;padding:14px 10px 80px}
+.inn{max-width:980px;margin:0 auto}
+.bb{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:2px}
+.ss{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+.mm{font-family:'Courier New',Courier,monospace}
+button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.tbtn{border-radius:4px;padding:7px 13px;font-size:11px;font-weight:600;letter-spacing:.7px;transition:all .15s}
+.pbtn{border-radius:4px;padding:7px 12px;font-size:10px;font-weight:500;letter-spacing:.7px;line-height:1.4;transition:all .15s}
+.sbtn{border-radius:4px;padding:5px 10px;font-size:10px;letter-spacing:.7px;transition:all .15s}
+.dbtn{border-radius:4px;padding:6px 9px;font-size:10px;font-weight:600;letter-spacing:.4px;line-height:1.3;min-width:42px;transition:all .12s}
+.dbtn:active,.pbtn:active,.sbtn:active{transform:scale(.96)}
+.rbtn{width:100%;text-align:left;display:grid;padding:11px 12px;border-bottom:1px solid #1a1c23;transition:background .1s}
+.rbtn:hover,.rbtn:active{background:rgba(255,255,255,.04)!important}
+.webtn{border:1px dashed #3a3d46;color:#666;border-radius:3px;padding:3px 7px;font-family:'Courier New',Courier,monospace;font-size:10px;transition:all .12s}
+.webtn:hover{border-color:#e8c547;color:#e8c547}
+.wsbtn{background:#e8c547;color:#0c0d10;border-radius:3px;padding:3px 8px;font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:700;margin-left:4px}
+.rpebtn{border:1px solid #22252e;border-radius:4px;padding:5px 11px;font-size:10px;letter-spacing:.7px;transition:all .15s}
+.savbtn{background:#e8c547;color:#0c0d10;border-radius:4px;padding:6px 12px;font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:700}
+.delbtn{border:1px solid #2a2d36;color:#555;border-radius:3px;padding:3px 7px;font-family:'Courier New',Courier,monospace;font-size:10px;transition:all .12s}
+.delbtn:hover{border-color:#e05252;color:#e05252}
+.wi{background:#0c0d10;border:1px solid #e8c547;color:#e8c547;border-radius:3px;padding:3px 7px;font-family:'Courier New',Courier,monospace;font-size:12px;width:92px;outline:none}
+.wi::placeholder{color:#3a3d46}
+.pi{background:#0e1013;border:1px solid #2a2d36;color:#ddd;border-radius:4px;padding:6px 9px;font-family:'Courier New',Courier,monospace;font-size:12px;outline:none}
+.pi:focus{border-color:#e8c547}
+.card{border-radius:8px;overflow:hidden}
+.ibox{background:#13151b;border:1px solid #2a2d36;border-radius:5px;padding:9px 12px}
+.stc{background:#14161c;border:1px solid #22252e;border-radius:6px;padding:8px 12px;text-align:center}
+.tcard{background:#0e1013;border:1px solid #1e2028;border-radius:5px;padding:9px 11px}
+.msc{background:#13151b;border:1px solid #1e2028;border-radius:5px;padding:9px 11px}
+.pe{background:#0e1013;border:1px solid #1e2028;border-radius:6px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;margin-bottom:6px}
+.sbadge{background:#e8c54718;border:1px solid #e8c54740;border-radius:3px;padding:2px 6px;font-family:'Courier New',Courier,monospace;font-size:9px;color:#e8c547;white-space:nowrap}
+.bwbadge{background:#9b7fd418;border:1px solid #9b7fd440;border-radius:3px;padding:2px 6px;font-family:'Courier New',Courier,monospace;font-size:9px;color:#9b7fd4;white-space:nowrap}
+.ssbadge{background:#6cc97e18;border:1px solid #6cc97e40;border-radius:3px;padding:1px 5px;font-family:'Courier New',Courier,monospace;font-size:8px;color:#6cc97e;white-space:nowrap}
+.dlbadge{background:#e0523218;border:1px solid #e0523240;border-radius:3px;padding:2px 7px;font-family:'Courier New',Courier,monospace;font-size:9px;color:#e05232;white-space:nowrap}
+.fade{animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.f{display:flex}.fw{flex-wrap:wrap}.g6{gap:6px}.g8{gap:8px}.g10{gap:10px}
+.jb{justify-content:space-between}.ac{align-items:center}
+.ga{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:7px}
+.gas{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:6px}
+.mb6{margin-bottom:6px}.mb8{margin-bottom:8px}.mb10{margin-bottom:10px}.mb12{margin-bottom:12px}.mb14{margin-bottom:14px}.mb16{margin-bottom:16px}
+.mt8{margin-top:8px}.mt10{margin-top:10px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
+@media(max-width:480px){#hdr{padding:10px 8px 8px}#main{padding:10px 6px 80px}.rbtn{padding:10px 7px}.pbtn{padding:6px 9px;font-size:9px}}
+
+/* ── WORKOUT FLOW OVERLAY ── */
+#wf-overlay{position:fixed;inset:0;z-index:200;background:#0c0d10;display:flex;flex-direction:column;overflow:hidden}
+#wf-header{background:#0e0f13;border-bottom:1px solid #1e2028;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}
+#wf-body{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:14px}
+#wf-elapsed{font-family:'Courier New',Courier,monospace;font-size:12px;color:#555;min-width:38px;text-align:right}
+.wf-label{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:3px;font-size:11px;color:#555}
+.wf-set-counter{font-family:'Courier New',Courier,monospace;font-size:13px;color:#e8c547;letter-spacing:1px}
+.wf-exlabel{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:3px;font-size:10px;color:#e8c547;margin-bottom:4px}
+.wf-exname{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:22px;color:#fff;font-weight:700;line-height:1.2;margin-bottom:4px}
+.wf-exdim{font-family:'Courier New',Courier,monospace;font-size:13px;color:#aaa;margin-bottom:3px}
+.wf-exwt{font-family:'Courier New',Courier,monospace;font-size:11px;color:#666}
+.wf-exwt span{color:#e8c547}
+.wf-sep{text-align:center;font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:4px;font-size:11px;color:#333;padding:6px 0}
+.wf-ex-b{opacity:.4}
+.wf-ex-b.active{opacity:1}
+.wf-complete-btn{width:100%;height:72px;background:#e8c547;color:#0c0d10;border-radius:10px;font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:22px;letter-spacing:3px;border:none;cursor:pointer;transition:all .1s;-webkit-tap-highlight-color:transparent}
+.wf-complete-btn:active{transform:scale(.97);background:#d4b33e}
+.wf-skip-btn{width:100%;padding:13px 10px;color:#888;font-family:'Courier New',Courier,monospace;font-size:13px;letter-spacing:.8px;text-align:center;border:1px solid #2a2d36;border-radius:8px;background:#13151b;cursor:pointer;min-height:48px;margin-top:8px}
+.wf-skip-btn:active{color:#e05252;border-color:#e05252;background:#1a1015}
+.wf-rest-box{background:#13151b;border:1px solid #1e2028;border-radius:10px;padding:20px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.wf-timer-big{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:80px;color:#e8c547;letter-spacing:4px;line-height:1}
+.wf-prog-bar{width:100%;height:8px;background:#1a1c23;border-radius:4px;overflow:hidden}
+.wf-prog-fill{height:100%;background:#e8c547;border-radius:4px;transition:width .25s linear}
+.wf-next-label{font-family:'Courier New',Courier,monospace;font-size:11px;color:#666;text-align:center}
+.wf-rest-btns{display:flex;gap:10px;width:100%}
+.wf-rest-btn{flex:1;height:48px;border:1px solid #22252e;border-radius:8px;background:#14161c;color:#aaa;font-family:'Courier New',Courier,monospace;font-size:12px;letter-spacing:.5px;cursor:pointer;transition:all .12s}
+.wf-rest-btn:active{background:#1e2028;transform:scale(.97)}
+.wf-log-box{background:#13151b;border:1px solid #1e2028;border-radius:10px;padding:16px}
+.wf-log-title{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:2px;font-size:22px;color:#e8c547;margin-bottom:16px}
+.wf-log-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}
+.wf-log-exname{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:28px;font-weight:700;color:#fff;flex:1;line-height:1.2}
+.wf-log-input{background:#0c0d10;border:1px solid #e8c547;color:#e8c547;border-radius:6px;padding:10px 12px;font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:28px;width:130px;outline:none;text-align:center;letter-spacing:1px}
+.wf-log-input::placeholder{color:#333}
+.wf-save-btn{width:100%;height:56px;background:#e8c547;color:#0c0d10;border-radius:8px;font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:18px;letter-spacing:2px;border:none;cursor:pointer;margin-top:6px;-webkit-tap-highlight-color:transparent}
+.wf-save-btn:active{transform:scale(.97);background:#d4b33e}
+.wf-skip-log-btn{width:100%;padding:10px;color:#444;font-family:'Courier New',Courier,monospace;font-size:11px;text-align:center;border:none;background:none;cursor:pointer;min-height:44px}
+.wf-done-box{background:#13151b;border:1px solid #1e2028;border-radius:10px;padding:20px 14px}
+.wf-done-title{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:3px;font-size:24px;color:#6cc97e;margin-bottom:6px}
+.wf-done-stat{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.wf-done-stc{background:#14161c;border:1px solid #22252e;border-radius:6px;padding:8px 12px;text-align:center;flex:1;min-width:80px}
+.wf-done-stc .val{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:22px;color:#e8c547;letter-spacing:1px}
+.wf-done-stc .lbl{font-family:'Courier New',Courier,monospace;font-size:9px;color:#555;letter-spacing:1px;margin-top:2px}
+.wf-done-exlist{margin-bottom:14px}
+.wf-done-exrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1a1c23;gap:6px;flex-wrap:wrap}
+.wf-done-exrow .exn{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;color:#bbb}
+.wf-done-exrow .exw{font-family:'Courier New',Courier,monospace;font-size:11px;color:#e8c547}
+.wf-done-exrow .pr{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:10px;color:#6cc97e;background:#6cc97e15;border:1px solid #6cc97e40;border-radius:3px;padding:1px 5px;letter-spacing:1px}
+.wf-done-btns{display:flex;gap:10px;flex-wrap:wrap}
+.wf-done-btns button{flex:1;min-width:120px;height:52px;border-radius:8px;font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:16px;letter-spacing:2px;cursor:pointer;border:none;-webkit-tap-highlight-color:transparent}
+.wf-save-session-btn{background:#e8c547;color:#0c0d10}
+.wf-save-session-btn:active{background:#d4b33e;transform:scale(.97)}
+.wf-back-btn{background:#14161c;color:#666;border:1px solid #22252e!important}
+.wf-back-btn:active{background:#1e2028;transform:scale(.97)}
+.wf-stop-btn{background:none;border:1px solid #2a2d36!important;border-radius:6px;padding:6px 12px;font-family:'Courier New',Courier,monospace;font-size:11px;color:#666;min-height:44px;cursor:pointer}
+.wf-stop-btn:active{color:#e05252;border-color:#e05252!important}
+.wf-start-btn{width:100%;height:52px;background:#e8c547;color:#0c0d10;border-radius:8px;font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:18px;letter-spacing:3px;border:none;cursor:pointer;margin-top:10px;-webkit-tap-highlight-color:transparent}
+.wf-start-btn:active{transform:scale(.97);background:#d4b33e}
+.wf-cardio-check{display:flex;align-items:center;gap:10px;padding:12px;background:#13151b;border:1px solid #1e2028;border-radius:8px;margin-bottom:8px;min-height:52px;cursor:pointer}
+.wf-cardio-check input[type=checkbox]{width:22px;height:22px;accent-color:#6cc97e;flex-shrink:0}
+.wf-cardio-check span{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#ccc;line-height:1.4}
+.hist-session{background:#13151b;border:1px solid #1e2028;border-radius:8px;margin-bottom:10px;overflow:hidden}
+.hist-session-hdr{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;cursor:pointer;gap:8px;flex-wrap:wrap}
+.hist-session-hdr:active{background:rgba(255,255,255,.04)}
+.hist-session-body{padding:10px 13px;border-top:1px solid #1e2028;display:none}
+.hist-session-body.open{display:block}
+.hist-ex-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #1a1c23;gap:6px;flex-wrap:wrap}
+.hist-ex-row .hn{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;color:#aaa}
+.hist-ex-row .hw{font-family:'Courier New',Courier,monospace;font-size:11px;color:#e8c547}
+/* per-exercise progress table */
+.exprog-section{background:#13151b;border:1px solid #1e2028;border-radius:8px;margin-bottom:10px;overflow:hidden}
+.exprog-hdr{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;cursor:pointer;gap:8px}
+.exprog-hdr:active{background:rgba(255,255,255,.04)}
+.exprog-body{padding:0 13px 12px;border-top:1px solid #1e2028;display:none}
+.exprog-body.open{display:block}
+.exprog-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #1a1c23;gap:6px}
+.exprog-row .ed{font-family:'Courier New',Courier,monospace;font-size:10px;color:#555}
+.exprog-row .ew{font-family:'Courier New',Courier,monospace;font-size:13px;color:#e8c547;font-weight:700}
+.exprog-row .epr{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:10px;color:#6cc97e;background:#6cc97e15;border:1px solid #6cc97e40;border-radius:3px;padding:1px 5px;letter-spacing:1px}
+/* GO flash when rest ends */
+@keyframes goFlash{0%{color:#e8c547;transform:scale(1.08)}100%{color:#fff;transform:scale(1)}}
+.wf-go-flash{animation:goFlash .6s ease-out forwards}
+/* Warmup screen */
+.wf-warmup-box{background:#13151b;border:1px solid #1e2028;border-radius:10px;padding:28px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.wf-warmup-exname{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:26px;color:#fff;font-weight:700;line-height:1.2}
+.wf-warmup-count{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:72px;color:#9b7fd4;letter-spacing:2px;line-height:1}
+.wf-warmup-step{font-family:'Courier New',Courier,monospace;font-size:11px;color:#444;letter-spacing:1px}
+@keyframes warmupPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.wf-warmup-count.last5{animation:warmupPulse .5s infinite}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// ═══════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════
+const RPE=[
+  {rpe:"6",  feel:"Could do 4+ more. Too easy — go heavier.",        c:"#6cc97e"},
+  {rpe:"7",  feel:"Could do 3 more. Warm-up territory.",             c:"#a8d96c"},
+  {rpe:"7.5",feel:"Could do 2–3 more. Getting there.",               c:"#c8d95c"},
+  {rpe:"8",  feel:"Could do 2 more. Target zone. ✓",                 c:"#e8c547",target:true},
+  {rpe:"8.5",feel:"Could do 1–2 more. Slightly above target.",       c:"#e8a847"},
+  {rpe:"9",  feel:"Could do 1 more. Very hard — drop 5 lbs.",        c:"#e07b39"},
+  {rpe:"10", feel:"Could not do another. Too heavy — drop 10 lbs.",  c:"#e05252"},
+];
+
+const TY={
+  lift:  {bg:"#1a1f2e",ac:"#e8c547",lb:"STRENGTH"},
+  cardio:{bg:"#0e1e1a",ac:"#6cc97e",lb:"PELOTON"},
+  rest:  {bg:"#1a1520",ac:"#9b7fd4",lb:"REST"},
+  deload:{bg:"#1a1520",ac:"#e05252",lb:"DELOAD"},
+};
+
+const WU_UPPER = "WARM-UP: 3 min dynamic (arm circles, shoulder rotations, thoracic rotations) + 2 sets DB External Rotation @ 5 lbs each arm (lie on side, rotate forearm up — rotator cuff prehab, non-negotiable at 42) + 2 warm-up sets on first exercise @ 50% working weight";
+const WU_LOWER = "WARM-UP: 5 min easy Peloton spin + hip circles, leg swings, ankle rotations + 2 bodyweight goblet squats (deep, slow) before loading up";
+const CD = "COOL-DOWN: 3–5 min static stretch — hold each position 30s";
+
+// ─── SHARED PELOTON SESSIONS ─────────────
+const pelo_z2 = (mins="35")=>({day:"Wednesday",label:"Core + Peloton Zone 2",type:"cardio",estTime:`~${parseInt(mins)+15} min`,ss:false,
+  sessions:[
+    {exercise:"Peloton Power Zone Endurance Ride",sets:1,reps:`${mins} min`,rest:"—",sw:"—",notes:"50–65% FTP. Conversational pace — you should be able to speak full sentences. Matt Wilpers PZE rides recommended."},
+    {exercise:"Post-ride Stretch",sets:1,reps:"5 min",rest:"—",sw:"—",notes:"Hip flexors, quads, lower back. The bike tightens all three."},
+  ]});
+
+const pelo_hiit = {day:"Saturday",label:"Peloton — HIIT",type:"cardio",estTime:"~30 min",ss:false,
+  sessions:[
+    {exercise:"Warm-Up Spin",sets:1,reps:"8 min easy",rest:"—",sw:"—",notes:""},
+    {exercise:"Intervals: 30s hard / 30s easy",sets:8,reps:"30s on / 30s off",rest:"—",sw:"—",notes:"85–90% max effort. Tabata or HIIT class. Total interval block ~16 min."},
+    {exercise:"Cool-Down",sets:1,reps:"6 min",rest:"—",sw:"—",notes:"Easy spin to bring HR down."},
+  ]};
+
+const pelo_climb = {day:"Saturday",label:"Peloton — Climb Ride",type:"cardio",estTime:"~35 min",ss:false,
+  sessions:[
+    {exercise:"Peloton Climb Ride",sets:1,reps:"35 min",rest:"—",sw:"—",notes:"High resistance, low cadence (60–70 RPM). Simulates sustained hill work — excellent for lower body and fat oxidation."},
+    {exercise:"Post-ride Plank",sets:3,reps:"45s",rest:"30s",sw:"BW",notes:"From bike straight to floor."},
+  ]};
+
+const rest_day = {day:"Sunday",label:"Full Rest",type:"rest",estTime:"—",ss:false,
+  sessions:[
+    {exercise:"Complete Rest",sets:0,reps:"—",rest:"—",sw:"—",notes:"34 lbs down since October. This day is earned. 7–9 hrs sleep is where muscle is built."},
+    {exercise:"Optional: Peloton Scenic Ride or Walk",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Truly easy. No output targets."},
+  ]};
+
+// ─── CORE CIRCUITS ────────────────────────
+const core_upperA = [
+  {exercise:"Lying Leg Raise (on bench)",sets:2,reps:"12",rest:"30s, then into Hollow Hold",sw:"BW",superset:true,
+   why:"Hip flexion and lower rectus abdominis. On the bench, a slight decline increases range. Keep lower back pressed down throughout — don't let it arch at the bottom.",
+   tg:{start:"BW. Control the descent — don't let legs drop.",tooEasy:"12 controlled reps → add ankle weights or hold a light DB between feet",tooHard:"Bend knees slightly to reduce lever arm"}},
+  {exercise:"Hollow Body Hold (Superset with above)",sets:2,reps:"30s hold",rest:"45s after pair",sw:"BW",superset:true,
+   why:"Superior to standard plank for rectus abdominis. Trains anti-extension with the muscle in a lengthened position under sustained tension. Arms extended overhead = harder. Tuck arms at sides = easier.",
+   tg:{start:"Arms by sides, knees slightly bent. Lower back must stay flat.",tooEasy:"Extend arms overhead; straighten legs",tooHard:"Bend knees more; arms stay at sides"}},
+];
+const core_upperB = [
+  {exercise:"Bicycle Crunch",sets:2,reps:"20 total (10 each side)",rest:"30s, then into Hollow Hold",sw:"BW",superset:true,
+   why:"One of the highest oblique + rectus abdominis activations available (Boeckh-Behrens EMG research). Trains both rotation AND flexion simultaneously. Slow is better — 2s per rep, full rotation, elbow to knee.",
+   tg:{start:"BW. Slow deliberate reps — not a race.",tooEasy:"Hold a light DB at chest for added load",tooHard:"Reduce range of rotation; focus on control"}},
+  {exercise:"Hollow Body Hold (Superset with above)",sets:2,reps:"30s hold",rest:"45s after pair",sw:"BW",superset:true,
+   why:"Second weekly hollow body stimulus. Pairs efficiently with bicycle crunch — opposite muscles.",
+   tg:{start:"Arms by sides, lower back flat.",tooEasy:"Arms overhead",tooHard:"Knees bent more"}},
+];
+const core_lowerA = [
+  {exercise:"Bicycle Crunch",sets:2,reps:"20 total (10 each side)",rest:"20s, then into Dead Bug",sw:"BW",superset:true,
+   why:"Oblique and rectus abdominis — highest oblique EMG activation available (Boeckh-Behrens research). Adding this to Lower A gives obliques 2x/week frequency alongside Lower B. Slow is better — 2s per rep, full rotation, elbow toward knee. Mini-circuit: Bicycle Crunch → Dead Bug → Calf Raise, rest after all three.",
+   tg:{start:"BW. Deliberate slow reps — not a race.",tooEasy:"Hold a light DB at chest",tooHard:"Reduce range of rotation"}},
+  {exercise:"Dead Bug",sets:2,reps:"10 each side",rest:"20s, then into Calf Raise",sw:"BW",superset:true,
+   why:"Anti-extension core — opposite arm and leg extend simultaneously while the lower back stays pressed to the floor. Follows bicycle crunch in the mini-circuit — rotation then anti-extension covers two distinct core functions.",
+   tg:{start:"BW. Lower back must stay in contact with floor every rep.",tooEasy:"Add a light DB held in extended arm",tooHard:"Reduce range — arm only, or leg only"}},
+  {exercise:"Single-Leg Calf Raise (mini-circuit finisher)",sets:2,reps:"15 each",rest:"50s after all three",sw:"20 lbs",superset:true,
+   why:"Calf raise closes the mini-circuit — completely different muscle from the core work, so it functions as active rest for the abs between rounds. Use a step for full ROM.",
+   tg:{start:"20 lbs. Full ROM — heel below step level at bottom.",tooEasy:"20 reps → 25 lbs",tooHard:"Cramping → reduce weight"}},
+];
+const core_lowerB = [
+  {exercise:"Lying Leg Raise",sets:2,reps:"12",rest:"30s, then into Calf Raise",sw:"BW",superset:true,
+   why:"Second weekly leg raise stimulus. Same cues as Upper A — lower back stays down, control the descent.",
+   tg:{start:"BW.",tooEasy:"Ankle weight or DB between feet",tooHard:"Bend knees"}},
+  {exercise:"Single-Leg Calf Raise — Superset with above",sets:2,reps:"15 each",rest:"45s after pair",sw:"20 lbs",superset:true,
+   why:"Second weekly calf stimulus. Different muscle — no overlap with leg raise.",
+   tg:{start:"20 lbs.",tooEasy:"25 lbs",tooHard:"Reduce weight or go bodyweight"}},
+];
+
+// ═══════════════════════════════════════════
+// PHASE DATA
+// ═══════════════════════════════════════════
+
+function upperA(ph){
+  const sets_press = ph<=2?4:5;
+  const reps_press = ph===1?"10–12":ph===2?"8":ph===3?"5":"5–6";
+  const rest_press = ph<=2?"90s":ph===3?"2.5 min":"2.5 min";
+  const sw_press   = ph===1?"40 lbs":ph===2?"40 lbs":ph===3?"45 lbs":"45–50 lbs";
+
+  const sets_row   = ph<=2?4:5;
+  const reps_row   = ph===1?"10–12 each":ph===2?"8 each":ph===3?"5 each":"5–6 each";
+  const rest_row   = ph<=2?"90s after pair":ph===3?"2 min":"2 min";
+  const sw_row     = ph===1?"40 lbs":ph===2?"45 lbs":ph===3?"50 lbs":"50 lbs";
+
+  const reps_flye  = ph<=2?"12–15":ph===3?"10–12":"10–12";
+  const sw_flye    = ph===1?"25 lbs":ph===2?"25–30 lbs":ph===3?"30 lbs":"30 lbs";
+  const reps_pull  = ph<=2?"12":ph===3?"10":"10";
+  const sw_pull    = ph===1?"30 lbs":ph===2?"30 lbs":"30–35 lbs";
+
+  const reps_lat   = ph<=2?"12–15":ph===3?"12":"12–15";
+  const sw_lat     = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
+  const reps_rfyl  = ph<=2?"12–15":ph===3?"12":"12–15";
+  const sw_rfyl    = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
+
+  const reps_curl  = ph<=2?"10–12":ph===3?"8":"8–10";
+  const sw_curl    = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"25 lbs":"25–30 lbs";
+  const reps_tri   = ph<=2?"12–15":ph===3?"10":"10–12";
+  const sw_tri_ohd = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35–40 lbs":"40 lbs";
+  const sw_cgp     = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30–35 lbs":"35 lbs";
+
+  return [
+    {exercise:"DB Bench Press + Single-Arm Row (Superset)",sets:sets_press,reps:`${reps_press} + ${reps_row}`,rest:rest_row,sw:`${sw_press} / ${sw_row}`,superset:true,
+     why:"Push/pull superset — bench press and row use completely opposite muscles. The effective rest for each muscle is identical to straight sets, but you're done in half the time. This is validated by Weakstad et al. (2020): equivalent hypertrophy, ~40% less time.",
+     tg:{start:`${sw_press} bench, ${sw_row} row — your calibrated Week 1 weights.`,tooEasy:"Both feel RPE 7 → add 5 lbs to whichever was easier",tooHard:"Second exercise form collapses → reduce it 5 lbs"}},
+    {exercise:"DB Flye + DB Pullover (Superset)",sets:3,reps:`${reps_flye} + ${reps_pull}`,rest:"50s after pair",sw:`${sw_flye} / ${sw_pull}`,superset:true,
+     why:"Chest stretch (flye) + lat stretch (pullover) — completely different muscles. Both exercises train in the lengthened position where research shows highest hypertrophy stimulus (Pedrosa et al. 2023). Bench allows arm to drop below body level — full stretch unavailable on floor.",
+     tg:{start:`${sw_flye} flye, ${sw_pull} pullover — your calibrated weights.`,tooEasy:"No stretch sensation → add 5 lbs to whichever",tooHard:"Shoulder discomfort → reduce 5 lbs on that exercise"}},
+    {exercise:"Lateral Raise + Reverse Fly (Superset)",sets:3,reps:`${reps_lat} + ${reps_rfyl}`,rest:"50s after pair",sw:`${sw_lat} / ${sw_rfyl}`,superset:true,
+     why:"Side delt (lateral raise) + rear delt (reverse fly) — different muscles, no fatigue overlap. Rear delts get direct work in BOTH upper sessions. Non-negotiable for posture and shoulder health at 42. Lead with elbows on the reverse fly, stop at shoulder height — rear delt should burn, not upper traps.",
+     tg:{start:`${sw_lat} lateral raise. ${sw_rfyl} reverse fly — feel it in the back of the shoulder.`,tooEasy:"Lateral raise: no burn by rep 12 → add 5 lbs. Reverse fly: no rear delt burn → add 5 lbs",tooHard:"Lateral raise: traps shrugging → reduce weight. Reverse fly: traps dominating → reduce and slow down"}},
+    {exercise:"Incline DB Curl + Overhead Tricep Extension (Superset)",sets:3,reps:`${reps_curl} + ${reps_tri}`,rest:"50s after pair",sw:`${sw_curl} / ${sw_tri_ohd}`,superset:true,
+     why:"Bicep and tricep — opposite muscles. Incline curl puts the bicep long head in a fully stretched position (research-backed for superior hypertrophy). Overhead extension is the single best tricep exercise — only position where the long head is fully stretched. One DB cupped with both hands for the extension.",
+     tg:{start:`${sw_curl} incline curl. ${sw_tri_ohd} overhead extension (one DB, both hands).`,tooEasy:"Both feel RPE 7 → add 5 lbs each",tooHard:"Second exercise fails → reduce it 5 lbs"}},
+    {exercise:"Zottman Curl + Close-Grip DB Press (Superset)",sets:3,reps:`${reps_curl} + ${reps_tri}`,rest:"50s after pair",sw:`${sw_curl} / ${sw_cgp}`,superset:true,
+     why:"Zottman curl starts fresh — kept separate from incline curl to avoid pre-fatigue. Curl up supinated (palms up), rotate to pronated (palms down) at the top, lower slowly over 3s. The pronated eccentric trains brachioradialis and brachialis uniquely. Close-grip DB press pairs as the tricep complement — lateral and medial head emphasis. Elbows stay tucked throughout the press.",
+     tg:{start:`${sw_curl} Zottman. ${sw_cgp} close-grip press — lighter than regular bench.`,tooEasy:"Zottman: controlled descent → add 5 lbs. Press: 12 reps easy → add 5 lbs",tooHard:"Zottman: wrist discomfort → reduce 5 lbs. Press: elbows flaring → reduce 5 lbs"}},
+  ];
+}
+
+function upperB(ph){
+  const sets_ohp = ph<=2?4:5;
+  const reps_ohp = ph===1?"10–12":ph===2?"8":ph===3?"5":"5–6";
+  const rest_ohp = ph<=2?"90s after pair":ph===3?"2.5 min":"2.5 min";
+  const sw_ohp   = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"35 lbs":"35–40 lbs";
+
+  const sets_csr = ph<=2?4:5;
+  const reps_csr = ph===1?"10–12 each":ph===2?"8 each":ph===3?"5–6 each":"5–6 each";
+  const sw_csr   = ph===1?"35 lbs":ph===2?"40 lbs":ph===3?"45 lbs":"45–50 lbs";
+
+  const reps_inc = ph<=2?"10–12":ph===3?"8":"8–10";
+  const sw_inc   = ph===1?"35 lbs":ph===2?"35 lbs":ph===3?"40 lbs":"40–45 lbs";
+  const reps_lat = ph<=2?"12–15":"12";
+  const sw_lat   = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
+
+  const reps_fyl = ph<=2?"12–15":"10–12";
+  const sw_fyl   = ph===1?"25 lbs":ph===2?"25–30 lbs":ph===3?"30 lbs":"30 lbs";
+  const reps_rfb = ph<=2?"12–15":"12";
+  const sw_rfb   = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
+
+  const reps_pull = ph<=2?"12":ph===3?"10":"10";
+  const sw_pull   = ph===1?"30 lbs":ph===2?"30 lbs":"30–35 lbs";
+
+  const reps_tri  = ph<=2?"12–15":ph===3?"10":"10–12";
+  const sw_tri    = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35–40 lbs":"40 lbs";
+
+  const reps_xbc = ph<=2?"10–12 each":ph===3?"8 each":"8–10 each";
+  const sw_xbc   = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30 lbs":"30–35 lbs";
+  const reps_skl = ph<=2?"10–12":ph===3?"8":"8–10";
+  const sw_skl   = ph===1?"15 lbs":ph===2?"20 lbs":ph===3?"20 lbs":"20–25 lbs";
+  const sw_conc  = ph===1?"20 lbs":ph===2?"20 lbs":ph===3?"20 lbs":"20–25 lbs";
+
+  return [
+    {exercise:"DB Overhead Press + Chest-Supported Row (Superset)",sets:sets_ohp,reps:`${reps_ohp} + ${reps_csr}`,rest:rest_ohp,sw:`${sw_ohp} / ${sw_csr}`,superset:true,
+     why:"Vertical push (OHP) + horizontal pull (chest-supported row) — as opposite as two exercises can be. Chest-supported row: lie face-down on bench at 30–45°, which eliminates lower back entirely and allows full lat stretch. Significantly better isolation than bent-over row.",
+     tg:{start:`${sw_ohp} OHP, ${sw_csr} row. OHP is harder than it looks.`,tooEasy:"Both feel RPE 7 → add 5 lbs each",tooHard:"Second collapses → reduce it 5 lbs"}},
+    {exercise:"Incline DB Press + Lateral Raise (Superset)",sets:3,reps:`${reps_inc} + ${reps_lat}`,rest:"50s after pair",sw:`${sw_inc} / ${sw_lat}`,superset:true,
+     why:"Upper chest (incline press) + side delt (lateral raise) — completely different muscles. Adding lateral raises to Upper B gives side delts 2x/week frequency at 6 total direct sets. Side delts are the only muscle that cannot be hit by any compound movement — they need direct work both sessions.",
+     tg:{start:`${sw_inc} incline press. ${sw_lat} lateral raise — lighter than the press.`,tooEasy:"Press: 12 reps → add 5 lbs. Raises: no burn → add 5 lbs",tooHard:"Press form breaks → reduce press. Raises: traps shrugging → reduce weight"}},
+    {exercise:"DB Flye + Reverse Fly (Superset)",sets:3,reps:`${reps_fyl} + ${reps_rfb}`,rest:"50s after pair",sw:`${sw_fyl} / ${sw_rfb}`,superset:true,
+     why:"Chest stretch (flye) + rear delt (reverse fly) — completely different muscles. Flye keeps weekly chest at 13 sets. Reverse fly here is the dedicated rear delt set for Upper B. Together rear delts get 6 direct sets per week at 2x frequency — essential for posture and shoulder health at 42. Lead with elbows, stop at shoulder height.",
+     tg:{start:`${sw_fyl} flye. ${sw_rfb} reverse fly — feel rear delt, not traps.`,tooEasy:"Flye: no pec stretch → add 5 lbs. Reverse fly: no rear delt burn → add 5 lbs",tooHard:"Flye: shoulder discomfort → reduce. Reverse fly: traps dominating → drop to 15 lbs"}},
+    {exercise:"DB Pullover",sets:3,reps:`${reps_pull}`,rest:"60s",sw:`${sw_pull}`,superset:false,
+     why:"Lat in a fully lengthened position — arm drops below bench level for a stretch unavailable on the floor. Standalone here; short rest keeps session time reasonable.",
+     tg:{start:`${sw_pull}. Slight elbow bend, feel the lat stretch at the bottom.`,tooEasy:"12 reps, no lat sensation → add 5 lbs",tooHard:"Shoulder discomfort → reduce 5 lbs"}},
+    {exercise:"Cross-Body Curl + Skull Crusher (Superset)",sets:3,reps:`${reps_xbc} + ${reps_skl}`,rest:"50s after pair",sw:`${sw_xbc} / ${sw_skl}`,superset:true,
+     why:"Bicep + tricep superset. Cross-body curl: neutral grip, curl across midline to opposite shoulder — elongates the long head more than standard hammer curl (Kassiano et al. 2023). Skull crusher: lower DBs beside temples on bench for full tricep lateral/medial head training.",
+     tg:{start:`${sw_xbc} cross-body, ${sw_skl} skull crusher.`,tooEasy:"Both easy → add 5 lbs each",tooHard:"Second fails → reduce 5 lbs"}},
+    {exercise:"Concentration Curl + Overhead Tricep Extension (Superset)",sets:3,reps:`${reps_xbc} + ${reps_tri}`,rest:"50s after pair",sw:`${sw_conc} / ${sw_tri}`,superset:true,
+     why:"Bicep peak contraction + tricep long head — opposite muscles, clean superset. Concentration curl: sit on bench, elbow braced firmly on inner thigh, full range curl. The braced position eliminates all cheating and emphasizes peak contraction — the opposite end of the length-tension curve from the incline curl. Overhead extension: one DB cupped with both hands.",
+     tg:{start:`${sw_conc} concentration curl — elbow stays on thigh throughout. ${sw_tri} overhead extension (one DB, both hands).`,tooEasy:"Curl: 12 controlled reps → add 5 lbs. Extension: 15 reps → add 5 lbs",tooHard:"Curl: elbow leaving thigh → reduce weight. Extension: elbows flaring → reduce weight"}},
+  ];
+}
+
+function lowerA(ph){
+  const sets_sq   = ph<=2?4:5;
+  const reps_sq   = ph===1?"12–15":ph===2?"8–10":ph===3?"6–8":"6–8";
+  const rest_sq   = ph<=2?"2 min":ph>=3?"2.5 min":"2 min";
+  const sw_sq     = ph===1?"40 lbs":ph===2?"40 lbs":ph===3?"45–50 lbs":"50 lbs";
+
+  const sets_bss  = ph<=2?3:4;
+  const reps_bss  = ph===1?"10 each":ph===2?"8 each":ph===3?"6–8 each":"6–8 each";
+  const rest_bss  = ph<=2?"2 min":"2 min";
+  const sw_bss    = ph===1?"20 lbs each":ph===2?"25 lbs each":ph===3?"30 lbs each":"30–35 lbs each";
+
+  const reps_rdl  = ph===1?"12":ph===2?"10":"8";
+  const sw_rdl    = ph===1?"35 lbs each":ph===2?"40 lbs each":"40–45 lbs each";
+
+  const reps_ht   = ph===1?"12–15":ph===2?"10–12":"10";
+  const sw_ht     = ph===1?"40 lbs":ph===2?"40 lbs":"40–45 lbs";
+
+  const reps_ll   = ph===1?"10 each":"10 each";
+  const sw_ll     = ph===1?"15 lbs each":ph===2?"20 lbs each":"20 lbs each";
+  const reps_lc   = ph===1?"10–12":"10";
+  const sw_lc     = ph===1?"20 lbs":ph===2?"20 lbs":"20–25 lbs";
+
+  return [
+    {exercise:"DB Goblet Squat",sets:sets_sq,reps:reps_sq,rest:rest_sq,sw:sw_sq,superset:false,
+     why:"Best squat pattern available with dumbbells. Upright torso, high quad emphasis. Straight sets — primary compound at near-max effort. Hip crease must pass below knee on every rep. 3s eccentric.",
+     tg:{start:`${sw_sq}. Legs are stronger than you think.`,tooEasy:"Top of rep range at RPE 7 → add 5 lbs",tooHard:"Heels rise or depth lost → reduce weight"}},
+    {exercise:"DB Bulgarian Split Squat",sets:sets_bss,reps:reps_bss,rest:rest_bss,sw:sw_bss,superset:false,
+     why:"Comparable quad/glute activation to barbell squat (Speirs et al. 2016). Rear foot on bench. Straight sets — balance demand means pre-fatigue would compromise form. Front shin stays vertical.",
+     tg:{start:`${sw_bss}. Start lighter than ego says.`,tooEasy:"Fully controlled reps → add 5 lbs each hand",tooHard:"Balance failing or knee caving → reduce weight"}},
+    {exercise:"DB Romanian Deadlift",sets:3,reps:reps_rdl,rest:"90s",sw:sw_rdl,superset:false,
+     why:"Hip hinge — hamstrings loaded in lengthened position. Keep DBs close to legs. Feel the hamstring stretch at the bottom; don't rush it.",
+     tg:{start:`${sw_rdl}.`,tooEasy:"No hamstring tension → add 5–10 lbs",tooHard:"Lower back rounding → reduce weight"}},
+    {exercise:"DB Hip Thrust + Lateral Lunge (Superset)",sets:3,reps:`${reps_ht} + ${reps_ll}`,rest:"75s after pair",sw:`${sw_ht} / ${sw_ll}`,superset:true,
+     why:"Glutes (hip thrust) + adductors (lateral lunge) — completely different muscles. Hip thrust fills the glute gap: glutes are NOT maximally contracted in squats or RDLs. Shoulders on bench increases ROM vs floor.",
+     tg:{start:`${sw_ht} hip thrust, ${sw_ll} lateral lunge.`,tooEasy:"Hip thrust: add 5 lbs. Lunge: add 5 lbs",tooHard:"Hip thrust: lower back aching → reduce. Lunge: knee caving → reduce or BW"}},
+    {exercise:"DB Leg Curl (Lying) + Single-Leg Calf Raise (Superset)",sets:3,reps:`${reps_lc} + 15–20 each`,rest:"50s after pair",sw:`${sw_lc} / 20 lbs`,superset:true,
+     why:"Knee-flexion hamstring (leg curl) + calf — different muscles, efficient pair. Leg curl: lie face-down on bench, hold DB vertically between feet (soles pressing against plate). Covers the knee-flexion hamstring pattern that RDL doesn't.",
+     tg:{start:`${sw_lc} leg curl. 20 lbs calf.`,tooEasy:"Leg curl: add 5 lbs. Calf: 20 reps → add 5 lbs",tooHard:"DB slipping → lighter. Calf cramping → reduce weight"}},
+  ];
+}
+
+function lowerB(ph){
+  const sets_rdl  = ph<=2?4:5;
+  const reps_rdl  = ph===1?"8–10":ph===2?"6–8":ph===3?"5":"5–6";
+  const rest_rdl  = ph<=2?"2 min":"2.5 min";
+  const sw_rdl    = ph===1?"45 lbs each":ph===2?"45 lbs each":ph===3?"50 lbs each":"50 lbs each";
+
+  const reps_nc   = ph===1?"5–8":ph===2?"5–8":ph===3?"6–8":"6–8";
+  const sw_nc     = "BW";
+
+  const reps_bss  = ph===1?"12 each":ph===2?"10 each":"8–10 each";
+  const sw_bss    = ph===1?"20 lbs each":ph===2?"25 lbs each":"30 lbs each";
+
+  const reps_ht   = ph===1?"15":ph===2?"12–15":"12";
+  const sw_ht     = ph===1?"40 lbs":ph===2?"40 lbs":"40–45 lbs";
+  const reps_rn   = ph===1?"8–10":"8–10";
+  const sw_rn     = "BW";
+
+  return [
+    {exercise:"DB Romanian Deadlift",sets:sets_rdl,reps:reps_rdl,rest:rest_rdl,sw:sw_rdl,superset:false,
+     why:"Primary heavy compound today — more sets, lower reps, 5 lbs heavier than Lower A's version. You're fresh; this is your headline lift. Hamstring in lengthened position drives hypertrophy.",
+     tg:{start:`${sw_rdl}. This is your main lift today — treat it accordingly.`,tooEasy:"Top rep range → add 5 lbs",tooHard:"Lower back rounding → reduce weight, prioritize hinge pattern"}},
+    {exercise:"Nordic Curl + DB Bulgarian Split Squat (Superset)",sets:3,reps:`5–8 + ${reps_bss}`,rest:"2 min after pair",sw:`BW / ${sw_bss}`,superset:true,
+     why:"Nordic curl (knee-flexion hamstring) + split squat (quad) — opposite muscles. Nordic: anchor feet under bench, lower as slowly as possible — even 2–3 inches is real work. Use hands to push back up. Builds range over weeks.",
+     tg:{start:`BW Nordic — any range is progress. ${sw_bss} split squat.`,tooEasy:"Nordic: more range, slower descent. Split squat: add 5 lbs",tooHard:"Nordic too hard → DB leg curl at 15 lbs instead. Split squat: balance failing → reduce weight"}},
+    {exercise:"DB Hip Thrust + Reverse Nordic Curl (Superset)",sets:3,reps:`${reps_ht} + 8–10`,rest:"75s after pair",sw:`${sw_ht} / BW`,superset:true,
+     why:"Glute concentric (hip thrust) + quad eccentric (reverse nordic) — completely different muscles. Reverse nordic: kneel upright on soft surface, lean back as far as you can control. Trains rectus femoris in a lengthened position squats don't reach. Even 10–15° of lean is meaningful.",
+     tg:{start:`${sw_ht} hip thrust. BW reverse nordic — any lean at all is productive.`,tooEasy:"Hip thrust: add 5 lbs. Reverse nordic: hold light DB at chest",tooHard:"Hip thrust: lower back aching → reduce. Reverse nordic: shorter lean"}},
+    {exercise:"Lateral Lunge + Single-Leg Calf Raise (Superset)",sets:3,reps:`10 each + 15–20 each`,rest:"50s after pair",sw:`${ph===1?"15 lbs each / 20 lbs":ph===2?"20 lbs each / 25 lbs":"20 lbs each / 25–30 lbs"}`,superset:true,
+     why:"Adductors (lateral lunge) + calves (single-leg calf raise) — completely different muscles, no fatigue overlap. Efficient pairing that saves ~3 minutes vs doing them separately. Use a step for the calf raise — full ROM, heel drops below step at the bottom.",
+     tg:{start:`${ph===1?"15 lbs each":ph===2?"20 lbs each":"20 lbs each"} lunge. ${ph===1?"20 lbs":ph===2?"25 lbs":"25–30 lbs"} calf raise.`,tooEasy:"Lunge: add 5 lbs. Calf: 20 reps, no burn → add 5 lbs",tooHard:"Lunge: knee caving → reduce weight. Calf: cramping → reduce weight"}},
+  ];
+}
+
+function deloadSessions(){
+  return {
+    upperA:{day:"Monday",label:"Upper A — Deload",type:"deload",estTime:"~33 min",ss:false,
+      why:"Deload week: same exercises, same weight, but only 2 sets per exercise. The goal is to maintain the movement patterns and neuromuscular connections while allowing accumulated fatigue to dissipate. Research shows performance rebounds ABOVE pre-deload levels after a proper deload.",
+      sessions:[
+        {exercise:"DB Bench Press + Single-Arm Row",sets:2,reps:"10–12 + 10–12",rest:"75s after pair",sw:"Previous Phase weight",superset:true,notes:"2 sets only. Don't add weight. This is recovery, not training."},
+        {exercise:"DB Flye + DB Pullover",sets:2,reps:"12 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"Lateral Raise + Reverse Fly",sets:2,reps:"12 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"Incline DB Curl + Overhead Tricep Ext",sets:2,reps:"10 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"Zottman Curl + Close-Grip DB Press",sets:2,reps:"10 + 12",rest:"50s after pair",sw:"Previous Phase weight",superset:true,notes:"2 sets. Same controlled rotation on the Zottman descent."},
+      ]},
+    lowerA:{day:"Tuesday",label:"Lower A — Deload",type:"deload",estTime:"~28 min",ss:false,
+      why:"Deload: 2 sets per exercise. Keep the weight — reduce the volume. Core is on Monday, Wednesday, and Saturday now — Lower A is purely lifting.",
+      sessions:[
+        {exercise:"DB Goblet Squat",sets:2,reps:"10",rest:"90s",sw:"Previous Phase weight",superset:false,notes:"2 sets. Full depth, controlled tempo."},
+        {exercise:"DB Bulgarian Split Squat",sets:2,reps:"8 each",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"DB Romanian Deadlift",sets:2,reps:"10",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"DB Hip Thrust",sets:2,reps:"12",rest:"75s",sw:"Previous Phase weight",superset:false,notes:""},
+      ]},
+    peloton:{day:"Wednesday",label:"Peloton — Easy Zone 2",type:"cardio",estTime:"35 min",ss:false,
+      sessions:[
+        {exercise:"Easy Zone 2 Ride",sets:1,reps:"30 min",rest:"—",sw:"—",notes:"Low end of Zone 2. This is active recovery — genuinely easy."},
+        {exercise:"Full body stretching",sets:1,reps:"5 min",rest:"—",sw:"—",notes:""},
+      ]},
+    upperB:{day:"Thursday",label:"Upper B — Deload",type:"deload",estTime:"~35 min",ss:false,
+      why:"Deload: 2 sets only. Same weight as previous phase.",
+      sessions:[
+        {exercise:"DB OHP + Chest-Supported Row",sets:2,reps:"10 + 10",rest:"75s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"Incline DB Press + Lateral Raise",sets:2,reps:"10 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"DB Flye + Reverse Fly",sets:2,reps:"12 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"DB Pullover",sets:2,reps:"12",rest:"60s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"Cross-Body Curl + Skull Crusher",sets:2,reps:"10 + 10",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"Concentration Curl + Overhead Tricep Ext",sets:2,reps:"10 + 12",rest:"50s after pair",sw:"Previous Phase weight",superset:true,notes:"Elbow braced on thigh for the curl. 2 sets."},
+      ]},
+    lowerB:{day:"Friday",label:"Lower B — Deload",type:"deload",estTime:"~30 min",ss:false,
+      why:"Deload: 2 sets only. If you feel fresh, resist the urge to add sets.",
+      sessions:[
+        {exercise:"DB Romanian Deadlift",sets:2,reps:"8",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"DB Bulgarian Split Squat",sets:2,reps:"8 each",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"DB Hip Thrust",sets:2,reps:"12",rest:"75s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"Nordic Curl (assisted)",sets:2,reps:"5",rest:"90s",sw:"BW",superset:false,notes:"Easier range — just maintain the pattern."},
+      ]},
+  };
+}
+
+function travelUpperA(){
+  return {day:"Monday",label:"Upper A — Bodyweight (Travel)",type:"lift",estTime:"~40 min",ss:false,
+    why:"Full bodyweight substitutes for hotel room. Increase reps to near-failure to compensate for no load. One week of BW training will NOT set back progress — the reduced loading acts as a partial deload and may improve Week 3 performance. A backpack with 10–15 lbs of books dramatically upgrades this session.",
+    sessions:[
+      {exercise:"Push-Up (Deficit if possible)",sets:4,reps:"To near-failure",rest:"75s",sw:"BW",superset:false,notes:"Hands on bed edge or two chairs for deeper ROM. Slow eccentric — 3s down.",tg:{start:"BW. Find depth that challenges you by rep 15.",tooEasy:"Feet elevated on bed",tooHard:"Standard push-up"}},
+      {exercise:"Wide Push-Up",sets:3,reps:"12–15",rest:"60s",sw:"BW",superset:false,notes:"Hands wide, elbows flare — approximates flye pattern.",tg:{start:"BW.",tooEasy:"Feet elevated",tooHard:"Reduce range"}},
+      {exercise:"Backpack Row (Bent-Over)",sets:4,reps:"10–12",rest:"75s",sw:"10–15 lb pack",superset:false,notes:"Load backpack with books/toiletries. Hinge forward, row pack to hip. Far better than towel row for load and feel.",tg:{start:"10–15 lbs in pack.",tooEasy:"Add more books",tooHard:"Towel door row instead"}},
+      {exercise:"Floor Pullover (Pattern groove)",sets:3,reps:"12",rest:"60s",sw:"BW",superset:false,notes:"Lie on floor, arms overhead, pull hands toward hips like a lat pulldown. No resistance — pure movement pattern maintenance.",tg:{start:"BW. Slow and deliberate.",tooEasy:"Hold a water bottle overhead",tooHard:"Shorter range"}},
+      {exercise:"Pike Push-Up + Prone Y-Raise (Superset)",sets:3,reps:"10 + 12",rest:"60s after pair",sw:"BW",superset:true,notes:"Pike push-up: shoulder dominant press. Prone Y-raise: lie face down, lift arms in Y shape, 2s hold — rear delt.",tg:{start:"BW.",tooEasy:"Feet higher for pike",tooHard:"Reduce range"}},
+      {exercise:"Towel Curl + Diamond Push-Up (Superset)",sets:3,reps:"10–12 + 10–15",rest:"60s after pair",sw:"BW",superset:true,notes:"Towel curl: loop towel under foot, curl against foot resistance. Diamond push-up: hands close, tricep dominant.",tg:{start:"BW.",tooEasy:"More foot pressure on towel; feet elevated for push-up",tooHard:"Less pressure; wider hands"}},
+      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"20 total + 30s",rest:"45s after pair",sw:"BW",superset:true,notes:"Same core work as regular plan.",tg:{start:"BW.",tooEasy:"Hold DB at chest; extend arms for hollow",tooHard:"Reduce range"}},
+    ]};
+}
+function travelLowerA(){
+  return {day:"Tuesday",label:"Lower A — Bodyweight (Travel)",type:"lift",estTime:"~40 min",ss:false,
+    why:"Slow tempo (3–4s eccentric) is your primary intensity tool this week. High reps compensate for no load.",
+    sessions:[
+      {exercise:"Slow Bodyweight Squat",sets:4,reps:"15–20",rest:"75s",sw:"BW",superset:false,notes:"4s down, 1s pause at bottom, 1s up.",tg:{start:"BW. Tempo is everything.",tooEasy:"Single-leg squat to chair",tooHard:"Use wall for balance"}},
+      {exercise:"BW Bulgarian Split Squat",sets:3,reps:"12–15 each",rest:"90s",sw:"BW",superset:false,notes:"Rear foot on bed. Higher reps than DB version.",tg:{start:"BW.",tooEasy:"Add jump at top",tooHard:"Reduce range"}},
+      {exercise:"Single-Leg RDL",sets:3,reps:"12 each",rest:"75s",sw:"BW",superset:false,notes:"3s descent. Balance challenge + hamstring stretch.",tg:{start:"BW. 3s descent.",tooEasy:"Touch floor with fingertips",tooHard:"Hold wall"}},
+      {exercise:"Glute Bridge + Backpack Hip Thrust (Superset)",sets:3,reps:"15 + 12",rest:"75s after pair",sw:"BW / pack",superset:true,notes:"BW glute bridge on floor (2s hold). Backpack on hips for loaded hip thrust on bed edge.",tg:{start:"BW bridge, light pack on hips.",tooEasy:"Single-leg bridge; heavier pack",tooHard:"Both BW"}},
+      {exercise:"Nordic Curl + BW Lateral Lunge (Superset)",sets:3,reps:"5–8 + 12 each",rest:"75s after pair",sw:"BW",superset:true,notes:"Feet under heavy luggage or bed frame. Lower as slowly as possible.",tg:{start:"BW. Any range of Nordic is productive.",tooEasy:"More range",tooHard:"Shorter range with hand catch"}},
+      {exercise:"BW Calf Raise + Dead Bug (Superset)",sets:2,reps:"25–30 each + 10 each side",rest:"45s after pair",sw:"BW",superset:true,notes:"Single-leg calf, high reps. Same dead bug cues.",tg:{start:"BW.",tooEasy:"Jump at top of calf raise; add arm overhead for dead bug",tooHard:"Two-leg calf raise"}},
+    ]};
+}
+function travelUpperB(){
+  return {day:"Thursday",label:"Upper B — Bodyweight (Travel)",type:"lift",estTime:"~40 min",ss:false,
+    why:"Shoulder-focused BW session. Pike push-ups and backpack rows are the primary movements.",
+    sessions:[
+      {exercise:"Pike Push-Up",sets:4,reps:"10–15",rest:"90s",sw:"BW",superset:false,notes:"Feet elevated on bed/chair, body in inverted V. Shoulder dominant.",tg:{start:"BW.",tooEasy:"Feet higher",tooHard:"Less elevation"}},
+      {exercise:"Backpack Row + Prone Y-T-W (Superset)",sets:4,reps:"10–12 + 10 each position",rest:"75s after pair",sw:"pack / BW",superset:true,notes:"Backpack row then prone Y-T-W (Y=upper back, T=mid back, W=rear delt). 2s hold each position.",tg:{start:"10–15 lb pack for rows. BW Y-T-W.",tooEasy:"More weight in pack",tooHard:"Lighter pack; shorter holds"}},
+      {exercise:"Decline Push-Up + Prone Y-Raise (Superset)",sets:3,reps:"12–15 + 12",rest:"60s after pair",sw:"BW",superset:true,notes:"Feet on bed, upper chest emphasis. Prone Y for rear delt.",tg:{start:"BW.",tooEasy:"Feet higher",tooHard:"Standard push-up"}},
+      {exercise:"Towel Curl + Tricep Dip (Superset)",sets:3,reps:"10–12 + 10–15",rest:"60s after pair",sw:"BW",superset:true,notes:"Towel curl: foot resistance. Dip: hands on chair seat behind you.",tg:{start:"BW.",tooEasy:"More foot pressure; feet elevated for dip",tooHard:"Less tension; shorter dip range"}},
+      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"20 total + 30s",rest:"45s after pair",sw:"BW",superset:true,notes:"Same core circuit.",tg:{start:"BW.",tooEasy:"Add weight",tooHard:"Reduce range"}},
+    ]};
+}
+function travelLowerB(){
+  return {day:"Friday",label:"Lower B — Bodyweight (Travel)",type:"lift",estTime:"~40 min",ss:false,
+    why:"Hamstring-focused. Nordic curls are the star — achievable anywhere you can anchor feet.",
+    sessions:[
+      {exercise:"Single-Leg RDL",sets:4,reps:"12 each",rest:"90s",sw:"BW",superset:false,notes:"Primary hamstring work. 3s descent, full control.",tg:{start:"BW. 3s descent.",tooEasy:"Touch floor",tooHard:"Hold wall"}},
+      {exercise:"Nordic Curl + BW Bulgarian Split Squat (Superset)",sets:3,reps:"5–8 + 12 each",rest:"90s after pair",sw:"BW",superset:true,notes:"Nordic: feet under bed/luggage. Split squat: add small jump for intensity.",tg:{start:"BW both.",tooEasy:"More Nordic range; add jump to BSS",tooHard:"Shorter Nordic; no jump"}},
+      {exercise:"Single-Leg Glute Bridge + Reverse Nordic (Superset)",sets:3,reps:"15 each + 8–10",rest:"75s after pair",sw:"BW",superset:true,notes:"Single-leg bridge: 2s hold at top. Reverse nordic: kneel, lean back as far as possible.",tg:{start:"BW.",tooEasy:"Elevated foot for bridge; hold water bottle for RN",tooHard:"Two-leg bridge; shorter lean"}},
+      {exercise:"BW Lateral Lunge + Bicycle Crunch (Superset)",sets:3,reps:"12 each + 20 total",rest:"50s after pair",sw:"BW",superset:true,notes:"Same core/adductor work.",tg:{start:"BW.",tooEasy:"Add jump to lunge",tooHard:"Shorter range"}},
+      {exercise:"BW Calf Raise + Plank (Superset)",sets:2,reps:"25–30 each + 45s",rest:"45s after pair",sw:"BW",superset:true,notes:"",tg:{start:"BW.",tooEasy:"Jump at top; feet elevated plank",tooHard:"Two-leg calf; shorten plank"}},
+    ]};
+}
+function travelPeloton(){
+  return {day:"Wednesday",label:"Hotel Cardio",type:"cardio",estTime:"40 min",ss:false,
+    sessions:[
+      {exercise:"Hotel Gym Bike/Treadmill OR Stairwell",sets:1,reps:"35 min",rest:"—",sw:"—",notes:"Hotel gym: 35 min Zone 2 pace. No gym: stairwell intervals — 10 floors × 5 rounds with 2 min rest. Or 30–40 min brisk walk outside. Zone 2 equivalent only — no HIIT this week."},
+    ]};
+}
+
+function buildSchedule(phaseNum, schedMode, bwMode){
+  const isTravel = (phaseNum===1 && bwMode);
+
+  const ua = isTravel ? travelUpperA() : {day:"Monday",  label:`Upper A — Chest & Back`,   type:"lift",estTime:"~44 min",ss:false,why:"Chest and back paired as push/pull. Core has moved to Wednesday and Saturday. Each muscle gets 72 hours recovery before its next session (Thu).",sessions:upperA(phaseNum)};
+  const la = isTravel ? travelLowerA() : {day:"Tuesday", label:`Lower A — Quad & Glute Primary`,type:"lift",estTime:"~47 min",ss:false,why:"Lower A is quad and glute primary. Core has moved to Monday, Wednesday, and Saturday — Lower A is now purely lifting.",sessions:lowerA(phaseNum)};
+
+  const coreBeforeZ2 = {
+    day:"Wednesday", label:"Core + Peloton Zone 2", type:"cardio",
+    estTime: phaseNum>=3?"~60 min":"~55 min", ss:false,
+    why:"Core circuit first (~14 min covering all five patterns), then Zone 2 ride. Zone 2 is low enough intensity that doing core immediately before doesn't impair performance. Wednesday sits between two heavy lifting days — Zone 2 only (not HIIT).",
+    sessions:[
+      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",notes:"Rotation/obliques (bicycle crunch) + anti-extension (hollow body). Slow bicycle crunch — 2s per rep, full rotation, elbow toward knee. Hollow body: arms by sides to start, lower back stays completely flat."},
+      {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",notes:"45 crunches: 15 standard, 15 left oblique (right elbow toward left knee), 15 right oblique (left elbow toward right knee). Chin tucked, hands lightly behind ears — don't pull the neck. Leg raise: control the descent — don't drop."},
+      {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",notes:"Anti-extension (dead bug) + sustained anti-extension (plank). Dead bug: opposite arm and leg extend while lower back stays pressed to floor. Plank: squeeze glutes and abs actively — don't just hang there. Then get on the bike."},
+      {exercise:"Peloton Power Zone Endurance Ride",sets:1,reps:phaseNum>=3?"40 min":"35 min",rest:"—",sw:"—",notes:"50–65% FTP. Conversational pace — you should be able to speak full sentences. Matt Wilpers PZE rides recommended."},
+      {exercise:"Post-ride Stretch",sets:1,reps:"5 min",rest:"—",sw:"—",notes:"Hip flexors, quads, lower back."},
+    ]
+  };
+  const wed = isTravel ? travelPeloton() : coreBeforeZ2;
+
+  const ub = isTravel ? travelUpperB() : {day:"Thursday",label:`Upper B — Shoulders & Back`, type:"lift",estTime:"~50 min",ss:false,why:"Shoulders and back primary, chest secondary. 72 hours since Upper A. OHP leads as primary compound.",sessions:upperB(phaseNum)};
+  const lb = isTravel ? travelLowerB() : {day:"Friday",  label:`Lower B — Hamstring Primary`,type:"lift",estTime:"~47 min",ss:false,why:"Hamstring primary, quad secondary. Core has moved off lower days — Lower B is now purely lifting.",sessions:lowerB(phaseNum)};
+
+  const coreBlock = [
+    {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",notes:"Same as Wednesday. Slow bicycle crunch — 2s per rep, full rotation. Hollow body: lower back stays flat."},
+    {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",notes:"45 crunches: 15 standard, 15 left oblique, 15 right oblique. Leg raise: control the descent — don't drop."},
+    {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",notes:"Dead bug: lower back pressed to floor throughout. Plank: actively squeeze glutes and abs. Then get on the bike."},
+  ];
+  let sat;
+  if(phaseNum===1) sat = {day:"Saturday",label:"Core + Peloton HIIT",type:"cardio",estTime:"~55 min",ss:false,sessions:[
+    ...coreBlock,
+    {exercise:"Peloton HIIT Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any HIIT class — the class has a built-in warm-up. 20–30 min is plenty. Optional: follow with a separate 5-min cool-down class."},
+  ]};
+  else if(phaseNum===2) sat = {day:"Saturday",label:"Core + Peloton Climb",type:"cardio",estTime:"~55 min",ss:false,sessions:[
+    ...coreBlock,
+    {exercise:"Peloton Climb Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any Climb class — high resistance, low cadence (60–70 RPM). Class has a built-in warm-up. Optional: follow with a 5-min cool-down class."},
+  ]};
+  else if(phaseNum===3) sat = {day:"Saturday",label:"Core + Peloton HIIT + Zone 2",type:"cardio",estTime:"~60 min",ss:false,sessions:[
+    ...coreBlock,
+    {exercise:"Peloton HIIT Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any HIIT class. Built-in warm-up included."},
+    {exercise:"Peloton Zone 2 Cool-Down Ride",sets:1,reps:"20 min",rest:"—",sw:"—",notes:"Stay on bike after HIIT — drop to easy Zone 2 immediately. Extended fat-burning window."},
+  ]};
+  else sat = {day:"Saturday",label:"Core + Peloton Climb + Sprint",type:"cardio",estTime:"~60 min",ss:false,sessions:[
+    ...coreBlock,
+    {exercise:"Peloton Climb Class",sets:1,reps:"20–30 min",rest:"—",sw:"—",notes:"Pick any Climb class. Built-in warm-up included."},
+    {exercise:"Peloton Sprint Class or Sprint Intervals",sets:1,reps:"10–15 min",rest:"—",sw:"—",notes:"Follow the climb with a short sprint class, or do your own: 20s all-out / 40s easy × 5 rounds. Pre-fatigued legs make this disproportionately effective."},
+  ]};
+
+  if(schedMode==="mf" && phaseNum>=3 && !isTravel){
+    lb.sessions = [...lb.sessions, {exercise:"20-min Zone 2 Ride (Post-Lift)",sets:1,reps:"20 min",rest:"—",sw:"—",notes:"Phase 3/4 Mon–Fri only: add this after lifting. Fat oxidation while metabolism is elevated. Keep it easy — Zone 2 only."}];
+  }
+
+  const full = [ua, la, wed, ub, lb, sat, {...rest_day}];
+  return schedMode==="mf" ? full.slice(0,5) : full;
+}
+
+function buildDeloadSchedule(schedMode){
+  const dl = deloadSessions();
+  const full = [dl.upperA, dl.lowerA, dl.peloton, dl.upperB, dl.lowerB, {...rest_day,day:"Saturday",label:"Rest"}, {...rest_day}];
+  return schedMode==="mf" ? full.slice(0,5) : full;
+}
+
+const PHASES = {
+  phase1:{name:"Phase 1: Hypertrophy",weeks:"Weeks 1–4",color:"#e8c547",num:1,
+    goal:"2× per muscle/week. RPE 8. Last 2 reps genuinely hard every set. Add 5 lbs only when all sets feel RPE 7 or below. Week 3 = travel bodyweight week."},
+  phase2:{name:"Phase 2: Strength",weeks:"Weeks 5–8",color:"#e07b39",num:2,
+    goal:"Heavier loads, lower reps. RPE 8.5. Order 45–50 lb DBs before Week 5 — you will need them. Week 8 = deload week."},
+  phase3:{name:"Phase 3: Strength + Cut",weeks:"Weeks 9–12",color:"#e05252",num:3,
+    goal:"Near-max effort on primary compounds (straight sets, RPE 9). Accessories supersetted. Calorie deficit tightens to 400–500 kcal. Recalculate TDEE at Week 9. Week 12 = deload week."},
+  phase4:{name:"Phase 4: Peak Recomp",weeks:"Weeks 13–16",color:"#6cc97e",num:4,
+    goal:"Primary compounds stay at 5–6 reps (maintain strength signal). Accessories at 10–12. Full supersets for accessories. Sprint Peloton sessions drive fat loss — not rep ranges."},
+};
+
+const PK=["phase1","phase2","phase3","phase4"];
+
+const MS=[
+  {wk:"Week 1",   note:"Calibration. Self-test every exercise. Log weights. Start conservative."},
+  {wk:"Week 2–3", note:"Week 2: add weight where earned. Week 3: travel BW week (turn on Travel Mode)."},
+  {wk:"Week 4",   note:"Back from travel. Resume with Phase 1 weights. You haven't lost anything."},
+  {wk:"Week 5–7", note:"Strength phase. Order 45–50 lb DBs now if you haven't."},
+  {wk:"Week 8",   note:"DELOAD. Same exercises, 2 sets only, same weight. Non-negotiable."},
+  {wk:"Week 9–11",note:"Near-max effort. Recalculate TDEE. Add 20-min daily walks for fat loss."},
+  {wk:"Week 12",  note:"DELOAD. Critical recovery before peak volume phase."},
+  {wk:"Week 13–16",note:"Peak volume. Highest intensity of the program. 15% BF is right there."},
+];
+
+const NUTR_STD = [
+  "Protein: ~190g/day (1g per lb bodyweight — non-negotiable)",
+  "Calories: ~2,400 kcal (300–400 kcal deficit)",
+  "Carbs — Lift days: 220–240g | Peloton days: 180–200g | Rest days: 150–170g",
+  "Fat: 65–75g (consistent across all days)",
+  "Recalculate at Week 9: as you lose weight, TDEE drops. Reassess deficit every ~10 lbs lost.",
+];
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let S={
+  // Plan view state
+  phase:"phase1",dayIdx:0,expandedRow:null,showRpe:false,
+  editKey:null,editVal:"",tab:"plan",
+  sched:"std",bw:false,deload:false,
+  weights:{},progress:[],
+  // Workout mode state
+  workout:null,
+  // History
+  history:[],
+  exerciseWeights:{},
+  // History expand
+  expandedHistIdx:null,
+  expandedExName:null,
+  histView:"sessions",
+};
+
+function load(){
+  try{const w=localStorage.getItem("wplan_v4_w");if(w)S.weights=JSON.parse(w);}catch(_){}
+  try{const p=localStorage.getItem("wplan_v4_p");if(p)S.progress=JSON.parse(p);}catch(_){}
+  try{const h=localStorage.getItem("wplan_v5_h");if(h)S.history=JSON.parse(h);}catch(_){}
+  try{const x=localStorage.getItem("wplan_v5_xw");if(x)S.exerciseWeights=JSON.parse(x);}catch(_){}
+}
+function saveW(){try{localStorage.setItem("wplan_v4_w",JSON.stringify(S.weights));}catch(_){}}
+function saveP(){try{localStorage.setItem("wplan_v4_p",JSON.stringify(S.progress));}catch(_){}}
+function saveH(){try{localStorage.setItem("wplan_v5_h",JSON.stringify(S.history));}catch(_){}}
+function saveXW(){try{localStorage.setItem("wplan_v5_xw",JSON.stringify(S.exerciseWeights));}catch(_){}}
+function set(o,re=true){Object.assign(S,o);if(re)render();}
+
+// ═══════════════════════════════════════════
+// AUDIO / HAPTICS / WAKE LOCK
+// ═══════════════════════════════════════════
+let _audioCtx=null;
+function unlockAudio(){
+  if(!_audioCtx){
+    try{_audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}
+  }
+  if(_audioCtx&&_audioCtx.state==="suspended"){_audioCtx.resume();}
+}
+function beepDone(){
+  unlockAudio();
+  if(!_audioCtx)return;
+  const beeps=[[660,0],[880,0.2],[660,0.4]];
+  beeps.forEach(([freq,t])=>{
+    const osc=_audioCtx.createOscillator();
+    const gain=_audioCtx.createGain();
+    osc.connect(gain);gain.connect(_audioCtx.destination);
+    osc.frequency.value=freq;
+    osc.type="sine";
+    gain.gain.setValueAtTime(0,_audioCtx.currentTime+t);
+    gain.gain.linearRampToValueAtTime(0.4,_audioCtx.currentTime+t+0.01);
+    gain.gain.linearRampToValueAtTime(0,_audioCtx.currentTime+t+0.15);
+    osc.start(_audioCtx.currentTime+t);
+    osc.stop(_audioCtx.currentTime+t+0.2);
+  });
+}
+function vibrate(){navigator.vibrate&&navigator.vibrate([150,80,150,80,200]);}
+
+let _wakeLock=null;
+async function requestWakeLock(){
+  try{_wakeLock=await navigator.wakeLock?.request('screen');}catch(e){}
+}
+async function releaseWakeLock(){
+  try{await _wakeLock?.release();_wakeLock=null;}catch(e){}
+}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+let _timerInterval=null;
+let _elapsedInterval=null;
+
+function startRestTimer(seconds){
+  clearInterval(_timerInterval);
+  S.workout.restEnd=Date.now()+seconds*1000;
+  S.workout.restTotal=seconds;
+  _timerInterval=setInterval(()=>{
+    const remaining=Math.ceil((S.workout.restEnd-Date.now())/1000);
+    if(remaining<=0){
+      clearInterval(_timerInterval);_timerInterval=null;
+      beepDone();vibrate();
+      // Transition: go to next part
+      advanceAfterRest();
+      S.workout.goFlash=true;
+      render();
+    } else {
+      // Update only timer DOM elements without full re-render
+      const te=document.getElementById("wf-timer-text");
+      const pb=document.getElementById("wf-prog-fill");
+      if(te){
+        const m=Math.floor(remaining/60);
+        const s=remaining%60;
+        te.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+      }
+      if(pb){
+        const total=S.workout.restTotal||60;
+        const pct=((S.workout.restEnd-Date.now())/(total*1000))*100;
+        pb.style.width=Math.max(0,Math.min(100,pct))+"%";
+      }
+    }
+  },250);
+}
+
+function stopAllTimers(){
+  clearInterval(_timerInterval);_timerInterval=null;
+  clearInterval(_elapsedInterval);_elapsedInterval=null;
+}
+
+function startElapsedTimer(){
+  clearInterval(_elapsedInterval);
+  _elapsedInterval=setInterval(()=>{
+    const el=document.getElementById("wf-elapsed");
+    if(el&&S.workout){
+      const mins=Math.floor((Date.now()-S.workout.startTime)/60000);
+      el.textContent=mins+"m";
+    }
+  },60000);
+}
+
+// ═══════════════════════════════════════════
+// WARMUP DATA + TIMER
+// ═══════════════════════════════════════════
+const WU_UPPER_EXS=[
+  {name:"Arm circles — forward",duration:30},
+  {name:"Arm circles — backward",duration:30},
+  {name:"Shoulder rolls",duration:30},
+  {name:"Thoracic rotations",duration:30},
+  {name:"Chest opener (hands behind back)",duration:30},
+  {name:"Wrist circles",duration:30},
+];
+const WU_LOWER_EXS=[
+  {name:"Hip circles",duration:30},
+  {name:"Leg swings — front to back",duration:30},
+  {name:"Leg swings — side to side",duration:30},
+  {name:"Ankle rotations",duration:30},
+  {name:"Bodyweight good morning",duration:30},
+  {name:"Deep squat hold",duration:30},
+];
+
+function getWarmupExercises(dayLabel){
+  const lower=dayLabel.toLowerCase();
+  if(lower.includes("lower"))return WU_LOWER_EXS;
+  if(lower.includes("upper"))return WU_UPPER_EXS;
+  return null;
+}
+
+function startWarmupStep(){
+  const w=S.workout;
+  if(!w||w.phase!=="warmup")return;
+  const step=w.warmupExercises[w.warmupIdx];
+  if(!step){
+    // All warmup steps done — go straight to first exercise
+    w.phase="active";
+    render();
+    return;
+  }
+  w.warmupEnd=Date.now()+step.duration*1000;
+  w.warmupTotal=step.duration;
+  clearInterval(_timerInterval);
+  _timerInterval=setInterval(()=>{
+    const remaining=Math.ceil((w.warmupEnd-Date.now())/1000);
+    if(remaining<=0){
+      clearInterval(_timerInterval);_timerInterval=null;
+      // soft beep for warmup transition
+      beepDone();
+      w.warmupIdx++;
+      if(w.warmupIdx>=w.warmupExercises.length){
+        w.phase="active";
+      } else {
+        startWarmupStep();
+      }
+      render();
+    } else {
+      // In-place DOM updates — no full re-render
+      const te=document.getElementById("wf-wu-timer");
+      const pb=document.getElementById("wf-wu-fill");
+      const nm=document.getElementById("wf-wu-name");
+      if(te){
+        te.textContent=String(remaining);
+        if(remaining<=5)te.classList.add("last5");
+        else te.classList.remove("last5");
+      }
+      if(pb){
+        const pct=((w.warmupEnd-Date.now())/(w.warmupTotal*1000))*100;
+        pb.style.width=Math.max(0,Math.min(100,pct))+"%";
+      }
+    }
+  },250);
+}
+
+// ═══════════════════════════════════════════
+// REST TIME PARSER
+// ═══════════════════════════════════════════
+function parseRestTime(restStr){
+  if(!restStr||restStr==="—")return 60;
+  const s=restStr.toLowerCase();
+  // "2.5 min" → 150
+  const minMatch=s.match(/(\d+\.?\d*)\s*min/);
+  if(minMatch)return Math.round(parseFloat(minMatch[1])*60);
+  // "90s" → 90
+  const secMatch=s.match(/(\d+)\s*s/);
+  if(secMatch)return parseInt(secMatch[1]);
+  return 60;
+}
+
+// ═══════════════════════════════════════════
+// EXERCISE PARSER
+// ═══════════════════════════════════════════
+function parseExerciseEntry(sess){
+  // Returns array of {name, reps, weight} parts
+  const isSuperset = sess.name
+    ? (sess.name.includes('(Superset)') || (sess.superset && sess.name.includes('+')))
+    : (sess.exercise&&(sess.exercise.includes('(Superset)') || (sess.superset && sess.exercise.includes('+'))));
+
+  const name = sess.name||sess.exercise||"";
+  const repsStr = sess.reps||"";
+  const swStr = sess.sw||"";
+
+  if(!isSuperset){
+    return [{name:name.replace(/\s*\(Superset\)/,"").trim(), reps:repsStr, weight:swStr}];
+  }
+
+  // Split name: remove (Superset) suffix, split on " + " or "+"
+  const cleanName=name.replace(/\s*\(Superset\)\s*$/,"").trim();
+  // Split on " + " first, then "+"
+  let nameParts=cleanName.split(/\s*\+\s*/);
+  let repsParts=repsStr.split(/\s*\+\s*/);
+  let weightParts=swStr.split(/\s*\/\s*/);
+
+  return nameParts.map((n,i)=>({
+    name:n.trim(),
+    reps:(repsParts[i]||repsParts[0]||"").trim(),
+    weight:(weightParts[i]||weightParts[0]||swStr).trim(),
+  }));
+}
+
+// ═══════════════════════════════════════════
+// WORKOUT FLOW LOGIC
+// ═══════════════════════════════════════════
+function buildWorkoutQueue(sessions){
+  // Build a flat list of "steps" for the workout
+  // Each step: {sessionIdx, parts:[{name,reps,weight}], sets, restSecs, type:'exercise'}
+  const queue=[];
+  sessions.forEach((sess,si)=>{
+    if(sess.sets<1)return; // skip rest/cardio sets=0
+    const parts=parseExerciseEntry(sess);
+    const restSecs=parseRestTime(sess.rest);
+    queue.push({sessionIdx:si, parts, sets:sess.sets, restSecs, exercise:sess.exercise||sess.name||""});
+  });
+  return queue;
+}
+
+function startWorkout(dayObj, phaseKey, schedMode, bwMode, deloadMode, dayIdx){
+  const sessions=dayObj.sessions;
+  const queue=buildWorkoutQueue(sessions);
+  if(queue.length===0)return;
+
+  const warmupExs=getWarmupExercises(dayObj.label);
+  const hasWarmup=(dayObj.type==="lift"||dayObj.type==="deload")&&warmupExs!==null;
+
+  S.workout={
+    dayLabel:dayObj.label,
+    dayType:dayObj.type,
+    phaseKey,schedMode,bwMode,deloadMode,dayIdx,
+    queue,
+    qIdx:0,
+    setNum:1,
+    partIdx:0,
+    phase:hasWarmup?"warmup":"active",
+    startTime:Date.now(),
+    restEnd:null,
+    restTotal:60,
+    totalSets:0,
+    loggedWeights:{},
+    exerciseSets:{},
+    cardioChecked:[],
+    // warmup
+    warmupExercises:warmupExs||[],
+    warmupIdx:0,
+    warmupEnd:null,
+    warmupTotal:30,
+  };
+
+  // For cardio/rest days use checklist mode
+  if(dayObj.type==="cardio"||dayObj.type==="rest"){
+    S.workout.phase="cardio";
+    S.workout.cardioChecked=sessions.map(()=>false);
+  }
+
+  requestWakeLock();
+  startElapsedTimer();
+  render();
+  // Kick off warmup timer after first render
+  if(hasWarmup)startWarmupStep();
+}
+
+function stopWorkout(){
+  stopAllTimers();
+  releaseWakeLock();
+  S.workout=null;
+  render();
+}
+
+function getTotalSets(){
+  if(!S.workout)return 0;
+  return S.workout.queue.reduce((acc,q)=>acc+q.sets,0);
+}
+
+function getCurrentItem(){
+  if(!S.workout)return null;
+  return S.workout.queue[S.workout.qIdx]||null;
+}
+
+function getNextDescription(){
+  const w=S.workout;
+  if(!w)return "";
+  const item=w.queue[w.qIdx];
+  if(!item)return "";
+  const nextSet=w.setNum+1;
+  const nextItemIdx=w.qIdx+(nextSet>item.sets?1:0);
+  const nextSetNum=nextSet>item.sets?1:nextSet;
+  const nextItem=w.queue[nextItemIdx];
+  if(!nextItem)return "Session complete";
+  const label=nextItem.parts.map(p=>p.name).join(" + ");
+  return `Set ${nextSetNum} of ${nextItem.sets} — ${label}`;
+}
+
+function completeCurrentPart(){
+  unlockAudio();
+  const w=S.workout;
+  if(!w)return;
+  const item=getCurrentItem();
+  if(!item)return;
+
+  // Entire set (or superset round) is done in one button press
+  w.partIdx=0;
+  w.totalSets++;
+
+  const isLastSet=(w.setNum>=item.sets);
+
+  if(isLastSet){
+    // Go to logging phase
+    w.setNum=item.sets; // keep for display
+    w.phase="logging";
+    render();
+  } else {
+    // Start rest timer
+    w.setNum++;
+    w.phase="resting";
+    startRestTimer(item.restSecs);
+    render();
+  }
+}
+
+function advanceAfterRest(){
+  const w=S.workout;
+  if(!w)return;
+  w.phase="active";
+  w.partIdx=0;
+  // setNum already incremented before rest
+}
+
+function skipExercise(){
+  const w=S.workout;
+  if(!w)return;
+  advanceToNextExercise();
+  render();
+}
+
+function advanceToNextExercise(){
+  const w=S.workout;
+  if(!w)return;
+  w.qIdx++;
+  w.setNum=1;
+  w.partIdx=0;
+  if(w.qIdx>=w.queue.length){
+    w.phase="done";
+    stopAllTimers();
+    releaseWakeLock();
+  } else {
+    w.phase="active";
+  }
+}
+
+function saveLogAndContinue(logMap){
+  const w=S.workout;
+  if(!w)return;
+  const item=getCurrentItem();
+  if(item){
+    item.parts.forEach(p=>{
+      if(logMap[p.name]){
+        w.loggedWeights[p.name]=logMap[p.name];
+        if(!w.exerciseSets)w.exerciseSets={};
+        w.exerciseSets[p.name]=item.sets;
+      }
+    });
+  }
+  advanceToNextExercise();
+  render();
+}
+
+function skipLog(){
+  advanceToNextExercise();
+  render();
+}
+
+function saveSession(){
+  const w=S.workout;
+  if(!w)return;
+  const duration=Math.round((Date.now()-w.startTime)/60000);
+  const session={
+    id:Date.now(),
+    date:new Date().toISOString().split("T")[0],
+    dayLabel:w.dayLabel,
+    duration,
+    totalSets:w.totalSets,
+    weights:Object.assign({},w.loggedWeights),
+    exerciseSets:Object.assign({},w.exerciseSets||{}),
+    expanded:false,
+  };
+  S.history.unshift(session);
+  saveH();
+  // Update exerciseWeights
+  const dateStr=new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"});
+  Object.entries(w.loggedWeights).forEach(([name,weight])=>{
+    S.exerciseWeights[name]={weight,date:dateStr};
+  });
+  saveXW();
+  stopAllTimers();
+  releaseWakeLock();
+  S.workout=null;
+  S.tab="history";
+  render();
+}
+
+function estimatedVolume(){
+  const w=S.workout;
+  if(!w)return 0;
+  let vol=0;
+  Object.entries(w.loggedWeights).forEach(([name,wStr])=>{
+    const match=wStr.match(/(\d+\.?\d*)/);
+    if(match){
+      const sets=w.exerciseSets?.[name]||3;
+      vol+=parseFloat(match[1])*sets;
+    }
+  });
+  return Math.round(vol);
+}
+
+// ═══════════════════════════════════════════
+// DOM HELPERS
+// ═══════════════════════════════════════════
+function el(t,a={},...c){
+  const e=document.createElement(t);
+  Object.entries(a).forEach(([k,v])=>{
+    if(k==="style"&&typeof v==="object")Object.assign(e.style,v);
+    else if(k.startsWith("on"))e.addEventListener(k.slice(2).toLowerCase(),v);
+    else if(k==="cls")e.className=v;
+    else e.setAttribute(k,v);
+  });
+  c.forEach(ch=>{
+    if(ch==null)return;
+    if(ch instanceof Node)e.appendChild(ch);
+    else e.appendChild(document.createTextNode(String(ch)));
+  });
+  return e;
+}
+const dv=(a,...c)=>el("div",a,...c);
+const sp=(a,...c)=>el("span",a,...c);
+const bt=(a,...c)=>el("button",a,...c);
+const ip=a=>el("input",a);
+
+// ═══════════════════════════════════════════
+// RENDER HEADER (plan mode)
+// ═══════════════════════════════════════════
+function renderHdr(phase){
+  const h=el("div",{id:"hdr"});
+  const inn=dv({cls:"inn"});
+
+  const top=dv({cls:"f fw jb ac g8 mb8"});
+  top.appendChild(dv({},
+    dv({cls:"bb",style:{fontSize:"25px",color:"#fff",lineHeight:1}},"16-WEEK UPPER/LOWER RECOMP"),
+    dv({cls:"ss",style:{fontSize:"10px",color:"#888",marginTop:"3px",letterSpacing:".5px"}},"42 YRS · 189 LBS · 24%→15% BF · DUMBBELLS + BENCH · UPPER ~44 MIN · LOWER ~47 MIN · WED/SAT CORE+BIKE ~55 MIN")
+  ));
+  const stats=dv({cls:"f fw g6"});
+  [["STARTED","223 LBS"],["NOW","189 LBS"],["LOST","34 LBS"],["BF GOAL","15%"]].forEach(([l,v])=>{
+    stats.appendChild(dv({cls:"stc"},
+      dv({cls:"bb",style:{fontSize:"15px",color:phase.color}},v),
+      dv({cls:"mm",style:{fontSize:"8px",color:"#555",letterSpacing:"1px"}},l)
+    ));
+  });
+  top.appendChild(stats);
+  inn.appendChild(top);
+
+  // Main tabs
+  const tabs=dv({cls:"f g6 mb8"});
+  [["PLAN","plan","#e8c547"],["HISTORY","history","#6cc97e"],["PROGRESS","progress","#6cc97e"]].forEach(([l,t,a])=>{
+    const act=S.tab===t;
+    tabs.appendChild(bt({cls:"tbtn ss",style:{background:act?a:"#14161c",color:act?"#0c0d10":"#666",border:act?"none":"1px solid #22252e",fontWeight:600},onClick:()=>set({tab:t})},l));
+  });
+  inn.appendChild(tabs);
+
+  inn.appendChild(dv({cls:"ibox mb8",style:{borderLeft:`3px solid ${phase.color}`}},
+    sp({cls:"ss",style:{fontSize:"11px",color:"#bbb"}},
+      sp({style:{color:phase.color,fontWeight:600}},"HOW IT WORKS: "),
+      "Browse the program below and tap START WORKOUT to begin a guided session. Use ",
+      sp({style:{color:"#e8c547"}},"+ LOG WEIGHT")," in plan view to save planned weights."
+    )
+  ));
+
+  inn.appendChild(bt({cls:"rpebtn mm",style:{background:S.showRpe?"#e8c547":"#14161c",color:S.showRpe?"#0c0d10":"#666"},
+    onClick:()=>set({showRpe:!S.showRpe})},S.showRpe?"▲ HIDE RPE SCALE":"▼ RPE SCALE — HOW HARD SHOULD IT FEEL?"));
+  if(S.showRpe){
+    const rs=dv({cls:"fade",style:{background:"#13151b",border:"1px solid #1e2028",borderRadius:"6px",overflow:"hidden",marginTop:"7px"}});
+    RPE.forEach(r=>{
+      const row=dv({style:{display:"flex",alignItems:"center",gap:"11px",padding:"7px 13px",borderBottom:"1px solid #111"}},
+        dv({cls:"bb",style:{fontSize:"17px",color:r.c,width:"30px",flexShrink:0}},r.rpe),
+        dv({cls:"ss",style:{fontSize:"11px",color:"#aaa"}},r.feel)
+      );
+      if(r.target)row.appendChild(dv({style:{marginLeft:"auto",background:"#e8c54720",border:"1px solid #e8c54750",borderRadius:"3px",padding:"2px 6px",fontFamily:"'Courier New',Courier,monospace",fontSize:"8px",color:"#e8c547"}},"TARGET"));
+      rs.appendChild(row);
+    });
+    inn.appendChild(rs);
+  }
+  h.appendChild(inn);
+  return h;
+}
+
+// ═══════════════════════════════════════════
+// RENDER PLAN TAB
+// ═══════════════════════════════════════════
+function renderPlanTab(phase,pk){
+  const f=document.createDocumentFragment();
+  const pNum=phase.num;
+
+  const pt=dv({cls:"f fw g6 mb10"});
+  PK.forEach(k=>{
+    const p=PHASES[k],act=k===pk;
+    pt.appendChild(bt({cls:"pbtn bb",style:{background:act?p.color:"#14161c",color:act?"#0c0d10":"#666",border:act?"none":"1px solid #22252e"},
+      onClick:()=>set({phase:k,dayIdx:0,expandedRow:null,deload:false,bw:false})},
+      p.name.toUpperCase()+"\n"+p.weeks));
+  });
+  f.appendChild(pt);
+
+  const mc=dv({cls:"f fw g6 mb8 ac"});
+  mc.appendChild(sp({cls:"mm",style:{fontSize:"9px",color:"#555",marginRight:"3px"}},"SCHEDULE:"));
+  [["MON–SAT (STANDARD)","std"],["MON–FRI ONLY","mf"]].forEach(([l,v])=>{
+    const act=S.sched===v;
+    mc.appendChild(bt({cls:"sbtn mm",style:{background:act?"#e8c547":"#14161c",color:act?"#0c0d10":"#666",border:act?"none":"1px solid #22252e"},
+      onClick:()=>set({sched:v,dayIdx:0,expandedRow:null})},l));
+  });
+  if(pNum===1){
+    mc.appendChild(sp({cls:"mm",style:{fontSize:"9px",color:"#333",margin:"0 4px"}},"·"));
+    const act=S.bw;
+    mc.appendChild(bt({cls:"sbtn mm",style:{background:act?"#9b7fd4":"#14161c",color:act?"#fff":"#666",border:act?"none":"1px solid #22252e"},
+      onClick:()=>set({bw:!S.bw,dayIdx:0,expandedRow:null,deload:false})},act?"✓ TRAVEL WEEK (BW)":"TRAVEL WEEK MODE"));
+  }
+  if(pNum===2||pNum===3){
+    mc.appendChild(sp({cls:"mm",style:{fontSize:"9px",color:"#333",margin:"0 4px"}},"·"));
+    const wkLabel=pNum===2?"WEEK 8 DELOAD":"WEEK 12 DELOAD";
+    const act=S.deload;
+    mc.appendChild(bt({cls:"sbtn mm",style:{background:act?"#e05252":"#14161c",color:act?"#fff":"#666",border:act?"none":"1px solid #22252e"},
+      onClick:()=>set({deload:!S.deload,dayIdx:0,expandedRow:null,bw:false})},act?"✓ "+wkLabel:wkLabel));
+  }
+  f.appendChild(mc);
+
+  if(S.deload){
+    const d=dv({cls:"ibox ss fade mb10",style:{borderLeft:"3px solid #e05252",fontSize:"12px",color:"#bbb",lineHeight:"1.6"}});
+    d.appendChild(sp({style:{color:"#e05252",fontWeight:600}},"DELOAD WEEK: "));
+    d.appendChild(document.createTextNode("Same exercises, same weight, 2 sets per exercise only. This is not optional — it's when supercompensation happens. Performance rebounds ABOVE pre-deload levels after a proper deload. Resist the urge to add sets."));
+    f.appendChild(d);
+  } else if(pNum===1&&S.bw){
+    f.appendChild(dv({cls:"ibox ss fade mb10",style:{borderLeft:"3px solid #9b7fd4",fontSize:"12px",color:"#bbb",lineHeight:"1.6"}},
+      sp({style:{color:"#9b7fd4",fontWeight:600}},"TRAVEL WEEK (APRIL 13): "),
+      "All exercises swapped for hotel-room bodyweight versions. A backpack with 10–15 lbs of books dramatically upgrades this week. One week of BW training will not set you back — it may actually improve Week 4 performance."
+    ));
+  } else {
+    f.appendChild(dv({cls:"ibox ss fade mb10",style:{borderLeft:`3px solid ${phase.color}`,fontSize:"12px",color:"#bbb",lineHeight:"1.6"}},
+      sp({style:{color:phase.color,fontWeight:600}},"PHASE GOAL: "),phase.goal));
+  }
+
+  const schedule = S.deload ? buildDeloadSchedule(S.sched) : buildSchedule(pNum, S.sched, pNum===1&&S.bw);
+  const safeIdx = Math.min(S.dayIdx, schedule.length-1);
+  const day = schedule[safeIdx];
+  const ts = TY[day.type]||TY.lift;
+
+  const dt=dv({cls:"f fw g6 mb14"});
+  schedule.forEach((dy,i)=>{
+    const act=i===safeIdx;
+    const tc=TY[dy.type]||TY.lift;
+    dt.appendChild(bt({cls:"dbtn mm",style:{background:act?tc.ac:"#14161c",color:act?"#0c0d10":"#555",border:act?"none":"1px solid #1e2028"},
+      onClick:()=>set({dayIdx:i,expandedRow:null})},
+      dy.day.slice(0,3).toUpperCase()+"\n"+(tc.lb||"").slice(0,3)));
+  });
+  f.appendChild(dt);
+
+  const card=dv({cls:"card fade",style:{background:ts.bg,border:`1px solid ${ts.ac}20`,borderTop:`3px solid ${ts.ac}`}});
+
+  // Day header with START WORKOUT button
+  const dhdr=dv({style:{padding:"12px",borderBottom:"1px solid #1e2028",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"7px"}});
+  dhdr.appendChild(dv({},
+    dv({cls:"bb",style:{fontSize:"19px",color:"#fff",letterSpacing:"2px"}},day.day+" — "+day.label),
+    dv({cls:"ss",style:{fontSize:"10px",color:ts.ac,letterSpacing:"1.5px",marginTop:"2px"}},
+      (ts.lb||"")+" · "+day.sessions.filter(x=>x.sets>0).length+" EXERCISES")
+  ));
+  const dhdrRight=dv({style:{display:"flex",gap:"7px",alignItems:"center"}});
+  if(day.estTime&&day.estTime!=="—"){
+    dhdrRight.appendChild(dv({style:{background:`${ts.ac}18`,border:`1px solid ${ts.ac}40`,borderRadius:"4px",padding:"3px 8px",fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"13px",color:ts.ac,letterSpacing:"1px"}},"⏱ "+day.estTime));
+  }
+  dhdrRight.appendChild(dv({cls:"mm",style:{fontSize:"8px",color:"#444",border:"1px solid #1e2028",borderRadius:"3px",padding:"3px 7px"}},phase.weeks));
+  dhdr.appendChild(dhdrRight);
+  card.appendChild(dhdr);
+
+  // START WORKOUT button
+  const swBtn=bt({cls:"wf-start-btn",style:{borderRadius:"0",marginTop:"0",borderBottom:"1px solid #1e2028"},
+    onClick:()=>startWorkout(day,pk,S.sched,S.bw,S.deload,safeIdx)},
+    "► START WORKOUT");
+  card.appendChild(swBtn);
+
+  if(day.why){
+    card.appendChild(dv({style:{padding:"8px 12px",borderBottom:"1px solid #1e2028",background:"rgba(255,255,255,.015)"}},
+      sp({cls:"ss",style:{fontSize:"11px",color:"#4a4d56"}},sp({style:{color:"#3d4050"}},"SESSION: "),day.why)
+    ));
+  }
+
+  if(day.type==="lift"||day.type==="deload"){
+    const isLower=day.label.includes("Lower")||day.label.includes("Leg");
+    card.appendChild(dv({style:{padding:"7px 12px",borderBottom:"1px solid #1e2028",background:"rgba(255,255,255,.02)"}},
+      sp({cls:"ss",style:{fontSize:"10px",color:"#555"}},isLower?WU_LOWER:WU_UPPER)
+    ));
+  }
+
+  card.appendChild(dv({style:{display:"grid",gridTemplateColumns:"1.9fr .4fr .8fr .95fr .55fr",padding:"7px 12px",background:"rgba(255,255,255,.05)",borderBottom:"1px solid #1e2028"}},
+    ...["EXERCISE","SETS","REPS","WEIGHT","REST"].map(h=>dv({cls:"mm",style:{fontSize:"8px",color:"#555",letterSpacing:"1.5px"}},h))
+  ));
+
+  day.sessions.forEach((sess,i)=>{
+    const wk=`${pk}-${S.sched}-${S.bw?'bw':'std'}-${S.deload?'dl':'wd'}-${safeIdx}-${i}`;
+    const logged=S.weights[wk];
+    const isEd=S.editKey===wk;
+    const isExp=S.expandedRow===i;
+    const hasTip=!!(sess.tg||sess.why||sess.notes);
+
+    const row=bt({cls:"rbtn",style:{gridTemplateColumns:"1.9fr .4fr .8fr .95fr .55fr",background:i%2===0?"transparent":"rgba(255,255,255,.018)"},
+      onClick:()=>set({expandedRow:isExp?null:i})});
+
+    const nm=dv({cls:"ss",style:{fontSize:"12px",color:"#ddd",paddingRight:"5px",display:"flex",flexWrap:"wrap",alignItems:"center",gap:"4px"}},
+      sp({},sess.exercise));
+    if(sess.superset)nm.appendChild(sp({cls:"ssbadge"},"SS"));
+    if(hasTip)nm.appendChild(sp({style:{fontSize:"9px",color:ts.ac,opacity:".5"}},"▾"));
+    row.appendChild(nm);
+
+    row.appendChild(dv({cls:"bb",style:{fontSize:"15px",color:sess.sets>0?ts.ac:"#444",letterSpacing:"1px",alignSelf:"center"}},sess.sets>0?String(sess.sets):"—"));
+    row.appendChild(dv({cls:"mm",style:{fontSize:"10px",color:"#ccc",alignSelf:"center"}},sess.reps));
+
+    const wc=dv({style:{alignSelf:"center"}});
+    wc.addEventListener("click",e=>e.stopPropagation());
+    const sw=sess.sw||"";
+    if(sess.tg){
+      if(isEd){
+        const fi=ip({cls:"wi",placeholder:"e.g. 25 lbs",value:S.editVal});
+        fi.addEventListener("input",e=>{S.editVal=e.target.value;});
+        fi.addEventListener("keydown",e=>{
+          if(e.key==="Enter"){S.weights[wk]=S.editVal;saveW();set({editKey:null});}
+          if(e.key==="Escape")set({editKey:null});
+        });
+        wc.appendChild(dv({style:{display:"flex",alignItems:"center"}},fi,
+          bt({cls:"wsbtn",onClick:()=>{S.weights[wk]=S.editVal;saveW();set({editKey:null});}},"✓")));
+        setTimeout(()=>fi.focus(),30);
+      } else if(logged){
+        wc.appendChild(dv({style:{display:"flex",alignItems:"center",gap:"4px"}},
+          sp({style:{fontFamily:"'Courier New',Courier,monospace",fontSize:"10px",color:"#0c0d10",background:ts.ac,padding:"2px 6px",borderRadius:"3px",fontWeight:700}},logged),
+          bt({cls:"webtn",onClick:()=>set({editKey:wk,editVal:logged})},"edit")
+        ));
+      } else {
+        wc.appendChild(dv({style:{display:"flex",flexDirection:"column",gap:"3px"}},
+          sw&&sw!=="—"&&sw!=="BW"?dv({style:{display:"flex",alignItems:"center",gap:"3px"}},sp({cls:"sbadge"},"→ "+sw)):
+          sw==="BW"?sp({cls:"bwbadge"},"BW"):null,
+          bt({cls:"webtn",onClick:()=>set({editKey:wk,editVal:sw&&sw!=="BW"&&sw!=="—"?sw:"",expandedRow:i})},"+ LOG WEIGHT")
+        ));
+      }
+    } else {
+      wc.appendChild(sw&&sw!=="—"?sp({cls:sw==="BW"?"bwbadge":"sbadge"},sw==="BW"?"BODYWEIGHT":sw):sp({cls:"mm",style:{fontSize:"10px",color:"#444"}},"—"));
+    }
+    row.appendChild(wc);
+    row.appendChild(dv({cls:"mm",style:{fontSize:"10px",color:"#666",alignSelf:"center"}},sess.rest));
+    card.appendChild(row);
+
+    if(isExp&&hasTip){
+      const panel=dv({cls:"fade",style:{padding:"11px 12px 13px",background:`${ts.ac}0c`,borderBottom:"1px solid #1a1c23"}});
+      if(sess.why){
+        panel.appendChild(dv({style:{marginBottom:sess.tg?"9px":"0"}},
+          dv({cls:"mm mb4",style:{fontSize:"8px",color:ts.ac,letterSpacing:"1.5px"}},"WHY THIS EXERCISE"),
+          dv({cls:"ss",style:{fontSize:"11px",color:"#aaa",lineHeight:"1.65"}},sess.why)
+        ));
+      }
+      if(sess.tg){
+        panel.appendChild(dv({cls:"mm",style:{fontSize:"8px",color:ts.ac,letterSpacing:"1.5px",marginBottom:"6px"}},"SELF-TEST PROTOCOL"));
+        const gr=dv({style:{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(145px,1fr))",gap:"6px",marginBottom:sess.notes?"9px":"0"}});
+        [{l:"▶ START WITH",c:"#6cc97e",t:sess.tg.start},{l:"✓ TOO EASY",c:"#6cc97e",t:sess.tg.tooEasy},{l:"✗ TOO HEAVY",c:"#e05252",t:sess.tg.tooHard}].forEach(x=>{
+          gr.appendChild(dv({cls:"tcard"},
+            dv({cls:"mm",style:{fontSize:"8px",color:x.c,letterSpacing:"1px",marginBottom:"3px"}},x.l),
+            dv({cls:"ss",style:{fontSize:"11px",color:"#bbb"}},x.t)
+          ));
+        });
+        panel.appendChild(gr);
+      }
+      if(sess.notes)panel.appendChild(dv({cls:"ss",style:{fontSize:"11px",color:"#bbb",lineHeight:"1.6"}},sp({style:{color:ts.ac,marginRight:"4px"}},"💡"),sess.notes));
+      card.appendChild(panel);
+    }
+  });
+
+  const ft=dv({style:{padding:"9px 12px",borderTop:"1px solid #1e2028",background:"rgba(255,255,255,.02)",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:"7px"}});
+  if(day.type==="lift"||day.type==="deload"){
+    ft.appendChild(dv({cls:"ss",style:{fontSize:"10px",color:"#555"}},sp({style:{color:"#777"}},"COOL-DOWN: "),CD));
+  } else if(day.type==="cardio"){
+    ft.appendChild(sp({cls:"ss",style:{fontSize:"10px",color:"#555"}},sp({style:{color:"#777"}},"HYDRATION: "),"20+ oz water per 30 min · electrolytes on long rides"));
+  } else {
+    ft.appendChild(sp({cls:"ss",style:{fontSize:"10px",color:"#555"}},sp({style:{color:"#777"}},"PRIORITY: "),"7–9 hrs sleep · protein target · daily 20–30 min walk"));
+  }
+  ft.appendChild(sp({cls:"ss",style:{fontSize:"9px",color:"#2a2d36"}},"Tap exercise for rationale + self-test ▾"));
+  card.appendChild(ft);
+  f.appendChild(card);
+
+  if(pNum>=3&&!S.deload){
+    f.appendChild(dv({cls:"ibox mt10",style:{borderLeft:"3px solid #6cc97e"}},
+      dv({cls:"ss",style:{fontSize:"11px",color:"#777",lineHeight:"1.7"}},
+        sp({style:{color:"#6cc97e",fontWeight:600}},"PHASE "+pNum+" FAT LOSS NOTES: "),
+        "20–30 min walks daily (outside of sessions) meaningfully increase weekly calorie burn without affecting recovery — free fat loss. ",
+        pNum===3?"Also: recalculate your TDEE at Week 9. Every ~10 lbs lost reduces maintenance by ~100–150 kcal — reset the deficit.":"Protein stays at 190g regardless of calorie adjustments.",
+        " Wednesday Peloton = Zone 2 ONLY (not HIIT) — it sits between two heavy lifting days."
+      )
+    ));
+  }
+
+  f.appendChild(dv({style:{marginTop:"16px"}},
+    dv({cls:"bb",style:{fontSize:"11px",letterSpacing:"3px",color:"#444",marginBottom:"9px"}},"PROGRAM MILESTONES"),
+    dv({cls:"gas"},...MS.map(m=>{
+      const isDl=m.note.includes("DELOAD");
+      return dv({cls:"msc",style:{borderLeft:isDl?"3px solid #e05252":"1px solid #1e2028"}},
+        dv({cls:"bb",style:{fontSize:"10px",color:isDl?"#e05252":phase.color,letterSpacing:"1.5px"}},m.wk),
+        dv({cls:"ss",style:{fontSize:"10px",color:isDl?"#aaa":"#666",marginTop:"2px",lineHeight:"1.5"}},m.note)
+      );
+    }))
+  ));
+
+  return f;
+}
+
+// ═══════════════════════════════════════════
+// RENDER WORKOUT FLOW OVERLAY
+// ═══════════════════════════════════════════
+function renderWorkoutOverlay(){
+  const w=S.workout;
+  if(!w)return null;
+
+  const overlay=dv({id:"wf-overlay"});
+
+  // Header
+  const mins=Math.floor((Date.now()-w.startTime)/60000);
+  const totalSetsAll=getTotalSets();
+  const hdr=dv({id:"wf-header"});
+  hdr.appendChild(bt({cls:"wf-stop-btn",onClick:()=>{if(confirm("Stop workout? Progress will be lost."))stopWorkout();}},"← STOP"));
+
+  const item=getCurrentItem();
+  const hdrCenter=dv({style:{flex:1,textAlign:"center"}});
+  if(w.phase==="warmup"){
+    hdrCenter.appendChild(dv({cls:"wf-label"},w.dayLabel.toUpperCase()));
+    hdrCenter.appendChild(dv({cls:"wf-set-counter"},"WARM-UP · "+(w.warmupIdx+1)+"/"+w.warmupExercises.length));
+  } else if(item&&w.phase!=="done"){
+    hdrCenter.appendChild(dv({cls:"wf-label"},w.dayLabel.toUpperCase()));
+    hdrCenter.appendChild(dv({cls:"wf-set-counter"},`SET ${w.setNum}/${item.sets} · EX ${w.qIdx+1}/${w.queue.length}`));
+  } else if(w.phase==="done"){
+    hdrCenter.appendChild(dv({cls:"wf-label"},"WORKOUT COMPLETE"));
+  }
+  hdr.appendChild(hdrCenter);
+  hdr.appendChild(dv({id:"wf-elapsed",cls:"mm"},mins+"m"));
+  overlay.appendChild(hdr);
+
+  const body=dv({id:"wf-body"});
+
+  if(w.phase==="warmup"){
+    renderWarmupPhase(body,w);
+  } else if(w.phase==="cardio"){
+    renderCardioMode(body,w);
+  } else if(w.phase==="active"){
+    renderActivePhase(body,w,item);
+  } else if(w.phase==="resting"){
+    renderRestPhase(body,w,item);
+  } else if(w.phase==="logging"){
+    renderLoggingPhase(body,w,item);
+  } else if(w.phase==="done"){
+    renderDonePhase(body,w);
+  }
+
+  overlay.appendChild(body);
+  return overlay;
+}
+
+function renderWarmupPhase(body,w){
+  const step=w.warmupExercises[w.warmupIdx]||{name:"",duration:30};
+  const remaining=Math.max(0,Math.ceil((w.warmupEnd-Date.now())/1000));
+  const pct=w.warmupEnd?((w.warmupEnd-Date.now())/(w.warmupTotal*1000))*100:100;
+
+  body.appendChild(dv({style:{textAlign:"center",marginBottom:"6px"}},
+    dv({cls:"wf-label",style:{color:"#9b7fd4"}},"3-MINUTE WARM-UP — AUTO-CYCLING")
+  ));
+
+  const box=dv({cls:"wf-warmup-box"});
+  box.appendChild(dv({id:"wf-wu-name",cls:"wf-warmup-exname"},step.name));
+  box.appendChild(dv({id:"wf-wu-timer",cls:"wf-warmup-count"+(remaining<=5?" last5":"")},String(remaining)));
+
+  const pb=dv({cls:"wf-prog-bar",style:{width:"100%"}});
+  pb.appendChild(dv({id:"wf-wu-fill",cls:"wf-prog-fill",style:{width:Math.max(0,Math.min(100,pct))+"%",background:"#9b7fd4"}}));
+  box.appendChild(pb);
+
+  // Mini exercise list showing all steps
+  const list=dv({style:{width:"100%",display:"flex",flexDirection:"column",gap:"4px",marginTop:"4px"}});
+  w.warmupExercises.forEach((ex,i)=>{
+    const isCurrent=i===w.warmupIdx;
+    const isDone=i<w.warmupIdx;
+    list.appendChild(dv({style:{
+      display:"flex",alignItems:"center",gap:"8px",padding:"5px 8px",
+      borderRadius:"5px",
+      background:isCurrent?"#9b7fd418":"transparent",
+      border:isCurrent?"1px solid #9b7fd440":"1px solid transparent",
+      opacity:isDone?".3":"1",
+    }},
+      dv({style:{
+        width:"16px",height:"16px",borderRadius:"50%",flexShrink:0,
+        background:isDone?"#9b7fd4":isCurrent?"#9b7fd4":"#1e2028",
+        border:isDone?"none":isCurrent?"none":"1px solid #333",
+        display:"flex",alignItems:"center",justifyContent:"center",
+        fontSize:"8px",color:"#0c0d10",fontFamily:"Impact,sans-serif",
+      }},isDone?"✓":isCurrent?"▶":""),
+      dv({cls:"ss",style:{fontSize:"12px",color:isCurrent?"#fff":isDone?"#555":"#777"}},ex.name),
+      dv({cls:"mm",style:{marginLeft:"auto",fontSize:"10px",color:isCurrent?"#9b7fd4":"#444"}},ex.duration+"s")
+    ));
+  });
+  box.appendChild(list);
+  body.appendChild(box);
+
+  body.appendChild(bt({cls:"wf-skip-btn",onClick:()=>{
+    clearInterval(_timerInterval);_timerInterval=null;
+    w.phase="active";
+    render();
+  }},"SKIP WARMUP"));
+}
+
+function renderCardioMode(body,w){
+  body.appendChild(dv({cls:"wf-label",style:{marginBottom:"8px"}},w.dayLabel.toUpperCase()+" — CHECKLIST"));
+  w.queue.forEach((item,i)=>{
+    const checked=w.cardioChecked[i]||false;
+    const row=dv({cls:"wf-cardio-check"});
+    const cb=ip({type:"checkbox"});
+    cb.checked=checked;
+    cb.addEventListener("change",()=>{
+      w.cardioChecked[i]=cb.checked;
+      if(w.cardioChecked.every(Boolean)){
+        w.phase="done";
+        stopAllTimers();
+        releaseWakeLock();
+        render();
+      } else {
+        // just update
+        cb.checked=w.cardioChecked[i];
+      }
+    });
+    row.appendChild(cb);
+    const label=dv({});
+    label.appendChild(dv({cls:"wf-exname",style:{fontSize:"15px",marginBottom:"2px"}},item.parts[0]&&item.parts[0].name||item.exercise));
+    const q=w.queue[i];
+    if(q&&q.parts&&q.parts[0]){
+      label.appendChild(dv({cls:"wf-exdim"},q.parts[0].reps));
+    }
+    row.appendChild(label);
+    body.appendChild(row);
+  });
+  // done button
+  body.appendChild(bt({cls:"wf-complete-btn",style:{marginTop:"auto"},
+    onClick:()=>{
+      w.phase="done";
+      stopAllTimers();
+      releaseWakeLock();
+      render();
+    }},"MARK COMPLETE"));
+}
+
+function renderActivePhase(body,w,item){
+  if(!item){
+    w.phase="done";
+    stopAllTimers();
+    releaseWakeLock();
+    render();
+    return;
+  }
+
+  const isSuperset=item.parts.length>1;
+  const doFlash=w.goFlash;
+  if(doFlash)w.goFlash=false;
+
+  // GO flash banner when transitioning from rest
+  if(doFlash){
+    const goBar=dv({style:{background:"#e8c54718",border:"1px solid #e8c54740",borderRadius:"8px",padding:"10px",textAlign:"center",marginBottom:"6px"}},
+      dv({cls:"bb wf-go-flash",style:{fontSize:"28px",color:"#e8c547",letterSpacing:"4px"}},"GO!"),
+      dv({cls:"mm",style:{fontSize:"10px",color:"#666",marginTop:"2px"}},`REST DONE — START SET ${w.setNum}`)
+    );
+    body.appendChild(goBar);
+  }
+
+  // Set counter
+  body.appendChild(dv({style:{textAlign:"center",marginBottom:"6px"}},
+    dv({cls:"wf-label"},"SET "+w.setNum+" OF "+item.sets)
+  ));
+
+  // Build one horizontal card per exercise part
+  function makeExCard(part, label){
+    const lastUsed=S.exerciseWeights[part.name];
+    const rawWt=part.weight||"";
+    const numMatch=rawWt.match(/(\d+\.?\d*)/);
+    const wtNum=numMatch?numMatch[1]:(rawWt==="BW"?"BW":rawWt==="—"?"—":rawWt);
+    const showLbs=wtNum&&wtNum!=="BW"&&wtNum!=="—";
+
+    const card=dv({style:{
+      background:"#13151b",border:"1px solid #1e2028",borderRadius:"10px",
+      padding:"18px 16px",
+    }});
+
+    if(label){
+      card.appendChild(dv({cls:"wf-exlabel",style:{marginBottom:"10px"}},label));
+    }
+
+    // Three-column row: name | reps | weight
+    const row=dv({style:{
+      display:"grid",
+      gridTemplateColumns:"1fr auto 1fr",
+      alignItems:"center",
+      gap:"10px",
+    }});
+
+    // LEFT: exercise name
+    row.appendChild(dv({style:{
+      fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif",
+      fontSize:"28px",fontWeight:"700",color:"#fff",lineHeight:"1.2",
+    }},part.name));
+
+    // CENTER: reps
+    row.appendChild(dv({style:{
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",
+      textAlign:"center",whiteSpace:"nowrap",
+    }},part.reps));
+
+    // RIGHT: weight
+    const wtRight=dv({style:{textAlign:"right"}});
+    wtRight.appendChild(dv({style:{
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",
+      lineHeight:"1",whiteSpace:"nowrap",
+    }},showLbs?wtNum+" lbs":wtNum));
+    if(lastUsed){
+      wtRight.appendChild(dv({style:{
+        fontFamily:"'Courier New',Courier,monospace",
+        fontSize:"10px",color:"#555",marginTop:"3px",
+      }},"last: "+lastUsed.weight));
+    }
+    row.appendChild(wtRight);
+
+    card.appendChild(row);
+    return card;
+  }
+
+  if(isSuperset){
+    item.parts.forEach((part,pi)=>{
+      body.appendChild(makeExCard(part,"SUPERSET "+(pi===0?"A":"B")));
+      if(pi<item.parts.length-1){
+        body.appendChild(dv({cls:"wf-sep"},"━━━ THEN ━━━"));
+      }
+    });
+  } else {
+    body.appendChild(makeExCard(item.parts[0],null));
+  }
+
+  // Button: one press per set (or superset round)
+  const btnLabel=isSuperset?`COMPLETE SUPERSET ${w.setNum}`:`COMPLETE SET ${w.setNum}`;
+  body.appendChild(bt({cls:"wf-complete-btn",onClick:()=>completeCurrentPart()},btnLabel));
+  body.appendChild(bt({cls:"wf-skip-btn",onClick:()=>{if(confirm("Skip this exercise?"))skipExercise();}},"SKIP EXERCISE"));
+}
+
+function renderRestPhase(body,w,item){
+  const remaining=Math.max(0,Math.ceil((w.restEnd-Date.now())/1000));
+  const m=Math.floor(remaining/60);
+  const s=remaining%60;
+  const total=w.restTotal||60;
+  const pct=((w.restEnd-Date.now())/(total*1000))*100;
+
+  body.appendChild(dv({style:{textAlign:"center"}},dv({cls:"wf-label"},"REST")));
+
+  const restBox=dv({cls:"wf-rest-box"});
+  restBox.appendChild(dv({id:"wf-timer-text",cls:"wf-timer-big"},
+    String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")));
+
+  const pb=dv({cls:"wf-prog-bar"});
+  pb.appendChild(dv({id:"wf-prog-fill",cls:"wf-prog-fill",style:{width:Math.max(0,Math.min(100,pct))+"%"}}));
+  restBox.appendChild(pb);
+
+  restBox.appendChild(dv({cls:"wf-next-label"},"NEXT: "+getNextDescription()));
+
+  const rbtns=dv({cls:"wf-rest-btns"});
+  rbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
+    w.restEnd=Date.now()+(remaining+30)*1000;
+    w.restTotal=(w.restTotal||60)+30;
+  }},"+30s"));
+  rbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
+    clearInterval(_timerInterval);_timerInterval=null;
+    advanceAfterRest();
+    render();
+  }},"SKIP REST"));
+  restBox.appendChild(rbtns);
+  body.appendChild(restBox);
+}
+
+function renderLoggingPhase(body,w,item){
+  if(!item){advanceToNextExercise();render();return;}
+  const logBox=dv({cls:"wf-log-box"});
+  const titleName=item.parts.map(p=>p.name).join(" + ");
+  logBox.appendChild(dv({cls:"wf-log-title"},"LOG WEIGHTS — "+titleName.toUpperCase()));
+
+  const inputs={};
+  item.parts.forEach(part=>{
+    const row=dv({cls:"wf-log-row"});
+    row.appendChild(dv({cls:"wf-log-exname"},part.name));
+    // Pre-fill: extract number only from last used or planned weight
+    const lastUsed=S.exerciseWeights[part.name];
+    const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
+    const numMatch=rawWeight.match(/(\d+\.?\d*)/);
+    const prefill=numMatch?numMatch[1]:"";
+    const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
+    inputs[part.name]=inp;
+    const inputWrap=dv({style:{display:"flex",alignItems:"center",gap:"5px"}});
+    inputWrap.appendChild(inp);
+    inputWrap.appendChild(sp({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",color:"#555",letterSpacing:"1px"}},"lbs"));
+    row.appendChild(inputWrap);
+    logBox.appendChild(row);
+  });
+
+  logBox.appendChild(bt({cls:"wf-save-btn",onClick:()=>{
+    const logMap={};
+    Object.entries(inputs).forEach(([name,inp])=>{
+      if(inp.value.trim())logMap[name]=inp.value.trim();
+    });
+    saveLogAndContinue(logMap);
+  }},"SAVE & CONTINUE"));
+
+  logBox.appendChild(bt({cls:"wf-skip-log-btn",onClick:skipLog},"SKIP"));
+  body.appendChild(logBox);
+}
+
+function renderDonePhase(body,w){
+  const duration=Math.round((Date.now()-w.startTime)/60000);
+  const vol=estimatedVolume();
+
+  const doneBox=dv({cls:"wf-done-box"});
+  doneBox.appendChild(dv({cls:"wf-done-title"},"DONE"));
+  doneBox.appendChild(dv({cls:"ss",style:{fontSize:"12px",color:"#888",marginBottom:"14px"}},w.dayLabel));
+
+  const stats=dv({cls:"wf-done-stat"});
+  [[duration+"m","DURATION"],[String(w.totalSets),"SETS"],[vol?vol+" lbs":"—","EST. VOLUME"]].forEach(([v,l])=>{
+    const stc=dv({cls:"wf-done-stc"});
+    stc.appendChild(dv({cls:"val"},v));
+    stc.appendChild(dv({cls:"lbl"},l));
+    stats.appendChild(stc);
+  });
+  doneBox.appendChild(stats);
+
+  if(Object.keys(w.loggedWeights).length>0){
+    doneBox.appendChild(dv({cls:"bb",style:{fontSize:"10px",color:"#444",letterSpacing:"2px",marginBottom:"8px"}},"LOGGED WEIGHTS"));
+    const list=dv({cls:"wf-done-exlist"});
+    Object.entries(w.loggedWeights).forEach(([name,weight])=>{
+      const prev=S.exerciseWeights[name];
+      const isPR=prev&&parseFloat(weight)>parseFloat(prev.weight);
+      const row=dv({cls:"wf-done-exrow"});
+      row.appendChild(dv({cls:"exn"},name));
+      const rightPart=dv({style:{display:"flex",alignItems:"center",gap:"6px"}});
+      rightPart.appendChild(dv({cls:"exw"},weight));
+      if(isPR)rightPart.appendChild(dv({cls:"pr"},"PR"));
+      row.appendChild(rightPart);
+      list.appendChild(row);
+    });
+    doneBox.appendChild(list);
+  }
+
+  const btns=dv({cls:"wf-done-btns"});
+  btns.appendChild(bt({cls:"wf-save-session-btn",onClick:saveSession},"SAVE SESSION"));
+  btns.appendChild(bt({cls:"wf-back-btn",style:{border:"1px solid #22252e"},onClick:()=>{
+    stopAllTimers();releaseWakeLock();S.workout=null;render();
+  }},"BACK TO PLAN"));
+  doneBox.appendChild(btns);
+  body.appendChild(doneBox);
+}
+
+// ═══════════════════════════════════════════
+// RENDER HISTORY TAB
+// ═══════════════════════════════════════════
+function renderHistory(phase){
+  const f=document.createDocumentFragment();
+  f.appendChild(dv({cls:"mb14"},
+    dv({cls:"bb",style:{fontSize:"20px",color:"#fff",letterSpacing:"2px"}},"WORKOUT HISTORY"),
+    dv({cls:"ss",style:{fontSize:"11px",color:"#888",marginTop:"3px"}},"Your past sessions.")
+  ));
+
+  if(S.history.length===0){
+    f.appendChild(dv({cls:"ss",style:{fontSize:"13px",color:"#444",padding:"30px",textAlign:"center",border:"1px dashed #1e2028",borderRadius:"8px"}},"No sessions yet. Start a workout from the PLAN tab."));
+    return f;
+  }
+
+  // View toggle: sessions vs. per-exercise
+  if(!S.histView)S.histView="sessions";
+  const viewRow=dv({cls:"f g6 mb10"});
+  [["SESSIONS","sessions"],["BY EXERCISE","exercise"]].forEach(([l,v])=>{
+    const act=S.histView===v;
+    viewRow.appendChild(bt({cls:"sbtn mm",style:{background:act?"#e8c547":"#14161c",color:act?"#0c0d10":"#666",border:act?"none":"1px solid #22252e"},
+      onClick:()=>set({histView:v})},l));
+  });
+  f.appendChild(viewRow);
+
+  if(S.histView==="exercise"){
+    // Build per-exercise aggregation from history (oldest first for display)
+    const byEx={};
+    const orderedHistory=[...S.history].reverse(); // oldest first
+    orderedHistory.forEach(sess=>{
+      Object.entries(sess.weights||{}).forEach(([name,weight])=>{
+        if(!byEx[name])byEx[name]=[];
+        byEx[name].push({date:sess.date,weight,sets:sess.exerciseSets?.[name]||null});
+      });
+    });
+
+    const exNames=Object.keys(byEx).sort();
+    if(exNames.length===0){
+      f.appendChild(dv({cls:"ss",style:{fontSize:"13px",color:"#444",padding:"30px",textAlign:"center",border:"1px dashed #1e2028",borderRadius:"8px"}},"No exercise data yet."));
+    } else {
+      exNames.forEach(name=>{
+        const entries=byEx[name]; // oldest to newest
+        const isOpenEx=S.expandedExName===name;
+        const card=dv({cls:"exprog-section"});
+
+        const hdr=dv({cls:"exprog-hdr",onClick:()=>set({expandedExName:isOpenEx?null:name})});
+        const left=dv({});
+        const latest=entries[entries.length-1];
+        const first=entries[0];
+        const gained=entries.length>1?(parseFloat(latest.weight)-parseFloat(first.weight)).toFixed(1):null;
+        left.appendChild(dv({cls:"ss",style:{fontSize:"13px",color:"#ddd",fontWeight:600}},name));
+        const sub=dv({cls:"mm",style:{fontSize:"9px",color:"#555",marginTop:"2px"}});
+        sub.appendChild(document.createTextNode(entries.length+" sessions · latest: "+latest.weight));
+        if(gained!==null){
+          const dir=parseFloat(gained)>0?"+":"";
+          const gc=parseFloat(gained)>0?"#6cc97e":"#e05252";
+          sub.appendChild(sp({style:{color:gc,marginLeft:"6px"}},dir+gained+" lbs total"));
+        }
+        left.appendChild(sub);
+        hdr.appendChild(left);
+        hdr.appendChild(dv({style:{color:"#444",fontSize:"16px",flexShrink:0}},isOpenEx?"▲":"▼"));
+        card.appendChild(hdr);
+
+        const body=dv({cls:"exprog-body"+(isOpenEx?" open":"")});
+        // Show table: date | weight | delta
+        let prevW=null;
+        entries.forEach((e,ei)=>{
+          const row=dv({cls:"exprog-row"});
+          row.appendChild(dv({cls:"ed"},e.date));
+          const right=dv({style:{display:"flex",alignItems:"center",gap:"8px"}});
+          right.appendChild(dv({cls:"ew"},e.weight));
+          if(prevW!==null){
+            const delta=(parseFloat(e.weight)-parseFloat(prevW)).toFixed(1);
+            if(delta!=="0.0"&&!isNaN(parseFloat(delta))){
+              const isPR=parseFloat(delta)>0;
+              if(isPR)right.appendChild(dv({cls:"epr"},"+"+delta+" PR"));
+              else right.appendChild(dv({style:{fontFamily:"'Courier New',Courier,monospace",fontSize:"10px",color:"#e05252"}},delta));
+            }
+          }
+          row.appendChild(right);
+          body.appendChild(row);
+          prevW=e.weight;
+        });
+        card.appendChild(body);
+        f.appendChild(card);
+      });
+    }
+    return f;
+  }
+
+  // Default: sessions view
+  S.history.forEach((sess,idx)=>{
+    const isOpen=S.expandedHistIdx===idx;
+    // Compute session volume
+    let sesVol=0;
+    Object.entries(sess.weights||{}).forEach(([name,weight])=>{
+      const match=weight.match(/(\d+\.?\d*)/);
+      if(match){
+        const sets=sess.exerciseSets?.[name]||3;
+        sesVol+=parseFloat(match[1])*sets;
+      }
+    });
+
+    const card=dv({cls:"hist-session"});
+
+    const hdr=dv({cls:"hist-session-hdr",onClick:()=>set({expandedHistIdx:isOpen?null:idx})});
+    const left=dv({});
+    left.appendChild(dv({cls:"bb",style:{fontSize:"14px",color:"#fff",letterSpacing:"1px"}},sess.dayLabel));
+    left.appendChild(dv({cls:"mm",style:{fontSize:"10px",color:"#555",marginTop:"3px"}},
+      sess.date+"  ·  "+sess.duration+"m  ·  "+sess.totalSets+" sets"+(sesVol>0?"  ·  ~"+sesVol+" lbs vol":"")));
+    hdr.appendChild(left);
+    hdr.appendChild(dv({style:{color:"#444",fontSize:"16px"}},isOpen?"▲":"▼"));
+    card.appendChild(hdr);
+
+    const body=dv({cls:"hist-session-body"+(isOpen?" open":"")});
+    if(Object.keys(sess.weights||{}).length>0){
+      Object.entries(sess.weights).forEach(([name,weight])=>{
+        const row=dv({cls:"hist-ex-row"});
+        row.appendChild(dv({cls:"hn"},name));
+        row.appendChild(dv({cls:"hw"},weight));
+        body.appendChild(row);
+      });
+    } else {
+      body.appendChild(dv({cls:"ss",style:{fontSize:"11px",color:"#555",padding:"6px 0"}},"No weights logged."));
+    }
+    const delBtn=bt({cls:"delbtn",style:{marginTop:"10px"},onClick:()=>{
+      if(confirm("Delete this session?")){
+        S.history.splice(idx,1);
+        saveH();
+        render();
+      }
+    }},"delete session");
+    body.appendChild(delBtn);
+    card.appendChild(body);
+    f.appendChild(card);
+  });
+
+  return f;
+}
+
+// ═══════════════════════════════════════════
+// RENDER PROGRESS TAB
+// ═══════════════════════════════════════════
+function renderProgress(phase){
+  const f=document.createDocumentFragment();
+  f.appendChild(dv({cls:"mb14"},
+    dv({cls:"bb",style:{fontSize:"20px",color:"#fff",letterSpacing:"2px"}},"PROGRESS LOG"),
+    dv({cls:"ss",style:{fontSize:"11px",color:"#888",marginTop:"3px"}},"Saves permanently to your browser.")
+  ));
+
+  const sec=dv({style:{background:"#13151b",border:"1px solid #1e2028",borderRadius:"8px",padding:"14px"}});
+  sec.appendChild(dv({cls:"bb mb8",style:{fontSize:"11px",color:phase.color,letterSpacing:"2px"}},"LOG NEW ENTRY"));
+
+  const di=ip({cls:"pi",type:"date",style:{width:"135px"}});
+  const wi=ip({cls:"pi",placeholder:"Weight (lbs)",type:"number",min:"100",max:"400",step:".1",style:{width:"125px"}});
+  const bi=ip({cls:"pi",placeholder:"Body fat %",type:"number",min:"5",max:"50",step:".1",style:{width:"115px"}});
+  const ni=ip({cls:"pi",placeholder:"Notes (optional)",style:{width:"170px"}});
+  di.value=new Date().toISOString().split("T")[0];
+
+  sec.appendChild(dv({style:{display:"flex",gap:"7px",flexWrap:"wrap",alignItems:"flex-end",marginBottom:"4px"}},di,wi,bi,ni,
+    bt({cls:"savbtn",onClick:()=>{
+      if(!wi.value){wi.style.borderColor="#e05252";wi.focus();return;}
+      S.progress.unshift({id:Date.now(),date:di.value,weight:wi.value,bf:bi.value,notes:ni.value});
+      saveP();wi.value="";bi.value="";ni.value="";wi.style.borderColor="#2a2d36";render();
+    }},"SAVE")
+  ));
+
+  if(S.progress.length>=2){
+    const first=S.progress[S.progress.length-1],latest=S.progress[0];
+    const wd=(parseFloat(latest.weight)-parseFloat(first.weight)).toFixed(1);
+    const wc=parseFloat(wd)<=0?"#6cc97e":"#e05252";
+    const sr=dv({style:{display:"flex",gap:"7px",flexWrap:"wrap",marginTop:"12px",marginBottom:"7px"}});
+    [[latest.weight+" lbs","CURRENT",phase.color],[first.weight+" lbs","STARTED","#888"],
+     [(parseFloat(wd)>0?"+":"")+wd+" lbs","CHANGE",wc],
+     ...(latest.bf?[[latest.bf+"%","CURRENT BF",phase.color]]:[])
+    ].forEach(([v,l,c])=>{
+      sr.appendChild(dv({cls:"stc"},dv({cls:"bb",style:{fontSize:"15px",color:c}},v),dv({cls:"mm",style:{fontSize:"8px",color:"#555",letterSpacing:"1px"}},l)));
+    });
+    sec.appendChild(sr);
+  }
+
+  if(S.progress.length>0){
+    sec.appendChild(dv({cls:"bb mt14 mb6",style:{fontSize:"10px",color:"#444",letterSpacing:"2px"}},"HISTORY"));
+    S.progress.forEach(e=>{
+      sec.appendChild(dv({cls:"pe"},
+        dv({style:{display:"flex",gap:"12px",flexWrap:"wrap",alignItems:"center"}},
+          dv({cls:"mm",style:{fontSize:"10px",color:"#666"}},e.date),
+          dv({cls:"bb",style:{fontSize:"16px",color:phase.color,letterSpacing:"1px"}},e.weight+" lbs"),
+          e.bf?dv({cls:"mm",style:{fontSize:"10px",color:"#aaa"}},e.bf+"% BF"):null,
+          e.notes?dv({cls:"ss",style:{fontSize:"10px",color:"#666"}},e.notes):null
+        ),
+        bt({cls:"delbtn",onClick:()=>{S.progress=S.progress.filter(x=>x.id!==e.id);saveP();render();}},"delete")
+      ));
+    });
+  } else {
+    sec.appendChild(dv({cls:"ss",style:{fontSize:"12px",color:"#444",marginTop:"14px",padding:"18px",textAlign:"center",border:"1px dashed #1e2028",borderRadius:"6px"}},"No entries yet. Log your first weigh-in above."));
+  }
+  f.appendChild(sec);
+
+  f.appendChild(dv({style:{marginTop:"12px",background:"#13151b",border:`1px solid ${phase.color}20`,borderLeft:`3px solid ${phase.color}`,borderRadius:"6px",padding:"11px 13px"}},
+    dv({cls:"bb mb6",style:{fontSize:"11px",color:phase.color,letterSpacing:"2px"}},"NUTRITION TARGETS"),
+    dv({cls:"ss",style:{fontSize:"11px",color:"#777",lineHeight:"2"}},...NUTR_STD.map(t=>dv({},t)))
+  ));
+  return f;
+}
+
+// ═══════════════════════════════════════════
+// MAIN RENDER
+// ═══════════════════════════════════════════
+function render(){
+  const app=document.getElementById("app");
+  app.innerHTML="";
+
+  // If in workout mode, show overlay
+  if(S.workout){
+    const overlay=renderWorkoutOverlay();
+    if(overlay)app.appendChild(overlay);
+    return;
+  }
+
+  const pk=S.phase,phase=PHASES[pk];
+  app.appendChild(renderHdr(phase));
+  const main=el("div",{id:"main"});
+
+  if(S.tab==="plan"){
+    main.appendChild(renderPlanTab(phase,pk));
+  } else if(S.tab==="history"){
+    main.appendChild(renderHistory(phase));
+  } else if(S.tab==="progress"){
+    main.appendChild(renderProgress(phase));
+  }
+
+  main.appendChild(dv({cls:"ss",style:{marginTop:"16px",fontSize:"9px",color:"#222",textAlign:"center"}},"Consult a physician before beginning a new exercise program. Adjust intensity based on how your body responds."));
+  app.appendChild(main);
+}
+
+// ═══════════════════════════════════════════
+// PWA SETUP
+// ═══════════════════════════════════════════
+function setupPWA(){
+  // Manifest via blob URL
+  const manifest={
+    name:"16-Week Recomp",
+    short_name:"Workout",
+    start_url:"./workout-pwa.html",
+    display:"standalone",
+    background_color:"#0c0d10",
+    theme_color:"#0c0d10",
+    icons:[
+      {src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230c0d10'/><text y='.9em' font-size='90'>💪</text></svg>",sizes:"any",type:"image/svg+xml"}
+    ]
+  };
+  try{
+    const blob=new Blob([JSON.stringify(manifest)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement("link");
+    link.rel="manifest";link.id="manifest-link";link.href=url;
+    document.head.appendChild(link);
+  }catch(e){}
+
+  // Service worker via blob URL
+  try{
+    if("serviceWorker" in navigator){
+      const swCode=`
+        const CACHE='workout-pwa-v1';
+        self.addEventListener('install',e=>{
+          e.waitUntil(
+            caches.open(CACHE).then(c=>c.addAll([self.location.href]))
+          );
+        });
+        self.addEventListener('fetch',e=>{
+          e.respondWith(
+            caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{
+              const clone=res.clone();
+              caches.open(CACHE).then(c=>c.put(e.request,clone));
+              return res;
+            }))
+          );
+        });
+      `;
+      const blob=new Blob([swCode],{type:"application/javascript"});
+      const url=URL.createObjectURL(blob);
+      navigator.serviceWorker.register(url).catch(()=>{});
+    }
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+load();
+render();
+setupPWA();
+</script>
+<noscript><div style="color:#e8e6df;padding:20px;font-family:sans-serif">JavaScript is required. Please open in Safari.</div></noscript>
+</body>
+</html>
