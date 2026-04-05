@@ -60,9 +60,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-ta
 
 /* ── WORKOUT FLOW OVERLAY ── */
 #wf-overlay{position:fixed;inset:0;z-index:200;background:#0c0d10;display:flex;flex-direction:column;overflow:hidden}
-#wf-header{background:#0e0f13;border-bottom:1px solid #1e2028;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}
-#wf-body{flex:1;overflow-y:auto;padding:28px 14px 16px;display:flex;flex-direction:column;gap:14px}
-#wf-elapsed{font-family:'Courier New',Courier,monospace;font-size:12px;color:#555;min-width:38px;text-align:right}
+#wf-header{background:#0e0f13;border-bottom:1px solid #1e2028;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;flex-wrap:nowrap}
+#wf-body{flex:1;overflow-y:auto;padding:16px 14px 32px;display:flex;flex-direction:column;gap:14px}
+#wf-elapsed{font-family:'Courier New',Courier,monospace;font-size:12px;color:#555;min-width:90px;flex-shrink:0;text-align:right;white-space:nowrap}
 .wf-label{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:3px;font-size:11px;color:#555}
 .wf-set-counter{font-family:'Courier New',Courier,monospace;font-size:13px;color:#e8c547;letter-spacing:1px}
 .wf-exlabel{font-family:Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:3px;font-size:10px;color:#e8c547;margin-bottom:4px}
@@ -111,7 +111,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-ta
 .wf-save-session-btn:active{background:#d4b33e;transform:scale(.97)}
 .wf-back-btn{background:#14161c;color:#666;border:1px solid #22252e!important}
 .wf-back-btn:active{background:#1e2028;transform:scale(.97)}
-.wf-stop-btn{background:none;border:1px solid #2a2d36!important;border-radius:6px;padding:6px 12px;font-family:'Courier New',Courier,monospace;font-size:11px;color:#666;min-height:44px;cursor:pointer}
+.wf-stop-btn{background:none;border:1px solid #2a2d36!important;border-radius:6px;padding:8px 14px;font-family:'Courier New',Courier,monospace;font-size:12px;color:#666;min-height:44px;min-width:90px;flex-shrink:0;cursor:pointer;white-space:nowrap}
 .wf-stop-btn:active{color:#e05252;border-color:#e05252!important}
 .wf-start-btn{width:100%;height:52px;background:#e8c547;color:#0c0d10;border-radius:8px;font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:18px;letter-spacing:3px;border:none;cursor:pointer;margin-top:10px;-webkit-tap-highlight-color:transparent}
 .wf-start-btn:active{transform:scale(.97);background:#d4b33e}
@@ -644,59 +644,80 @@ function set(o,re=true){Object.assign(S,o);if(re)render();}
 // ═══════════════════════════════════════════
 // AUDIO / HAPTICS / WAKE LOCK
 // ═══════════════════════════════════════════
-// ── Single AudioContext singleton, created on first user gesture ──
+// Single AudioContext reused for entire session
 let _audioCtx=null;
-function _createAudioCtx(){
+
+function _initAudioCtx(){
   if(_audioCtx)return;
   try{
-    _audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    // Play a silent 1-sample buffer — required on iOS to fully unlock the context
-    const buf=_audioCtx.createBuffer(1,1,22050);
-    const src=_audioCtx.createBufferSource();
-    src.buffer=buf;src.connect(_audioCtx.destination);src.start(0);
-  }catch(e){}
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC){console.warn('[audio] Web Audio API not supported');return;}
+    _audioCtx=new AC();
+    console.log('[audio] AudioContext created, state:',_audioCtx.state);
+  }catch(e){console.error('[audio] failed to create AudioContext:',e);}
 }
-// Unlock on any user interaction so the context is ready before workouts start
-['click','touchstart','keydown'].forEach(evName=>{
-  document.addEventListener(evName,function handler(){
-    _createAudioCtx();
-    if(_audioCtx&&_audioCtx.state!=="running")_audioCtx.resume().catch(()=>{});
-    document.removeEventListener(evName,handler,true);
-  },{capture:true,once:true});
+
+// Create + unlock on first user interaction (required by iOS and Safari)
+function _unlockOnInteraction(){
+  _initAudioCtx();
+  if(_audioCtx&&_audioCtx.state!=='running'){
+    _audioCtx.resume()
+      .then(()=>console.log('[audio] unlocked via user gesture, state:',_audioCtx.state))
+      .catch(e=>console.warn('[audio] resume error:',e));
+  }
+}
+['click','touchstart','keydown'].forEach(ev=>{
+  document.addEventListener(ev,_unlockOnInteraction,{capture:true,once:true});
 });
 
 function unlockAudio(){
-  _createAudioCtx();
-  if(_audioCtx&&_audioCtx.state!=="running")_audioCtx.resume().catch(()=>{});
+  _initAudioCtx();
+  if(_audioCtx&&_audioCtx.state!=='running'){
+    _audioCtx.resume().catch(()=>{});
+  }
 }
 
-function playTone(durationSec=2,freq=880){
-  _createAudioCtx();
+// Tone: 440 Hz sine, gain 0→0.3 in 0.01s, hold 1.8s, 0.3→0 in 0.2s = 2.01s total
+async function playTone(durationSec=2,freq=440){
+  console.log('[audio] playTone() called — ctx state:',_audioCtx?_audioCtx.state:'null');
+  _initAudioCtx();
   const ctx=_audioCtx;
-  if(!ctx)return;
-  function _play(){
+  if(!ctx){console.warn('[audio] no AudioContext, aborting');return;}
+  if(ctx.state!=='running'){
+    console.log('[audio] resuming ctx (state:',ctx.state,')...');
     try{
-      const osc=ctx.createOscillator();
-      const gain=ctx.createGain();
-      osc.connect(gain);gain.connect(ctx.destination);
-      osc.frequency.value=freq;
-      osc.type="sine";
-      const t=ctx.currentTime;
-      const d=Math.max(0.05,durationSec);
-      gain.gain.setValueAtTime(0.4,t);
-      gain.gain.setValueAtTime(0.4,t+d-0.05);
-      gain.gain.linearRampToValueAtTime(0,t+d);
-      osc.start(t);osc.stop(t+d);
-    }catch(e){}
+      await ctx.resume();
+      console.log('[audio] resumed, state now:',ctx.state);
+    }catch(e){
+      console.error('[audio] resume failed:',e);
+      return;
+    }
   }
-  // Handle suspended, interrupted, or any non-running state
-  if(ctx.state==="running"){
-    _play();
-  }else{
-    ctx.resume().then(_play).catch(()=>{});
+  try{
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type='sine';
+    osc.frequency.value=freq;
+    const t=ctx.currentTime;
+    // Envelope: attack 0.01s, sustain, release 0.2s
+    const attack=0.01;
+    const release=0.2;
+    const sustain=Math.max(0,durationSec-attack-release);
+    gain.gain.setValueAtTime(0,t);
+    gain.gain.linearRampToValueAtTime(0.3,t+attack);
+    gain.gain.setValueAtTime(0.3,t+attack+sustain);
+    gain.gain.linearRampToValueAtTime(0,t+attack+sustain+release);
+    osc.start(t);
+    osc.stop(t+durationSec);
+    console.log('[audio] oscillator started at t='+t.toFixed(3)+' freq='+freq+'Hz dur='+durationSec+'s');
+  }catch(e){
+    console.error('[audio] tone generation error:',e);
   }
 }
 function beepDone(){playTone(2);}
+function vibrate(){navigator.vibrate&&navigator.vibrate([150,80,150,80,200]);}
 function vibrate(){navigator.vibrate&&navigator.vibrate([150,80,150,80,200]);}
 
 let _wakeLock=null;
@@ -836,7 +857,7 @@ function startWarmupStep(){
       const te=document.getElementById("wf-wu-timer");
       const pb=document.getElementById("wf-wu-fill");
       if(te){
-        te.textContent=String(remaining);
+        te.textContent=fmtMSS(remaining);
         if(remaining<=5)te.classList.add("last5");
         else te.classList.remove("last5");
       }
@@ -876,7 +897,7 @@ function startLogTimer(secs){
       render();
     } else {
       if(te){
-        te.textContent=String(remaining);
+        te.textContent=fmtMSS(remaining);
         const col=remaining<=5?"#e05252":"#e8c547";
         te.style.color=col;
         if(te.parentElement)te.parentElement.style.borderColor=col;
@@ -893,6 +914,12 @@ function startLogTimer(secs){
 // ═══════════════════════════════════════════
 // REST TIME PARSER
 // ═══════════════════════════════════════════
+// Format seconds → "MM:SS"
+function fmtMSS(secs){
+  const s=Math.max(0,Math.round(secs));
+  return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+}
+
 function parseRestTime(restStr){
   if(!restStr||restStr==="—")return 60;
   const s=restStr.toLowerCase();
@@ -1055,19 +1082,34 @@ function completeCurrentPart(){
 
   if(isLastSet){
     w.setNum=item.sets;
+    const isLastExercise=(w.qIdx===w.queue.length-1);
     if(w.coreDay){
-      // Core days: skip logging, rest then advance to next exercise
-      w.restAdvancesQueue=true;
-      w.phase="resting";
-      startRestTimer(item.restSecs);
-      render();
+      if(isLastExercise){
+        // Last set of last exercise on core day — skip rest, go straight to summary
+        w.phase="done";
+        stopAllTimers();
+        releaseWakeLock();
+        render();
+      } else {
+        // More exercises remain — rest then advance
+        w.restAdvancesQueue=true;
+        w.phase="resting";
+        startRestTimer(item.restSecs);
+        render();
+      }
     } else {
-      // Lifting days: show log screen with embedded rest timer
+      // Lifting days: show log screen
       w.phase="logging";
-      w.logRestSecs=item.restSecs;
       w._logSaved=false;
-      render();
-      startLogTimer(item.restSecs);
+      if(isLastExercise){
+        // Last exercise — no timer, just log and save goes straight to summary
+        w.logRestSecs=0;
+        render();
+      } else {
+        w.logRestSecs=item.restSecs;
+        render();
+        startLogTimer(item.restSecs);
+      }
     }
   } else {
     w.setNum++;
@@ -1229,11 +1271,11 @@ function renderHdr(phase){
   },onClick:(e)=>{
     e.stopPropagation();
     unlockAudio();
-    playTone(1.5,880);
+    playTone(2,440);
     const b=e.currentTarget;
     const orig=b.textContent;
     b.textContent="♪ playing…";b.style.color="#e8c547";
-    setTimeout(()=>{b.textContent=orig;b.style.color="#555";},1800);
+    setTimeout(()=>{b.textContent=orig;b.style.color="#555";},2200);
   }},"♪ TEST TONE"));
   inn.appendChild(tabs);
 
@@ -1500,7 +1542,7 @@ function renderWorkoutOverlay(){
   hdr.appendChild(bt({cls:"wf-stop-btn",onClick:()=>{if(confirm("Stop workout? Progress will be lost."))stopWorkout();}},"← STOP"));
 
   const item=getCurrentItem();
-  const hdrCenter=dv({style:{flex:1,textAlign:"center"}});
+  const hdrCenter=dv({style:{flex:1,textAlign:"center",minWidth:0,overflow:"hidden"}});
   if(w.phase==="warmup"){
     hdrCenter.appendChild(dv({cls:"wf-label"},w.dayLabel.toUpperCase()));
     hdrCenter.appendChild(dv({cls:"wf-set-counter"},"WARM-UP · "+(w.warmupIdx+1)+"/"+w.warmupExercises.length));
@@ -1557,7 +1599,7 @@ function renderWarmupPhase(body,w){
     box.appendChild(dv({id:"wf-wu-switch",style:{display:"none"}}));
   }
 
-  box.appendChild(dv({id:"wf-wu-timer",cls:"wf-warmup-count"+(remaining<=5?" last5":"")},String(remaining)));
+  box.appendChild(dv({id:"wf-wu-timer",cls:"wf-warmup-count"+(remaining<=5?" last5":"")},fmtMSS(remaining)));
 
   const pb=dv({cls:"wf-prog-bar",style:{width:"100%"}});
   pb.appendChild(dv({id:"wf-wu-fill",cls:"wf-prog-fill",style:{width:Math.max(0,Math.min(100,pct))+"%",background:"#9b7fd4"}}));
@@ -1796,9 +1838,9 @@ function renderLoggingPhase(body,w,item){
     }},"REST — AUTO-ADVANCE WHEN ZERO"));
     timerBox.appendChild(dv({id:"wf-log-timer",style:{
       fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
-      fontSize:"160px",color:isLast5?"#e05252":"#e8c547",
-      letterSpacing:"4px",lineHeight:"1",
-    }},String(remaining)));
+      fontSize:"100px",color:isLast5?"#e05252":"#e8c547",
+      letterSpacing:"2px",lineHeight:"1",
+    }},fmtMSS(remaining)));
     const pb=dv({cls:"wf-prog-bar",style:{width:"100%",height:"6px",marginTop:"4px"}});
     pb.appendChild(dv({id:"wf-log-fill",cls:"wf-prog-fill",style:{
       width:Math.max(0,Math.min(100,pct))+"%",
