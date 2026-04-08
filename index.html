@@ -718,15 +718,40 @@ async function playTone(durationSec=2,freq=440){
 }
 function beepDone(){playTone(2);}
 function vibrate(){navigator.vibrate&&navigator.vibrate([150,80,150,80,200]);}
-function vibrate(){navigator.vibrate&&navigator.vibrate([150,80,150,80,200]);}
 
+// ── Screen Wake Lock ──────────────────────────────────────────────────────────
+// _wakeLockDesired: true while a workout is active — drives re-request logic
 let _wakeLock=null;
+let _wakeLockDesired=false;
+
 async function requestWakeLock(){
-  try{_wakeLock=await navigator.wakeLock?.request('screen');}catch(e){}
+  _wakeLockDesired=true;
+  if(!('wakeLock' in navigator))return; // API not supported — fail silently
+  try{
+    _wakeLock=await navigator.wakeLock.request('screen');
+    // When the OS releases the lock (tab hidden, screen locked, etc.),
+    // clear our handle; visibilitychange will re-request it when visible again.
+    _wakeLock.addEventListener('release',()=>{_wakeLock=null;});
+  }catch(e){}
 }
+
 async function releaseWakeLock(){
-  try{await _wakeLock?.release();_wakeLock=null;}catch(e){}
+  _wakeLockDesired=false; // signal: we no longer want the lock
+  try{await _wakeLock?.release();}catch(e){}
+  _wakeLock=null;
 }
+
+// Re-acquire the wake lock whenever the page comes back to the foreground
+// (covers: iOS home-button, switching apps, screen auto-lock + unlock).
+document.addEventListener('visibilitychange',async()=>{
+  if(document.visibilityState==='visible'&&_wakeLockDesired&&S.workout&&!_wakeLock){
+    try{
+      _wakeLock=await navigator.wakeLock?.request('screen');
+      if(_wakeLock)_wakeLock.addEventListener('release',()=>{_wakeLock=null;});
+    }catch(e){}
+  }
+});
+// ─────────────────────────────────────────────────────────────────────────────
 
 // ═══════════════════════════════════════════
 // TIMER
