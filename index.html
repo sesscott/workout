@@ -738,12 +738,12 @@ function startRestTimer(seconds){
   clearInterval(_timerInterval);
   S.workout.restEnd=Date.now()+seconds*1000;
   S.workout.restTotal=seconds;
-  _timerInterval=setInterval(()=>{
+  _timerInterval=setInterval(async ()=>{
     const remaining=Math.ceil((S.workout.restEnd-Date.now())/1000);
     if(remaining<=0){
       clearInterval(_timerInterval);_timerInterval=null;
-      beepDone();vibrate();
-      // Transition: go to next part
+      await playTone(2); // await ensures tone starts before any DOM transition
+      vibrate();
       advanceAfterRest();
       S.workout.goFlash=true;
       render();
@@ -831,11 +831,11 @@ function startWarmupStep(){
   w.warmupSwitchFired=false;
   w.warmupSwitchActive=false;
   clearInterval(_timerInterval);
-  _timerInterval=setInterval(()=>{
+  _timerInterval=setInterval(async ()=>{
     const remaining=Math.ceil((w.warmupEnd-Date.now())/1000);
     if(remaining<=0){
       clearInterval(_timerInterval);_timerInterval=null;
-      playTone(2);
+      await playTone(2); // await ensures tone starts before DOM transition
       w.warmupSwitchActive=false;
       w.warmupIdx++;
       if(w.warmupIdx>=w.warmupExercises.length){
@@ -849,7 +849,7 @@ function startWarmupStep(){
       if(step.switchAt&&remaining===step.switchAt&&!w.warmupSwitchFired){
         w.warmupSwitchFired=true;
         w.warmupSwitchActive=true;
-        playTone(2);
+        await playTone(2); // await before showing switch prompt
         render(); // show switch prompt; subsequent ticks update DOM in place
         return;
       }
@@ -878,13 +878,14 @@ function startLogTimer(secs){
   clearInterval(_timerInterval);_timerInterval=null;
   w.logRestEnd=Date.now()+secs*1000;
   w.logRestTotal=secs;
-  _timerInterval=setInterval(()=>{
+  _timerInterval=setInterval(async ()=>{
     const remaining=Math.ceil((w.logRestEnd-Date.now())/1000);
     const te=document.getElementById("wf-log-timer");
     const pb=document.getElementById("wf-log-fill");
     if(remaining<=0){
       clearInterval(_timerInterval);_timerInterval=null;
-      playTone(2);vibrate();
+      await playTone(2); // await ensures tone starts before any DOM transition
+      vibrate();
       // save whatever is in inputs if not already manually saved
       if(!w._logSaved&&w._logInputs){
         const logMap={};
@@ -1065,6 +1066,86 @@ function getNextDescription(){
     const label=item.parts.map(p=>p.name).join(" + ");
     return `Set ${w.setNum} of ${item.sets} — ${label}`;
   }
+}
+
+// Returns {item, setNum} for what comes after the current rest/log/warmup
+function getNextInfo(w){
+  if(!w)return null;
+  if(w.phase==="warmup"){
+    const item=w.queue[0]||null;
+    return item?{item,setNum:1}:null;
+  }
+  if(w.phase==="resting"){
+    if(w.restAdvancesQueue){
+      const item=w.queue[w.qIdx+1]||null;
+      return item?{item,setNum:1}:null;
+    } else {
+      const item=w.queue[w.qIdx]||null;
+      return item?{item,setNum:w.setNum}:null;
+    }
+  }
+  if(w.phase==="logging"){
+    const item=w.queue[w.qIdx+1]||null;
+    return item?{item,setNum:1}:null;
+  }
+  return null;
+}
+
+// Renders a "NEXT" exercise preview card into container — used on all timer screens
+function renderNextPreview(container,w){
+  const info=getNextInfo(w);
+  if(!info)return;
+  const {item,setNum}=info;
+
+  const wrap=dv({style:{
+    background:"#0e1013",border:"1px solid #2a2d36",borderRadius:"10px",
+    padding:"14px 16px",
+  }});
+  // Prominent NEXT label
+  wrap.appendChild(dv({style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"13px",
+    letterSpacing:"4px",color:"#e8c547",marginBottom:"12px",
+    borderBottom:"1px solid #1e2028",paddingBottom:"8px",
+  }},`NEXT: SET ${setNum} OF ${item.sets}`));
+
+  item.parts.forEach((part,pi)=>{
+    if(pi>0){
+      wrap.appendChild(dv({style:{
+        textAlign:"center",fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+        fontSize:"11px",letterSpacing:"4px",color:"#333",padding:"4px 0",
+      }},"━━━ THEN ━━━"));
+    }
+    const lastUsed=S.exerciseWeights[part.name];
+    const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
+    const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*)/):null;
+    const wtNum=numMatch?numMatch[1]:"—";
+    const showLbs=wtNum&&wtNum!=="—";
+
+    const row=dv({style:{
+      display:"grid",gridTemplateColumns:"1fr auto auto",
+      gap:"10px 16px",alignItems:"center",
+    }});
+    // LEFT: name
+    row.appendChild(dv({cls:"ss",style:{
+      fontSize:"28px",fontWeight:"700",color:"#fff",lineHeight:"1.2",
+    }},part.name));
+    // CENTER: reps
+    row.appendChild(dv({style:{
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",
+      textAlign:"center",whiteSpace:"nowrap",
+    }},part.reps||"—"));
+    // RIGHT: weight
+    const wtRight=dv({style:{textAlign:"right",whiteSpace:"nowrap"}});
+    wtRight.appendChild(dv({style:{
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",lineHeight:"1",
+    }},showLbs?wtNum+" lbs":"—"));
+    row.appendChild(wtRight);
+    wrap.appendChild(row);
+  });
+
+  container.appendChild(wrap);
 }
 
 function completeCurrentPart(){
@@ -1636,6 +1717,8 @@ function renderWarmupPhase(body,w){
     w.phase="active";
     render();
   }},"SKIP WARMUP"));
+  // Show first exercise coming up after warmup
+  renderNextPreview(body,w);
 }
 
 function renderCardioMode(body,w){
@@ -1795,8 +1878,6 @@ function renderRestPhase(body,w,item){
   pb.appendChild(dv({id:"wf-prog-fill",cls:"wf-prog-fill",style:{width:Math.max(0,Math.min(100,pct))+"%"}}));
   restBox.appendChild(pb);
 
-  restBox.appendChild(dv({cls:"wf-next-label"},"NEXT: "+getNextDescription()));
-
   const rbtns=dv({cls:"wf-rest-btns"});
   rbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
     // Always add to current remaining, never to the original total
@@ -1812,75 +1893,107 @@ function renderRestPhase(body,w,item){
   }},"SKIP REST"));
   restBox.appendChild(rbtns);
   body.appendChild(restBox);
+  renderNextPreview(body,w);
 }
 
 function renderLoggingPhase(body,w,item){
   if(!item){advanceToNextExercise();render();return;}
-  const logBox=dv({cls:"wf-log-box"});
-  const titleName=item.parts.map(p=>p.name).join(" + ");
-  logBox.appendChild(dv({cls:"wf-log-title"},"LOG WEIGHTS — "+titleName.toUpperCase()));
-
-  // Embedded rest timer (lifting days only)
   const hasTimer=!w.coreDay&&w.logRestSecs;
-  if(hasTimer){
-    const restEnd=w.logRestEnd||Date.now();
-    const remaining=Math.max(0,Math.ceil((restEnd-Date.now())/1000));
-    const pct=w.logRestTotal?((restEnd-Date.now())/(w.logRestTotal*1000))*100:100;
-    const isLast5=remaining<=5&&remaining>0;
-    const timerBox=dv({style:{
-      background:"#0c0d10",border:"2px solid "+(isLast5?"#e05252":"#e8c547"),
-      borderRadius:"10px",padding:"18px 14px 14px",marginBottom:"14px",
-      display:"flex",flexDirection:"column",alignItems:"center",gap:"4px",
-    }});
-    timerBox.appendChild(dv({style:{
-      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",letterSpacing:"4px",
-      fontSize:"12px",color:"#555",
-    }},"REST — AUTO-ADVANCE WHEN ZERO"));
-    timerBox.appendChild(dv({id:"wf-log-timer",style:{
-      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
-      fontSize:"100px",color:isLast5?"#e05252":"#e8c547",
-      letterSpacing:"2px",lineHeight:"1",
-    }},fmtMSS(remaining)));
-    const pb=dv({cls:"wf-prog-bar",style:{width:"100%",height:"6px",marginTop:"4px"}});
-    pb.appendChild(dv({id:"wf-log-fill",cls:"wf-prog-fill",style:{
-      width:Math.max(0,Math.min(100,pct))+"%",
-      background:isLast5?"#e05252":"#e8c547",
-    }}));
-    timerBox.appendChild(pb);
+  const titleName=item.parts.map(p=>p.name).join(" + ");
 
-    // +30s / Skip Rest controls
-    const logRbtns=dv({cls:"wf-rest-btns",style:{marginTop:"8px"}});
-    logRbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
-      const now=Date.now();
-      const cur=Math.max(0,Math.ceil((w.logRestEnd-now)/1000));
-      w.logRestEnd=now+(cur+30)*1000;
-      w.logRestTotal=cur+30;
-    }},"+30 SECONDS"));
-    logRbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
-      clearInterval(_timerInterval);_timerInterval=null;
-      // save whatever is entered, then advance
+  // ════════════════════════════════════════════════
+  // FINAL SET — no timer, no next preview, just log
+  // ════════════════════════════════════════════════
+  if(!hasTimer){
+    const box=dv({cls:"wf-log-box"});
+    box.appendChild(dv({cls:"wf-log-title"},"LOG — "+titleName.toUpperCase()));
+    const inputs={};
+    item.parts.forEach(part=>{
+      const row=dv({cls:"wf-log-row"});
+      row.appendChild(dv({cls:"wf-log-exname"},part.name));
+      const lastUsed=S.exerciseWeights[part.name];
+      const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
+      const numMatch=rawWeight.match(/(\d+\.?\d*)/);
+      const prefill=numMatch?numMatch[1]:"";
+      const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
+      inputs[part.name]=inp;
+      const wrap=dv({style:{display:"flex",alignItems:"center",gap:"5px"}});
+      wrap.appendChild(inp);
+      wrap.appendChild(sp({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",color:"#555"}},"lbs"));
+      row.appendChild(wrap);
+      box.appendChild(row);
+    });
+    w._logInputs=inputs;
+    box.appendChild(bt({cls:"wf-save-btn",style:{marginTop:"10px"},onClick:()=>{
       const logMap={};
-      if(w._logInputs){
-        Object.entries(w._logInputs).forEach(([name,inp])=>{
-          if(inp.value&&inp.value.trim())logMap[name]=inp.value.trim();
-        });
-      }
-      if(!w._logSaved)commitLogWeights(logMap);
-      advanceToNextExercise();
-      render();
-    }},"SKIP REST"));
-    timerBox.appendChild(logRbtns);
-    logBox.appendChild(timerBox);
+      Object.entries(inputs).forEach(([n,inp])=>{if(inp.value.trim())logMap[n]=inp.value.trim();});
+      saveLogAndContinue(logMap);
+    }},"SAVE WEIGHTS"));
+    body.appendChild(box);
+    return;
   }
+
+  // ════════════════════════════════════════════════
+  // WITH TIMER — three distinct sections
+  // ════════════════════════════════════════════════
+
+  // ── SECTION 1: TIMER ─────────────────────────
+  const restEnd=w.logRestEnd||Date.now();
+  const remaining=Math.max(0,Math.ceil((restEnd-Date.now())/1000));
+  const pct=w.logRestTotal?((restEnd-Date.now())/(w.logRestTotal*1000))*100:100;
+  const isLast5=remaining<=5&&remaining>0;
+  const timerSec=dv({style:{
+    background:"#0c0d10",
+    border:"2px solid "+(isLast5?"#e05252":"#e8c547"),
+    borderRadius:"10px",padding:"20px 16px 16px",
+    display:"flex",flexDirection:"column",alignItems:"center",gap:"6px",
+  }});
+  timerSec.appendChild(dv({style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",letterSpacing:"4px",
+    fontSize:"11px",color:"#555",
+  }},"REST — AUTO-ADVANCE WHEN ZERO"));
+  timerSec.appendChild(dv({id:"wf-log-timer",style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+    fontSize:"100px",color:isLast5?"#e05252":"#e8c547",
+    letterSpacing:"2px",lineHeight:"1",
+  }},fmtMSS(remaining)));
+  const pb=dv({cls:"wf-prog-bar",style:{width:"100%",height:"6px",marginTop:"2px"}});
+  pb.appendChild(dv({id:"wf-log-fill",cls:"wf-prog-fill",style:{
+    width:Math.max(0,Math.min(100,pct))+"%",
+    background:isLast5?"#e05252":"#e8c547",
+  }}));
+  timerSec.appendChild(pb);
+  const rbtns=dv({cls:"wf-rest-btns",style:{marginTop:"10px",width:"100%"}});
+  rbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
+    const now=Date.now();
+    const cur=Math.max(0,Math.ceil((w.logRestEnd-now)/1000));
+    w.logRestEnd=now+(cur+30)*1000;
+    w.logRestTotal=cur+30;
+  }},"+30 SECONDS"));
+  rbtns.appendChild(bt({cls:"wf-rest-btn",onClick:()=>{
+    clearInterval(_timerInterval);_timerInterval=null;
+    const logMap={};
+    if(w._logInputs)Object.entries(w._logInputs).forEach(([n,inp])=>{if(inp.value&&inp.value.trim())logMap[n]=inp.value.trim();});
+    if(!w._logSaved)commitLogWeights(logMap);
+    advanceToNextExercise();render();
+  }},"SKIP REST"));
+  timerSec.appendChild(rbtns);
+  body.appendChild(timerSec);
+
+  // ── SECTION 2: LOG WEIGHTS ────────────────────
+  const logSec=dv({style:{
+    background:"#13151b",border:"1px solid #1e2028",borderRadius:"10px",
+    padding:"16px",
+  }});
+  logSec.appendChild(dv({cls:"wf-log-title",style:{marginBottom:"12px"}},
+    "LOG — "+titleName.toUpperCase()));
 
   const inputs={};
 
   if(w._logSaved){
-    // Show saved confirmation — timer still running
-    logBox.appendChild(dv({style:{
+    logSec.appendChild(dv({style:{
       background:"#0d1f12",border:"2px solid #6cc97e",borderRadius:"8px",
-      padding:"14px 16px",marginBottom:"12px",
-      display:"flex",flexDirection:"column",gap:"10px",
+      padding:"14px 16px",display:"flex",flexDirection:"column",gap:"10px",
     }},
       dv({style:{
         fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"20px",
@@ -1898,7 +2011,6 @@ function renderLoggingPhase(body,w,item){
       })
     ));
   } else {
-    // Show input rows
     item.parts.forEach(part=>{
       const row=dv({cls:"wf-log-row"});
       row.appendChild(dv({cls:"wf-log-exname"},part.name));
@@ -1908,39 +2020,25 @@ function renderLoggingPhase(body,w,item){
       const prefill=numMatch?numMatch[1]:"";
       const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
       inputs[part.name]=inp;
-      const inputWrap=dv({style:{display:"flex",alignItems:"center",gap:"5px"}});
-      inputWrap.appendChild(inp);
-      inputWrap.appendChild(sp({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",color:"#555",letterSpacing:"1px"}},"lbs"));
-      row.appendChild(inputWrap);
-      logBox.appendChild(row);
+      const wrap=dv({style:{display:"flex",alignItems:"center",gap:"5px"}});
+      wrap.appendChild(inp);
+      wrap.appendChild(sp({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",color:"#555"}},"lbs"));
+      row.appendChild(wrap);
+      logSec.appendChild(row);
     });
-
-    if(hasTimer){
-      // Save weights only — timer keeps running, page stays, advances automatically
-      logBox.appendChild(bt({cls:"wf-save-btn",style:{marginTop:"10px"},onClick:()=>{
-        const logMap={};
-        Object.entries(inputs).forEach(([name,inp])=>{
-          if(inp.value.trim())logMap[name]=inp.value.trim();
-        });
-        commitLogWeights(logMap);
-        render(); // re-render to show saved state; timer interval keeps running
-      }},"SAVE WEIGHTS"));
-    } else {
-      logBox.appendChild(bt({cls:"wf-save-btn",onClick:()=>{
-        const logMap={};
-        Object.entries(inputs).forEach(([name,inp])=>{
-          if(inp.value.trim())logMap[name]=inp.value.trim();
-        });
-        saveLogAndContinue(logMap);
-      }},"SAVE & CONTINUE"));
-      logBox.appendChild(bt({cls:"wf-skip-log-btn",onClick:skipLog},"SKIP"));
-    }
+    logSec.appendChild(bt({cls:"wf-save-btn",style:{marginTop:"10px"},onClick:()=>{
+      const logMap={};
+      Object.entries(inputs).forEach(([n,inp])=>{if(inp.value.trim())logMap[n]=inp.value.trim();});
+      commitLogWeights(logMap);
+      render(); // re-render to show saved state; timer keeps running
+    }},"SAVE WEIGHTS"));
   }
 
-  // Store inputs ref so timer auto-save can read them (even after saved, keep ref for fallback)
-  if(Object.keys(inputs).length>0) w._logInputs=inputs;
+  if(Object.keys(inputs).length>0)w._logInputs=inputs;
+  body.appendChild(logSec);
 
-  body.appendChild(logBox);
+  // ── SECTION 3: NEXT EXERCISE ─────────────────
+  renderNextPreview(body,w);
 }
 
 function renderDonePhase(body,w){
