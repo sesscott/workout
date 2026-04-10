@@ -141,9 +141,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;-webkit-ta
 .wf-go-flash{animation:goFlash .6s ease-out forwards}
 /* Warmup screen */
 .wf-warmup-box{background:#13151b;border:1px solid #1e2028;border-radius:10px;padding:28px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
-.wf-warmup-exname{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:26px;color:#fff;font-weight:700;line-height:1.2}
-.wf-warmup-count{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:72px;color:#9b7fd4;letter-spacing:2px;line-height:1}
-.wf-warmup-step{font-family:'Courier New',Courier,monospace;font-size:11px;color:#444;letter-spacing:1px}
+.wf-warmup-exname{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:42px;color:#fff;font-weight:700;line-height:1.2}
+.wf-warmup-count{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:110px;color:#9b7fd4;letter-spacing:2px;line-height:1}
+.wf-warmup-step{font-family:'Courier New',Courier,monospace;font-size:18px;color:#444;letter-spacing:1px}
 @keyframes warmupPulse{0%,100%{opacity:1}50%{opacity:.5}}
 .wf-warmup-count.last5{animation:warmupPulse .5s infinite}
 </style>
@@ -463,15 +463,12 @@ function deloadSessions(){
 
 function travelUpperA(){
   return {day:"Monday",label:"Upper A — Bodyweight (Travel)",type:"lift",estTime:"~40 min",ss:false,
-    why:"Full bodyweight substitutes for hotel room. Increase reps to near-failure to compensate for no load. One week of BW training will NOT set back progress — the reduced loading acts as a partial deload and may improve Week 3 performance. A backpack with 10–15 lbs of books dramatically upgrades this session.",
+    why:"Four supersets hit chest, back, shoulders, and arms with no equipment. Backpack with 10–15 lbs of books is the key load tool. Superset format keeps intensity high and session time manageable.",
     sessions:[
-      {exercise:"Push-Up (Deficit if possible)",sets:4,reps:"To near-failure",rest:"75s",sw:"BW",superset:false,notes:"Hands on bed edge or two chairs for deeper ROM. Slow eccentric — 3s down.",tg:{start:"BW. Find depth that challenges you by rep 15.",tooEasy:"Feet elevated on bed",tooHard:"Standard push-up"}},
-      {exercise:"Wide Push-Up",sets:3,reps:"12–15",rest:"60s",sw:"BW",superset:false,notes:"Hands wide, elbows flare — approximates flye pattern.",tg:{start:"BW.",tooEasy:"Feet elevated",tooHard:"Reduce range"}},
-      {exercise:"Backpack Row (Bent-Over)",sets:4,reps:"10–12",rest:"75s",sw:"10–15 lb pack",superset:false,notes:"Load backpack with books/toiletries. Hinge forward, row pack to hip. Far better than towel row for load and feel.",tg:{start:"10–15 lbs in pack.",tooEasy:"Add more books",tooHard:"Towel door row instead"}},
-      {exercise:"Floor Pullover (Pattern groove)",sets:3,reps:"12",rest:"60s",sw:"BW",superset:false,notes:"Lie on floor, arms overhead, pull hands toward hips like a lat pulldown. No resistance — pure movement pattern maintenance.",tg:{start:"BW. Slow and deliberate.",tooEasy:"Hold a water bottle overhead",tooHard:"Shorter range"}},
+      {exercise:"Push-Up (Deficit if possible) + Backpack Row (Bent-Over) (Superset)",sets:4,reps:"To near-failure + 10–12",rest:"75s after pair",sw:"BW / 10–15 lb pack",superset:true,notes:"Push-up: hands on bed edge or chairs for deeper ROM, 3s eccentric. Backpack row: hinge forward, load pack with books, row to hip.",tg:{start:"BW push-up, 10–15 lb pack for rows.",tooEasy:"Feet elevated for push-up; add more books",tooHard:"Standard push-up; lighter pack"}},
+      {exercise:"Wide Push-Up + Floor Pullover (Superset)",sets:3,reps:"12–15 + 12",rest:"60s after pair",sw:"BW / BW",superset:true,notes:"Wide push-up: hands wide, elbows flare — approximates flye pattern. Floor pullover: arms overhead, pull hands toward hips like a lat pulldown. Slow and deliberate.",tg:{start:"BW both.",tooEasy:"Feet elevated for push-up; hold water bottle overhead",tooHard:"Reduce range"}},
       {exercise:"Pike Push-Up + Prone Y-Raise (Superset)",sets:3,reps:"10 + 12",rest:"60s after pair",sw:"BW",superset:true,notes:"Pike push-up: shoulder dominant press. Prone Y-raise: lie face down, lift arms in Y shape, 2s hold — rear delt.",tg:{start:"BW.",tooEasy:"Feet higher for pike",tooHard:"Reduce range"}},
       {exercise:"Towel Curl + Diamond Push-Up (Superset)",sets:3,reps:"10–12 + 10–15",rest:"60s after pair",sw:"BW",superset:true,notes:"Towel curl: loop towel under foot, curl against foot resistance. Diamond push-up: hands close, tricep dominant.",tg:{start:"BW.",tooEasy:"More foot pressure on towel; feet elevated for push-up",tooHard:"Less pressure; wider hands"}},
-      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"20 total + 30s",rest:"45s after pair",sw:"BW",superset:true,notes:"Same core work as regular plan.",tg:{start:"BW.",tooEasy:"Hold DB at chest; extend arms for hollow",tooHard:"Reduce range"}},
     ]};
 }
 function travelLowerA(){
@@ -483,7 +480,7 @@ function travelLowerA(){
       {exercise:"Single-Leg RDL",sets:3,reps:"12 each",rest:"75s",sw:"BW",superset:false,notes:"3s descent. Balance challenge + hamstring stretch.",tg:{start:"BW. 3s descent.",tooEasy:"Touch floor with fingertips",tooHard:"Hold wall"}},
       {exercise:"Glute Bridge + Backpack Hip Thrust (Superset)",sets:3,reps:"15 + 12",rest:"75s after pair",sw:"BW / pack",superset:true,notes:"BW glute bridge on floor (2s hold). Backpack on hips for loaded hip thrust on bed edge.",tg:{start:"BW bridge, light pack on hips.",tooEasy:"Single-leg bridge; heavier pack",tooHard:"Both BW"}},
       {exercise:"Nordic Curl + BW Lateral Lunge (Superset)",sets:3,reps:"5–8 + 12 each",rest:"75s after pair",sw:"BW",superset:true,notes:"Feet under heavy luggage or bed frame. Lower as slowly as possible.",tg:{start:"BW. Any range of Nordic is productive.",tooEasy:"More range",tooHard:"Shorter range with hand catch"}},
-      {exercise:"BW Calf Raise + Dead Bug (Superset)",sets:2,reps:"25–30 each + 10 each side",rest:"45s after pair",sw:"BW",superset:true,notes:"Single-leg calf, high reps. Same dead bug cues.",tg:{start:"BW.",tooEasy:"Jump at top of calf raise; add arm overhead for dead bug",tooHard:"Two-leg calf raise"}},
+      {exercise:"BW Calf Raise",sets:2,reps:"25–30 each",rest:"45s",sw:"BW",superset:false,notes:"Single-leg, high reps. Pause at top.",tg:{start:"BW.",tooEasy:"Jump at top",tooHard:"Two-leg calf raise"}},
     ]};
 }
 function travelUpperB(){
@@ -494,7 +491,6 @@ function travelUpperB(){
       {exercise:"Backpack Row + Prone Y-T-W (Superset)",sets:4,reps:"10–12 + 10 each position",rest:"75s after pair",sw:"pack / BW",superset:true,notes:"Backpack row then prone Y-T-W (Y=upper back, T=mid back, W=rear delt). 2s hold each position.",tg:{start:"10–15 lb pack for rows. BW Y-T-W.",tooEasy:"More weight in pack",tooHard:"Lighter pack; shorter holds"}},
       {exercise:"Decline Push-Up + Prone Y-Raise (Superset)",sets:3,reps:"12–15 + 12",rest:"60s after pair",sw:"BW",superset:true,notes:"Feet on bed, upper chest emphasis. Prone Y for rear delt.",tg:{start:"BW.",tooEasy:"Feet higher",tooHard:"Standard push-up"}},
       {exercise:"Towel Curl + Tricep Dip (Superset)",sets:3,reps:"10–12 + 10–15",rest:"60s after pair",sw:"BW",superset:true,notes:"Towel curl: foot resistance. Dip: hands on chair seat behind you.",tg:{start:"BW.",tooEasy:"More foot pressure; feet elevated for dip",tooHard:"Less tension; shorter dip range"}},
-      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"20 total + 30s",rest:"45s after pair",sw:"BW",superset:true,notes:"Same core circuit.",tg:{start:"BW.",tooEasy:"Add weight",tooHard:"Reduce range"}},
     ]};
 }
 function travelLowerB(){
@@ -504,14 +500,18 @@ function travelLowerB(){
       {exercise:"Single-Leg RDL",sets:4,reps:"12 each",rest:"90s",sw:"BW",superset:false,notes:"Primary hamstring work. 3s descent, full control.",tg:{start:"BW. 3s descent.",tooEasy:"Touch floor",tooHard:"Hold wall"}},
       {exercise:"Nordic Curl + BW Bulgarian Split Squat (Superset)",sets:3,reps:"5–8 + 12 each",rest:"90s after pair",sw:"BW",superset:true,notes:"Nordic: feet under bed/luggage. Split squat: add small jump for intensity.",tg:{start:"BW both.",tooEasy:"More Nordic range; add jump to BSS",tooHard:"Shorter Nordic; no jump"}},
       {exercise:"Single-Leg Glute Bridge + Reverse Nordic (Superset)",sets:3,reps:"15 each + 8–10",rest:"75s after pair",sw:"BW",superset:true,notes:"Single-leg bridge: 2s hold at top. Reverse nordic: kneel, lean back as far as possible.",tg:{start:"BW.",tooEasy:"Elevated foot for bridge; hold water bottle for RN",tooHard:"Two-leg bridge; shorter lean"}},
-      {exercise:"BW Lateral Lunge + Bicycle Crunch (Superset)",sets:3,reps:"12 each + 20 total",rest:"50s after pair",sw:"BW",superset:true,notes:"Same core/adductor work.",tg:{start:"BW.",tooEasy:"Add jump to lunge",tooHard:"Shorter range"}},
-      {exercise:"BW Calf Raise + Plank (Superset)",sets:2,reps:"25–30 each + 45s",rest:"45s after pair",sw:"BW",superset:true,notes:"",tg:{start:"BW.",tooEasy:"Jump at top; feet elevated plank",tooHard:"Two-leg calf; shorten plank"}},
+      {exercise:"BW Lateral Lunge",sets:3,reps:"12 each",rest:"50s",sw:"BW",superset:false,notes:"Adductor stretch and lateral quad work.",tg:{start:"BW.",tooEasy:"Add jump at top",tooHard:"Shorter range"}},
+      {exercise:"BW Calf Raise",sets:2,reps:"25–30 each",rest:"45s",sw:"BW",superset:false,notes:"Single-leg, pause at top.",tg:{start:"BW.",tooEasy:"Jump at top",tooHard:"Two-leg calf raise"}},
     ]};
 }
-function travelPeloton(){
-  return {day:"Wednesday",label:"Hotel Cardio",type:"cardio",estTime:"40 min",ss:false,
+function travelWednesday(){
+  return {day:"Wednesday",label:"Core + Hotel Cardio",type:"lift",estTime:"~50 min",ss:false,
+    why:"Core circuit first (~14 min, same 3 supersets as regular Wednesday), then Zone 2 cardio in hotel gym or stairwell.",
     sessions:[
-      {exercise:"Hotel Gym Bike/Treadmill OR Stairwell",sets:1,reps:"35 min",rest:"—",sw:"—",notes:"Hotel gym: 35 min Zone 2 pace. No gym: stairwell intervals — 10 floors × 5 rounds with 2 min rest. Or 30–40 min brisk walk outside. Zone 2 equivalent only — no HIIT this week."},
+      {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Rotation/obliques + anti-extension. Slow bicycle crunch — 2s per rep. Hollow body: arms by sides, lower back stays flat."},
+      {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"45 crunches: 15 standard, 15 left oblique, 15 right oblique. Leg raise: control the descent."},
+      {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Dead bug: opposite arm and leg, lower back flat. Plank: squeeze glutes and abs. Then do cardio."},
+      {exercise:"Hotel Cardio — Bike, Treadmill, or Stairwell",sets:1,reps:"35 min",rest:"—",sw:"—",peloton:true,notes:"35 min Zone 2 equivalent. Hotel gym: bike or treadmill at conversational pace. No gym: stairwell (10 floors × 5 rounds, 2 min rest) or 30–40 min brisk walk. No HIIT this week."},
     ]};
 }
 
@@ -533,7 +533,7 @@ function buildSchedule(phaseNum, schedMode, bwMode){
       {exercise:"Post-ride Stretch",sets:1,reps:"5 min",rest:"—",sw:"—",peloton:true,notes:"Hip flexors, quads, lower back."},
     ]
   };
-  const wed = isTravel ? travelPeloton() : coreBeforeZ2;
+  const wed = isTravel ? travelWednesday() : coreBeforeZ2;
 
   const ub = isTravel ? travelUpperB() : {day:"Thursday",label:`Upper B — Shoulders & Back`, type:"lift",estTime:"~50 min",ss:false,why:"Shoulders and back primary, chest secondary. 72 hours since Upper A. OHP leads as primary compound.",sessions:upperB(phaseNum)};
   const lb = isTravel ? travelLowerB() : {day:"Friday",  label:`Lower B — Hamstring Primary`,type:"lift",estTime:"~47 min",ss:false,why:"Hamstring primary, quad secondary. Core has moved off lower days — Lower B is now purely lifting.",sessions:lowerB(phaseNum)};
@@ -793,6 +793,85 @@ function startRestTimer(seconds){
 function stopAllTimers(){
   clearInterval(_timerInterval);_timerInterval=null;
   clearInterval(_elapsedInterval);_elapsedInterval=null;
+}
+
+// ═══════════════════════════════════════════
+// TIMED CORE EXERCISE FLOW (Wed/Sat core days)
+// ═══════════════════════════════════════════
+// Returns {name, secs} if the item has a timed part (reps like "30s" or "45s"), else null
+function getTimedPart(item){
+  for(const part of item.parts){
+    const m=part.reps.match(/^(\d+)s$/);
+    if(m)return {name:part.name,secs:parseInt(m[1])};
+  }
+  return null;
+}
+
+function startTransitionTimer(){
+  clearInterval(_timerInterval);_timerInterval=null;
+  _timerInterval=setInterval(async()=>{
+    const w=S.workout;
+    if(!w||w.phase!=="transition")return;
+    const remaining=Math.max(0,Math.ceil((w.transitionEnd-Date.now())/1000));
+    if(remaining<=0){
+      clearInterval(_timerInterval);_timerInterval=null;
+      await playTone(1);
+      w.phase="timed";
+      w.timedEnd=Date.now()+w.timedExercise.secs*1000;
+      startTimedExerciseTimer();
+      render();
+    } else {
+      const el=document.getElementById("wf-trans-count");
+      if(el)el.textContent=fmtMSS(remaining);
+    }
+  },250);
+}
+
+function startTimedExerciseTimer(){
+  clearInterval(_timerInterval);_timerInterval=null;
+  _timerInterval=setInterval(async()=>{
+    const w=S.workout;
+    if(!w||w.phase!=="timed")return;
+    const remaining=Math.max(0,Math.ceil((w.timedEnd-Date.now())/1000));
+    if(remaining<=0){
+      clearInterval(_timerInterval);_timerInterval=null;
+      await playTone(2);
+      vibrate();
+      afterTimedExercise();
+      render();
+    } else {
+      const el=document.getElementById("wf-timed-count");
+      if(el)el.textContent=fmtMSS(remaining);
+      const fill=document.getElementById("wf-timed-fill");
+      if(fill){
+        const pct=((w.timedEnd-Date.now())/(w.timedExercise.secs*1000))*100;
+        fill.style.width=Math.max(0,Math.min(100,pct))+"%";
+      }
+    }
+  },250);
+}
+
+function afterTimedExercise(){
+  const w=S.workout;
+  if(!w)return;
+  const item=getCurrentItem();
+  const isLastSet=w.timedIsLastSet;
+  if(isLastSet){
+    const isLastExercise=(w.qIdx===w.queue.length-1);
+    if(isLastExercise){
+      w.phase="done";
+      stopAllTimers();
+      releaseWakeLock();
+    } else {
+      w.restAdvancesQueue=true;
+      w.phase="resting";
+      startRestTimer(item.restSecs);
+    }
+  } else {
+    w.setNum++;
+    w.phase="resting";
+    startRestTimer(item.restSecs);
+  }
 }
 
 function startElapsedTimer(){
@@ -1113,6 +1192,16 @@ function getNextInfo(w){
     const item=w.queue[w.qIdx+1]||null;
     return item?{item,setNum:1}:null;
   }
+  if(w.phase==="transition"||w.phase==="timed"){
+    // After timed exercise: either next set of same item, or next item
+    if(w.timedIsLastSet){
+      const item=w.queue[w.qIdx+1]||null;
+      return item?{item,setNum:1}:null;
+    } else {
+      const item=w.queue[w.qIdx]||null;
+      return item?{item,setNum:(w.setNum+1)}:null;
+    }
+  }
   return null;
 }
 
@@ -1185,6 +1274,19 @@ function completeCurrentPart(){
   w.totalSets++;
 
   const isLastSet=(w.setNum>=item.sets);
+
+  // Check for timed exercise (core days: Hollow Body Hold, Plank, etc.)
+  const timedPart=w.coreDay?getTimedPart(item):null;
+  if(timedPart){
+    if(isLastSet)w.setNum=item.sets;
+    w.timedExercise=timedPart;
+    w.timedIsLastSet=isLastSet;
+    w.phase="transition";
+    w.transitionEnd=Date.now()+10000;
+    startTransitionTimer();
+    render();
+    return;
+  }
 
   if(isLastSet){
     w.setNum=item.sets;
@@ -1674,6 +1776,10 @@ function renderWorkoutOverlay(){
     renderRestPhase(body,w,item);
   } else if(w.phase==="logging"){
     renderLoggingPhase(body,w,item);
+  } else if(w.phase==="transition"){
+    renderTransitionPhase(body,w);
+  } else if(w.phase==="timed"){
+    renderTimedPhase(body,w);
   } else if(w.phase==="done"){
     renderDonePhase(body,w);
   }
@@ -1698,7 +1804,7 @@ function renderWarmupPhase(body,w){
     box.appendChild(dv({id:"wf-wu-switch",style:{
       background:"#e8c54730",border:"2px solid #e8c547",borderRadius:"8px",
       padding:"10px 16px",textAlign:"center",margin:"6px 0",
-      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"22px",
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"36px",
       letterSpacing:"3px",color:"#e8c547",
     }},step.switchPrompt||"SWITCH SIDES"));
   } else {
@@ -1730,8 +1836,8 @@ function renderWarmupPhase(body,w){
         display:"flex",alignItems:"center",justifyContent:"center",
         fontSize:"8px",color:"#0c0d10",fontFamily:"Impact,sans-serif",
       }},isDone?"✓":isCurrent?"▶":""),
-      dv({cls:"ss",style:{fontSize:"12px",color:isCurrent?"#fff":isDone?"#555":"#777"}},ex.name),
-      dv({cls:"mm",style:{marginLeft:"auto",fontSize:"10px",color:isCurrent?"#9b7fd4":"#444"}},ex.duration+"s")
+      dv({cls:"ss",style:{fontSize:"18px",color:isCurrent?"#fff":isDone?"#555":"#777"}},ex.name),
+      dv({cls:"mm",style:{marginLeft:"auto",fontSize:"14px",color:isCurrent?"#9b7fd4":"#444"}},ex.duration+"s")
     ));
   });
   box.appendChild(list);
@@ -2064,6 +2170,52 @@ function renderLoggingPhase(body,w,item){
 
   // ── SECTION 3: NEXT EXERCISE ─────────────────
   renderNextPreview(body,w);
+}
+
+function renderTransitionPhase(body,w){
+  const remaining=Math.max(0,Math.ceil((w.transitionEnd-Date.now())/1000));
+  const box=dv({cls:"wf-warmup-box",style:{gap:"20px"}});
+  box.appendChild(dv({style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"14px",
+    letterSpacing:"4px",color:"#e8c547",
+  }},"GET READY"));
+  box.appendChild(dv({style:{
+    fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
+    fontSize:"42px",fontWeight:"700",color:"#fff",lineHeight:"1.2",textAlign:"center",
+  }},w.timedExercise.name));
+  box.appendChild(dv({style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"14px",
+    letterSpacing:"4px",color:"#9b7fd4",
+  }},"STARTING IN"));
+  box.appendChild(dv({id:"wf-trans-count",style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"110px",
+    color:"#e8c547",letterSpacing:"4px",lineHeight:"1",
+  }},fmtMSS(remaining)));
+  body.appendChild(box);
+}
+
+function renderTimedPhase(body,w){
+  const remaining=Math.max(0,Math.ceil((w.timedEnd-Date.now())/1000));
+  const pct=((w.timedEnd-Date.now())/(w.timedExercise.secs*1000))*100;
+  const box=dv({cls:"wf-warmup-box",style:{gap:"20px"}});
+  box.appendChild(dv({style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"14px",
+    letterSpacing:"4px",color:"#9b7fd4",
+  }},"HOLD"));
+  box.appendChild(dv({style:{
+    fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
+    fontSize:"42px",fontWeight:"700",color:"#fff",lineHeight:"1.2",textAlign:"center",
+  }},w.timedExercise.name));
+  box.appendChild(dv({id:"wf-timed-count",style:{
+    fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"110px",
+    color:"#9b7fd4",letterSpacing:"4px",lineHeight:"1",
+  }},fmtMSS(remaining)));
+  const pb=dv({cls:"wf-prog-bar",style:{width:"100%"}});
+  pb.appendChild(dv({id:"wf-timed-fill",cls:"wf-prog-fill",style:{
+    width:Math.max(0,Math.min(100,pct))+"%",background:"#9b7fd4",
+  }}));
+  box.appendChild(pb);
+  body.appendChild(box);
 }
 
 function renderDonePhase(body,w){
