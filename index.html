@@ -246,26 +246,26 @@ function upperA(ph){
   const sets_press = ph<=2?4:5;
   const reps_press = ph===1?"10–12":ph===2?"8":ph===3?"5":"5–6";
   const rest_press = ph<=2?"90s":ph===3?"2.5 min":"2.5 min";
-  const sw_press   = ph===1?"40 lbs":ph===2?"40 lbs":ph===3?"45 lbs":"45–50 lbs";
+  const sw_press   = ph===1?"40 lbs":ph===2?"45 lbs":ph===3?"50 lbs":"50–55 lbs";
 
   const sets_row   = ph<=2?4:5;
   const reps_row   = ph===1?"10–12 each":ph===2?"8 each":ph===3?"5 each":"5–6 each";
   const rest_row   = ph<=2?"90s after pair":ph===3?"2 min":"2 min";
   const sw_row     = ph===1?"40 lbs":ph===2?"45 lbs":ph===3?"50 lbs":"50 lbs";
 
-  const reps_flye  = ph<=2?"12–15":ph===3?"10–12":"10–12";
-  const sw_flye    = ph===1?"25 lbs":ph===2?"25–30 lbs":ph===3?"30 lbs":"30 lbs";
-  const reps_pull  = ph<=2?"12":ph===3?"10":"10";
-  const sw_pull    = ph===1?"30 lbs":ph===2?"30 lbs":"30–35 lbs";
+  const reps_flye  = ph===1?"12–15":ph===2?"10–12":ph===3?"8–10":"8–10";
+  const sw_flye    = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30 lbs":"30–35 lbs";
+  const reps_pull  = ph===1?"12":ph===2?"10":ph===3?"8":"8";
+  const sw_pull    = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"40 lbs":"40–45 lbs";
 
-  const reps_lat   = ph<=2?"12–15":ph===3?"12":"12–15";
-  const sw_lat     = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
-  const reps_rfyl  = ph<=2?"12–15":ph===3?"12":"12–15";
-  const sw_rfyl    = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
+  const reps_lat   = ph<=2?"12–15":"12";
+  const sw_lat     = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
+  const reps_rfyl  = ph<=2?"12–15":"12";
+  const sw_rfyl    = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
 
-  const reps_curl  = ph<=2?"10–12":ph===3?"8":"8–10";
-  const sw_curl    = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"25 lbs":"25–30 lbs";
-  const reps_tri   = ph<=2?"12–15":ph===3?"10":"10–12";
+  const reps_curl  = ph===1?"10–12":ph===2?"8–10":ph===3?"8":"8";
+  const sw_curl    = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"30 lbs":"30 lbs";
+  const reps_tri   = ph===1?"12–15":ph===2?"10–12":ph===3?"10":"10–12";
   const sw_tri_ohd = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35–40 lbs":"40 lbs";
   const sw_cgp     = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30–35 lbs":"35 lbs";
 
@@ -298,27 +298,27 @@ function upperB(ph){
   const reps_csr = ph===1?"10–12 each":ph===2?"8 each":ph===3?"5–6 each":"5–6 each";
   const sw_csr   = ph===1?"35 lbs":ph===2?"40 lbs":ph===3?"45 lbs":"45–50 lbs";
 
-  const reps_inc = ph<=2?"10–12":ph===3?"8":"8–10";
-  const sw_inc   = ph===1?"35 lbs":ph===2?"35 lbs":ph===3?"40 lbs":"40–45 lbs";
+  const reps_inc = ph===1?"10–12":ph===2?"8":ph===3?"8":"8–10";
+  const sw_inc   = ph===1?"35 lbs":ph===2?"40 lbs":ph===3?"45 lbs":"45–50 lbs";
   const reps_lat = ph<=2?"12–15":"12";
-  const sw_lat   = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
+  const sw_lat   = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
 
-  const reps_fyl = ph<=2?"12–15":"10–12";
-  const sw_fyl   = ph===1?"25 lbs":ph===2?"25–30 lbs":ph===3?"30 lbs":"30 lbs";
+  const reps_fyl = ph===1?"12–15":ph===2?"10–12":ph===3?"8–10":"8–10";
+  const sw_fyl   = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30 lbs":"30–35 lbs";
   const reps_rfb = ph<=2?"12–15":"12";
-  const sw_rfb   = ph===1?"12 lbs":ph===2?"15 lbs":"15 lbs";
+  const sw_rfb   = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
 
-  const reps_pull = ph<=2?"12":ph===3?"10":"10";
-  const sw_pull   = ph===1?"30 lbs":ph===2?"30 lbs":"30–35 lbs";
+  const reps_pull = ph===1?"12":ph===2?"10":ph===3?"8":"8";
+  const sw_pull   = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"40 lbs":"40–45 lbs";
 
-  const reps_tri  = ph<=2?"12–15":ph===3?"10":"10–12";
+  const reps_tri  = ph===1?"12–15":ph===2?"10–12":ph===3?"10":"10–12";
   const sw_tri    = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35–40 lbs":"40 lbs";
 
-  const reps_xbc = ph<=2?"10–12 each":ph===3?"8 each":"8–10 each";
-  const sw_xbc   = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30 lbs":"30–35 lbs";
-  const reps_skl = ph<=2?"10–12":ph===3?"8":"8–10";
-  const sw_skl   = ph===1?"15 lbs":ph===2?"20 lbs":ph===3?"20 lbs":"20–25 lbs";
-  const sw_conc  = ph===1?"20 lbs":ph===2?"20 lbs":ph===3?"20 lbs":"20–25 lbs";
+  const reps_xbc = ph===1?"10–12 each":ph===2?"8–10 each":ph===3?"8 each":"8–10 each";
+  const sw_xbc   = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"35 lbs":"35 lbs";
+  const reps_skl = ph===1?"10–12":ph===2?"8–10":ph===3?"8":"8–10";
+  const sw_skl   = ph===1?"15 lbs":ph===2?"20 lbs":ph===3?"25 lbs":"25 lbs";
+  const sw_conc  = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"30 lbs":"30 lbs";
 
   return [
     {exercise:"DB Overhead Press + Chest-Supported Row (Superset)",sets:sets_ohp,reps:`${reps_ohp} + ${reps_csr}`,rest:rest_ohp,sw:`${sw_ohp} / ${sw_csr}`,superset:true,
@@ -346,7 +346,7 @@ function lowerA(ph){
   const sets_sq   = ph<=2?4:5;
   const reps_sq   = ph===1?"12–15":ph===2?"8–10":ph===3?"6–8":"6–8";
   const rest_sq   = ph<=2?"2 min":ph>=3?"2.5 min":"2 min";
-  const sw_sq     = ph===1?"40 lbs":ph===2?"40 lbs":ph===3?"45–50 lbs":"50 lbs";
+  const sw_sq     = ph===1?"40 lbs":ph===2?"45 lbs":ph===3?"50 lbs":"50–55 lbs";
 
   const sets_bss  = ph<=2?3:4;
   const reps_bss  = ph===1?"10 each":ph===2?"8 each":ph===3?"6–8 each":"6–8 each";
@@ -354,15 +354,15 @@ function lowerA(ph){
   const sw_bss    = ph===1?"20 lbs each":ph===2?"25 lbs each":ph===3?"30 lbs each":"30–35 lbs each";
 
   const reps_rdl  = ph===1?"12":ph===2?"10":"8";
-  const sw_rdl    = ph===1?"35 lbs each":ph===2?"40 lbs each":"40–45 lbs each";
+  const sw_rdl    = ph===1?"35 lbs each":ph===2?"40 lbs each":ph===3?"45 lbs each":"50 lbs each";
 
-  const reps_ht   = ph===1?"12–15":ph===2?"10–12":"10";
-  const sw_ht     = ph===1?"40 lbs":ph===2?"40 lbs":"40–45 lbs";
+  const reps_ht   = ph===1?"12–15":ph===2?"10–12":ph===3?"8–10":"8–10";
+  const sw_ht     = ph===1?"40 lbs":ph===2?"45 lbs":ph===3?"50 lbs":"55 lbs";
 
-  const reps_ll   = ph===1?"10 each":"10 each";
-  const sw_ll     = ph===1?"15 lbs each":ph===2?"20 lbs each":"20 lbs each";
-  const reps_lc   = ph===1?"10–12":"10";
-  const sw_lc     = ph===1?"20 lbs":ph===2?"20 lbs":"20–25 lbs";
+  const reps_ll   = "10 each";
+  const sw_ll     = ph===1?"15 lbs each":ph===2?"20 lbs each":ph===3?"25 lbs each":"25–30 lbs each";
+  const reps_lc   = ph===1?"10–12":ph===2?"10":ph===3?"8":"8";
+  const sw_lc     = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"30 lbs":"30 lbs";
 
   return [
     {exercise:"DB Goblet Squat",sets:sets_sq,reps:reps_sq,rest:rest_sq,sw:sw_sq,superset:false,
@@ -387,16 +387,16 @@ function lowerB(ph){
   const sets_rdl  = ph<=2?4:5;
   const reps_rdl  = ph===1?"8–10":ph===2?"6–8":ph===3?"5":"5–6";
   const rest_rdl  = ph<=2?"2 min":"2.5 min";
-  const sw_rdl    = ph===1?"45 lbs each":ph===2?"45 lbs each":ph===3?"50 lbs each":"50 lbs each";
+  const sw_rdl    = ph===1?"45 lbs each":ph===2?"50 lbs each":ph===3?"55 lbs each":"55–60 lbs each";
 
   const reps_nc   = ph===1?"5–8":ph===2?"5–8":ph===3?"6–8":"6–8";
   const sw_nc     = "BW";
 
   const reps_bss  = ph===1?"12 each":ph===2?"10 each":"8–10 each";
-  const sw_bss    = ph===1?"20 lbs each":ph===2?"25 lbs each":"30 lbs each";
+  const sw_bss    = ph===1?"20 lbs each":ph===2?"25 lbs each":ph===3?"30 lbs each":"30–35 lbs each";
 
-  const reps_ht   = ph===1?"15":ph===2?"12–15":"12";
-  const sw_ht     = ph===1?"40 lbs":ph===2?"40 lbs":"40–45 lbs";
+  const reps_ht   = ph===1?"15":ph===2?"12–15":ph===3?"10":"10";
+  const sw_ht     = ph===1?"40 lbs":ph===2?"45 lbs":ph===3?"50 lbs":"55 lbs";
   const reps_rn   = ph===1?"8–10":"8–10";
   const sw_rn     = "BW";
 
@@ -410,9 +410,9 @@ function lowerB(ph){
     {exercise:"DB Hip Thrust + Reverse Nordic Curl (Superset)",sets:3,reps:`${reps_ht} + 8–10`,rest:"75s after pair",sw:`${sw_ht} / BW`,superset:true,
      why:"Glute concentric (hip thrust) + quad eccentric (reverse nordic) — completely different muscles. Reverse nordic: kneel upright on soft surface, lean back as far as you can control. Trains rectus femoris in a lengthened position squats don't reach. Even 10–15° of lean is meaningful.",
      tg:{start:`${sw_ht} hip thrust. BW reverse nordic — any lean at all is productive.`,tooEasy:"Hip thrust: add 5 lbs. Reverse nordic: hold light DB at chest",tooHard:"Hip thrust: lower back aching → reduce. Reverse nordic: shorter lean"}},
-    {exercise:"Lateral Lunge + Single-Leg Calf Raise (Superset)",sets:3,reps:`10 each + 15–20 each`,rest:"50s after pair",sw:`${ph===1?"15 lbs each / 20 lbs":ph===2?"20 lbs each / 25 lbs":"20 lbs each / 25–30 lbs"}`,superset:true,
+    {exercise:"Lateral Lunge + Single-Leg Calf Raise (Superset)",sets:3,reps:`10 each + 15–20 each`,rest:"50s after pair",sw:`${ph===1?"15 lbs each / 20 lbs":ph===2?"20 lbs each / 25 lbs":ph===3?"25 lbs each / 25–30 lbs":"25–30 lbs each / 30 lbs"}`,superset:true,
      why:"Adductors (lateral lunge) + calves (single-leg calf raise) — completely different muscles, no fatigue overlap. Efficient pairing that saves ~3 minutes vs doing them separately. Use a step for the calf raise — full ROM, heel drops below step at the bottom.",
-     tg:{start:`${ph===1?"15 lbs each":ph===2?"20 lbs each":"20 lbs each"} lunge. ${ph===1?"20 lbs":ph===2?"25 lbs":"25–30 lbs"} calf raise.`,tooEasy:"Lunge: add 5 lbs. Calf: 20 reps, no burn → add 5 lbs",tooHard:"Lunge: knee caving → reduce weight. Calf: cramping → reduce weight"}},
+     tg:{start:`${ph===1?"15 lbs each":ph===2?"20 lbs each":ph===3?"25 lbs each":"25–30 lbs each"} lunge. ${ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"25–30 lbs":"30 lbs"} calf raise.`,tooEasy:"Lunge: add 5 lbs. Calf: 20 reps, no burn → add 5 lbs",tooHard:"Lunge: knee caving → reduce weight. Calf: cramping → reduce weight"}},
   ];
 }
 
