@@ -891,16 +891,17 @@ function startElapsedTimer(){
 const WU_UPPER_EXS=[
   {name:"Arm circles — forward",duration:30},
   {name:"Arm circles — backward",duration:30},
-  {name:"Shoulder rolls",duration:30},
+  {name:"Shoulder rolls",duration:30,switchAt:15,switchPrompt:"Switch direction"},
   {name:"Thoracic rotations",duration:30},
   {name:"Chest opener (hands behind back)",duration:30},
-  {name:"Wrist circles",duration:30},
+  {name:"Wrist circles",duration:30,switchAt:15,switchPrompt:"Switch direction"},
+  {name:"Warmup Pushups",reps:"10–15 reps",note:"Bodyweight only. Controlled tempo — 2 seconds down, 1 second up. This primes the chest and triceps for pressing. Tap Complete when done.",repBased:true},
 ];
 const WU_LOWER_EXS=[
-  {name:"Hip circles",duration:30},
-  {name:"Leg swings — front to back",duration:30},
-  {name:"Leg swings — side to side",duration:30},
-  {name:"Ankle rotations",duration:30},
+  {name:"Hip circles",duration:30,switchAt:15,switchPrompt:"Switch direction"},
+  {name:"Leg swings — front to back",duration:30,switchAt:15,switchPrompt:"Switch sides"},
+  {name:"Leg swings — side to side",duration:30,switchAt:15,switchPrompt:"Switch sides"},
+  {name:"Ankle rotations",duration:30,switchAt:15,switchPrompt:"Switch sides"},
   {name:"Bodyweight good morning",duration:30},
   {name:"Deep squat hold",duration:30},
 ];
@@ -910,7 +911,7 @@ const WU_CORE_EXS=[
   {name:"Supine knee hug",duration:30},
   {name:"Bird dog — slow",duration:30,switchAt:15,switchPrompt:"SWITCH SIDES"},
   {name:"Spinal twist stretch",duration:30,switchAt:15,switchPrompt:"SWITCH SIDES — drop knees to other side"},
-  {name:"Hip flexor stretch",duration:30,switchAt:15,switchPrompt:"SWITCH SIDES"},
+  {name:"Hip flexor stretch",duration:30,switchAt:15,switchPrompt:"Switch sides"},
 ];
 
 function getWarmupExercises(dayLabel){
@@ -930,11 +931,15 @@ function startWarmupStep(){
     render();
     return;
   }
-  w.warmupEnd=Date.now()+step.duration*1000;
-  w.warmupTotal=step.duration;
   w.warmupSwitchFired=false;
   w.warmupSwitchActive=false;
   clearInterval(_timerInterval);
+  if(step.repBased){
+    render();
+    return;
+  }
+  w.warmupEnd=Date.now()+step.duration*1000;
+  w.warmupTotal=step.duration;
   _timerInterval=setInterval(async ()=>{
     const remaining=Math.ceil((w.warmupEnd-Date.now())/1000);
     if(remaining<=0){
@@ -1229,8 +1234,10 @@ function renderNextPreview(container,w){
         fontSize:"11px",letterSpacing:"4px",color:"#333",padding:"4px 0",
       }},"━━━ THEN ━━━"));
     }
+    const progRaw=(part.weight&&part.weight!=="BW"&&part.weight!=="—")?part.weight:"";
+    const progNum=progRaw?progRaw.match(/(\d+\.?\d*)/):null;
     const lastUsed=S.exerciseWeights[part.name];
-    const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
+    const rawWeight=progNum?progRaw:(lastUsed?lastUsed.weight:"");
     const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*)/):null;
     const wtNum=numMatch?numMatch[1]:"—";
     const showLbs=wtNum&&wtNum!=="—";
@@ -1790,6 +1797,69 @@ function renderWorkoutOverlay(){
 
 function renderWarmupPhase(body,w){
   const step=w.warmupExercises[w.warmupIdx]||{name:"",duration:30};
+
+  // Mini exercise list — shared between timed and rep-based views
+  const list=dv({style:{width:"100%",display:"flex",flexDirection:"column",gap:"10px",marginTop:"8px"}});
+  w.warmupExercises.forEach((ex,i)=>{
+    const isCurrent=i===w.warmupIdx;
+    const isDone=i<w.warmupIdx;
+    list.appendChild(dv({style:{
+      display:"flex",alignItems:"center",gap:"16px",padding:"10px 14px",
+      borderRadius:"6px",
+      background:isCurrent?"#9b7fd418":"transparent",
+      border:isCurrent?"1px solid #9b7fd440":"1px solid transparent",
+      opacity:isDone?".3":"1",
+    }},
+      dv({style:{
+        width:"36px",height:"36px",borderRadius:"50%",flexShrink:0,
+        background:isDone?"#9b7fd4":isCurrent?"#9b7fd4":"#1e2028",
+        border:isDone?"none":isCurrent?"none":"1px solid #333",
+        display:"flex",alignItems:"center",justifyContent:"center",
+        fontSize:"18px",color:"#0c0d10",fontFamily:"Impact,sans-serif",
+      }},isDone?"✓":isCurrent?"▶":""),
+      dv({cls:"ss",style:{fontSize:"54px",color:isCurrent?"#fff":isDone?"#555":"#777"}},ex.name),
+      dv({cls:"mm",style:{marginLeft:"auto",fontSize:"42px",color:isCurrent?"#9b7fd4":"#444",whiteSpace:"nowrap"}},
+        ex.repBased?(ex.reps||"reps"):ex.duration+"s")
+    ));
+  });
+
+  const skipBtn=bt({cls:"wf-skip-btn",onClick:()=>{
+    clearInterval(_timerInterval);_timerInterval=null;
+    w.phase="active";
+    render();
+  }},"SKIP WARMUP");
+
+  // ── Rep-based warmup step (e.g., pushups) ──────────────────
+  if(step.repBased){
+    body.appendChild(dv({style:{textAlign:"center",marginBottom:"6px"}},
+      dv({cls:"wf-label",style:{color:"#9b7fd4"}},"WARM-UP — PRESSING PRIMER")
+    ));
+    const box=dv({cls:"wf-warmup-box"});
+    box.appendChild(dv({cls:"wf-warmup-exname"},step.name));
+    box.appendChild(dv({style:{
+      fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"36px",
+      color:"#e8c547",letterSpacing:"2px",
+    }},step.reps||""));
+    if(step.note){
+      box.appendChild(dv({style:{
+        fontFamily:"'Courier New',Courier,monospace",fontSize:"14px",
+        color:"#777",lineHeight:"1.6",maxWidth:"340px",
+      }},step.note));
+    }
+    box.appendChild(list);
+    body.appendChild(box);
+    body.appendChild(bt({cls:"wf-complete-btn",onClick:()=>{
+      w.warmupIdx++;
+      if(w.warmupIdx>=w.warmupExercises.length){w.phase="active";}
+      else{startWarmupStep();}
+      render();
+    }},"COMPLETE"));
+    body.appendChild(skipBtn);
+    renderNextPreview(body,w);
+    return;
+  }
+
+  // ── Timed warmup step ──────────────────────────────────────
   const remaining=Math.max(0,Math.ceil((w.warmupEnd-Date.now())/1000));
   const pct=w.warmupEnd?((w.warmupEnd-Date.now())/(w.warmupTotal*1000))*100:100;
 
@@ -1816,38 +1886,10 @@ function renderWarmupPhase(body,w){
   const pb=dv({cls:"wf-prog-bar",style:{width:"100%"}});
   pb.appendChild(dv({id:"wf-wu-fill",cls:"wf-prog-fill",style:{width:Math.max(0,Math.min(100,pct))+"%",background:"#9b7fd4"}}));
   box.appendChild(pb);
-
-  // Mini exercise list showing all steps
-  const list=dv({style:{width:"100%",display:"flex",flexDirection:"column",gap:"4px",marginTop:"4px"}});
-  w.warmupExercises.forEach((ex,i)=>{
-    const isCurrent=i===w.warmupIdx;
-    const isDone=i<w.warmupIdx;
-    list.appendChild(dv({style:{
-      display:"flex",alignItems:"center",gap:"8px",padding:"5px 8px",
-      borderRadius:"5px",
-      background:isCurrent?"#9b7fd418":"transparent",
-      border:isCurrent?"1px solid #9b7fd440":"1px solid transparent",
-      opacity:isDone?".3":"1",
-    }},
-      dv({style:{
-        width:"16px",height:"16px",borderRadius:"50%",flexShrink:0,
-        background:isDone?"#9b7fd4":isCurrent?"#9b7fd4":"#1e2028",
-        border:isDone?"none":isCurrent?"none":"1px solid #333",
-        display:"flex",alignItems:"center",justifyContent:"center",
-        fontSize:"8px",color:"#0c0d10",fontFamily:"Impact,sans-serif",
-      }},isDone?"✓":isCurrent?"▶":""),
-      dv({cls:"ss",style:{fontSize:"18px",color:isCurrent?"#fff":isDone?"#555":"#777"}},ex.name),
-      dv({cls:"mm",style:{marginLeft:"auto",fontSize:"14px",color:isCurrent?"#9b7fd4":"#444"}},ex.duration+"s")
-    ));
-  });
   box.appendChild(list);
   body.appendChild(box);
 
-  body.appendChild(bt({cls:"wf-skip-btn",onClick:()=>{
-    clearInterval(_timerInterval);_timerInterval=null;
-    w.phase="active";
-    render();
-  }},"SKIP WARMUP"));
+  body.appendChild(skipBtn);
   // Show first exercise coming up after warmup
   renderNextPreview(body,w);
 }
