@@ -1125,6 +1125,7 @@ function startWorkout(dayObj, phaseKey, schedMode, bwMode, deloadMode, dayIdx){
     warmupTotal:30,
     warmupSwitchFired:false,
     warmupSwitchActive:false,
+    appleWatchDismissed:false,
   };
 
   // For cardio/rest days use checklist mode
@@ -1132,6 +1133,9 @@ function startWorkout(dayObj, phaseKey, schedMode, bwMode, deloadMode, dayIdx){
     S.workout.phase="cardio";
     S.workout.cardioChecked=sessions.map(()=>false);
   }
+
+  // Auto-dismiss Apple Watch reminder after 5 seconds
+  setTimeout(()=>{if(S.workout)S.workout.appleWatchDismissed=true;render();},5000);
 
   requestWakeLock();
   startElapsedTimer();
@@ -1242,25 +1246,27 @@ function renderNextPreview(container,w){
     const wtNum=numMatch?numMatch[1]:"—";
     const showLbs=wtNum&&wtNum!=="—";
 
-    const row=dv({style:{
-      display:"grid",gridTemplateColumns:"1fr auto auto",
-      gap:"10px 16px",alignItems:"center",
-    }});
-    // LEFT: name
-    row.appendChild(dv({cls:"ss",style:{
-      fontSize:"28px",fontWeight:"700",color:"#fff",lineHeight:"1.2",
+    // Name (bold, large)
+    wrap.appendChild(dv({style:{
+      fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif",
+      fontSize:"32px",fontWeight:"700",color:"#fff",lineHeight:"1.2",marginBottom:"6px",
     }},part.name));
-    // CENTER: reps
+    const row=dv({style:{
+      display:"grid",gridTemplateColumns:"1fr 1fr",
+      gap:"8px",alignItems:"center",
+    }});
+    // LEFT: reps
     row.appendChild(dv({style:{
       fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
-      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",
-      textAlign:"center",whiteSpace:"nowrap",
+      fontSize:"56px",color:"#e8c547",letterSpacing:"1px",
+      textAlign:"left",whiteSpace:"nowrap",lineHeight:"1",
     }},part.reps||"—"));
     // RIGHT: weight
     const wtRight=dv({style:{textAlign:"right",whiteSpace:"nowrap"}});
     wtRight.appendChild(dv({style:{
       fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
-      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",lineHeight:"1",
+      fontSize:"56px",color:"#e8c547",letterSpacing:"1px",lineHeight:"1",
+      fontWeight:"700",
     }},showLbs?wtNum+" lbs":"—"));
     row.appendChild(wtRight);
     wrap.appendChild(row);
@@ -1798,6 +1804,27 @@ function renderWorkoutOverlay(){
 function renderWarmupPhase(body,w){
   const step=w.warmupExercises[w.warmupIdx]||{name:"",duration:30};
 
+  // ── Apple Watch reminder banner ─────────────────────────────
+  if(!w.appleWatchDismissed){
+    const banner=dv({style:{
+      background:"#1a1f2e",border:"1px solid #3a4a7a",borderRadius:"10px",
+      padding:"12px 14px",marginBottom:"10px",
+      display:"flex",alignItems:"center",gap:"10px",
+    }});
+    banner.appendChild(dv({style:{fontSize:"24px",flexShrink:0}},"⌚"));
+    banner.appendChild(dv({style:{
+      flex:"1",fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
+      fontSize:"15px",color:"#c8d4f0",lineHeight:"1.4",
+    }},"Don't forget to start a workout in Apple Fitness on your Apple Watch."));
+    banner.appendChild(bt({style:{
+      background:"none",border:"1px solid #3a4a7a",borderRadius:"6px",
+      color:"#7a9fd4",fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
+      fontSize:"11px",letterSpacing:"2px",padding:"6px 10px",
+      cursor:"pointer",flexShrink:0,whiteSpace:"nowrap",
+    },onClick:()=>{w.appleWatchDismissed=true;render();}},"GOT IT"));
+    body.appendChild(banner);
+  }
+
   // Mini exercise list — shared between timed and rep-based views
   const list=dv({style:{width:"100%",display:"flex",flexDirection:"column",gap:"10px",marginTop:"8px"}});
   w.warmupExercises.forEach((ex,i)=>{
@@ -1977,32 +2004,32 @@ function renderActivePhase(body,w,item){
       card.appendChild(dv({cls:"wf-exlabel",style:{marginBottom:"10px"}},label));
     }
 
-    // Three-column row: name | reps | weight
+    // Name row (smaller, above the big numbers)
+    card.appendChild(dv({style:{
+      fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif",
+      fontSize:"22px",fontWeight:"700",color:"#aaa",lineHeight:"1.2",marginBottom:"8px",
+    }},part.name));
+
+    // Big numbers row: reps | weight
     const row=dv({style:{
       display:"grid",
-      gridTemplateColumns:"1fr auto 1fr",
+      gridTemplateColumns:"1fr 1fr",
       alignItems:"center",
       gap:"10px",
     }});
 
-    // LEFT: exercise name
-    row.appendChild(dv({style:{
-      fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif",
-      fontSize:"28px",fontWeight:"700",color:"#fff",lineHeight:"1.2",
-    }},part.name));
-
-    // CENTER: reps
+    // LEFT: reps
     row.appendChild(dv({style:{
       fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
-      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",
-      textAlign:"center",whiteSpace:"nowrap",
+      fontSize:"64px",color:"#e8c547",letterSpacing:"1px",
+      textAlign:"left",whiteSpace:"nowrap",lineHeight:"1",
     }},part.reps));
 
     // RIGHT: weight
     const wtRight=dv({style:{textAlign:"right"}});
     wtRight.appendChild(dv({style:{
       fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",
-      fontSize:"28px",color:"#e8c547",letterSpacing:"1px",
+      fontSize:"64px",color:"#e8c547",letterSpacing:"1px",
       lineHeight:"1",whiteSpace:"nowrap",
     }},showLbs?wtNum+" lbs":wtNum));
     if(lastUsed){
@@ -2084,9 +2111,11 @@ function renderLoggingPhase(body,w,item){
     item.parts.forEach(part=>{
       const row=dv({cls:"wf-log-row"});
       row.appendChild(dv({cls:"wf-log-exname"},part.name));
+      const progRaw=(part.weight&&part.weight!=="BW"&&part.weight!=="—")?part.weight:"";
+      const progNum=progRaw?progRaw.match(/(\d+\.?\d*)/):null;
       const lastUsed=S.exerciseWeights[part.name];
-      const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
-      const numMatch=rawWeight.match(/(\d+\.?\d*)/);
+      const rawWeight=progNum?progRaw:(lastUsed?lastUsed.weight:"");
+      const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*/):null;
       const prefill=numMatch?numMatch[1]:"";
       const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
       inputs[part.name]=inp;
@@ -2187,9 +2216,11 @@ function renderLoggingPhase(body,w,item){
     item.parts.forEach(part=>{
       const row=dv({cls:"wf-log-row"});
       row.appendChild(dv({cls:"wf-log-exname"},part.name));
+      const progRaw=(part.weight&&part.weight!=="BW"&&part.weight!=="—")?part.weight:"";
+      const progNum=progRaw?progRaw.match(/(\d+\.?\d*)/):null;
       const lastUsed=S.exerciseWeights[part.name];
-      const rawWeight=lastUsed?lastUsed.weight:(part.weight&&part.weight!=="BW"&&part.weight!=="—"?part.weight:"");
-      const numMatch=rawWeight.match(/(\d+\.?\d*)/);
+      const rawWeight=progNum?progRaw:(lastUsed?lastUsed.weight:"");
+      const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*/):null;
       const prefill=numMatch?numMatch[1]:"";
       const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
       inputs[part.name]=inp;
