@@ -2115,7 +2115,7 @@ function renderLoggingPhase(body,w,item){
       const progNum=progRaw?progRaw.match(/(\d+\.?\d*)/):null;
       const lastUsed=S.exerciseWeights[part.name];
       const rawWeight=progNum?progRaw:(lastUsed?lastUsed.weight:"");
-      const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*/):null;
+      const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*)/):null;
       const prefill=numMatch?numMatch[1]:"";
       const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
       inputs[part.name]=inp;
@@ -2220,7 +2220,7 @@ function renderLoggingPhase(body,w,item){
       const progNum=progRaw?progRaw.match(/(\d+\.?\d*)/):null;
       const lastUsed=S.exerciseWeights[part.name];
       const rawWeight=progNum?progRaw:(lastUsed?lastUsed.weight:"");
-      const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*/):null;
+      const numMatch=rawWeight?rawWeight.match(/(\d+\.?\d*)/):null;
       const prefill=numMatch?numMatch[1]:"";
       const inp=ip({cls:"wf-log-input",placeholder:"0",value:prefill,type:"number",min:"0",step:"2.5",inputmode:"decimal"});
       inputs[part.name]=inp;
