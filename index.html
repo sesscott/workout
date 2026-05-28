@@ -256,20 +256,21 @@ function upperA(ph){
   const reps_flye  = ph===1?"12–15":ph===2?"10–12":ph===3?"8–10":"8–10";
   const sw_flye    = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30 lbs":"30–35 lbs";
   const reps_pull  = ph===1?"12":ph===2?"10":ph===3?"8":"8";
-  const sw_pull    = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"40 lbs":"40–45 lbs";
+  const sw_pull    = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"45 lbs":"45–50 lbs";
 
   const reps_lat   = ph<=2?"12–15":"12";
-  const sw_lat     = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
+  const sw_lat     = ph===1?"12 lbs":ph===2?"12 lbs":ph===3?"12 lbs":"12–15 lbs";
   const reps_rfyl  = ph<=2?"12–15":"12";
-  const sw_rfyl    = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
+  const sw_rfyl    = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"15 lbs":"15–20 lbs";
 
   const sets_acc   = ph<=2?3:4;
 
   const reps_curl  = ph===1?"10–12":ph===2?"8–10":ph===3?"8":"8";
-  const sw_curl    = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"30 lbs":"30 lbs";
+  const sw_curl_inc= ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"25 lbs":"25 lbs";
+  const sw_curl_zot= ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"20 lbs":"20 lbs";
   const reps_tri   = ph===1?"12–15":ph===2?"10–12":ph===3?"10":"10–12";
-  const sw_tri_ohd = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35–40 lbs":"40 lbs";
-  const sw_cgp     = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30–35 lbs":"35 lbs";
+  const sw_tri_ohd = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35 lbs":"40 lbs";
+  const sw_cgp     = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"30 lbs":"35 lbs";
 
   const reps_fr    = ph<=2?"12–15":"12";
   const sw_fr      = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
@@ -278,18 +279,18 @@ function upperA(ph){
     {exercise:"DB Bench Press + Single-Arm Row (Superset)",sets:sets_press,reps:`${reps_press} + ${reps_row}`,rest:rest_row,sw:`${sw_press} / ${sw_row}`,superset:true,
      why:"Push/pull superset — bench press and row use completely opposite muscles. The effective rest for each muscle is identical to straight sets, but you're done in half the time. This is validated by Weakstad et al. (2020): equivalent hypertrophy, ~40% less time.",
      tg:{start:`${sw_press} bench, ${sw_row} row — your calibrated Week 1 weights.`,tooEasy:"Both feel RPE 7 → add 5 lbs to whichever was easier",tooHard:"Second exercise form collapses → reduce it 5 lbs"}},
-    {exercise:"DB Flye + DB Pullover (Superset)",sets:sets_acc,reps:`${reps_flye} + ${reps_pull}`,rest:"50s after pair",sw:`${sw_flye} / ${sw_pull}`,superset:true,
-     why:"Chest stretch (flye) + lat stretch (pullover) — completely different muscles. Both exercises train in the lengthened position where research shows highest hypertrophy stimulus (Pedrosa et al. 2023). Bench allows arm to drop below body level — full stretch unavailable on floor.",
-     tg:{start:`${sw_flye} flye, ${sw_pull} pullover — your calibrated weights.`,tooEasy:"No stretch sensation → add 5 lbs to whichever",tooHard:"Shoulder discomfort → reduce 5 lbs on that exercise"}},
-    {exercise:"Lateral Raise + Front Raise + Reverse Fly (Superset)",sets:sets_acc,reps:`${reps_lat} + ${reps_fr} + ${reps_rfyl}`,rest:"60s after triset",sw:`${sw_lat} / ${sw_fr} / ${sw_rfyl}`,superset:true,
-     why:"Side delt (lateral raise) + front delt (front raise) + rear delt (reverse fly) — all three delt heads in one triset, zero muscle overlap. Rear delts get direct work in BOTH upper sessions — non-negotiable for posture and shoulder health. Lead with elbows on the reverse fly, stop at shoulder height. Keep front raise controlled — no swinging.",
-     tg:{start:`${sw_lat} lateral raise. ${sw_fr} front raise. ${sw_rfyl} reverse fly — feel rear delt, not traps.`,tooEasy:"Any one feels RPE 7 → add 5 lbs to that movement",tooHard:"Lateral or front raise: traps shrugging → reduce and slow down. Reverse fly: traps dominating → reduce weight"}},
-    {exercise:"Incline DB Curl + Overhead Tricep Extension (Superset)",sets:3,reps:`${reps_curl} + ${reps_tri}`,rest:"50s after pair",sw:`${sw_curl} / ${sw_tri_ohd}`,superset:true,
+    {exercise:"Incline DB Flye + DB Pullover (Superset)",sets:sets_acc,reps:`${reps_flye} + ${reps_pull}`,rest:"50s after pair",sw:`${sw_flye} / ${sw_pull}`,superset:true,
+     why:"Upper chest stretch (incline flye at 30–45°) + lat stretch (pullover) — completely different muscles. Both train in the lengthened position where research shows highest hypertrophy stimulus. Set bench to 30–45° for the flye; arm drops below body level for full lat stretch on the pullover.",
+     tg:{start:`${sw_flye} incline flye, ${sw_pull} pullover — set bench to 30–45°.`,tooEasy:"No stretch sensation → add 5 lbs to whichever",tooHard:"Shoulder discomfort → reduce 5 lbs on that exercise"}},
+    {exercise:"Lateral Raise + Reverse Fly (Superset)",sets:3,reps:`${reps_lat} + ${reps_rfyl}`,rest:"50s after pair",sw:`${sw_lat} / ${sw_rfyl}`,superset:true,
+     why:"Side delt (lateral raise) + rear delt (reverse fly) — different muscles, no fatigue overlap. Rear delts get direct work in BOTH upper sessions — non-negotiable for posture and shoulder health. Lead with elbows on the reverse fly, stop at shoulder height.",
+     tg:{start:`${sw_lat} lateral raise. ${sw_rfyl} reverse fly — feel it in the back of the shoulder.`,tooEasy:"Lateral raise: no burn → add 5 lbs. Reverse fly: no rear delt burn → add 5 lbs",tooHard:"Lateral raise: traps shrugging → reduce weight. Reverse fly: traps dominating → reduce and slow down"}},
+    {exercise:"Incline DB Curl + Overhead Tricep Extension (Superset)",sets:3,reps:`${reps_curl} + ${reps_tri}`,rest:"50s after pair",sw:`${sw_curl_inc} / ${sw_tri_ohd}`,superset:true,
      why:"Bicep and tricep — opposite muscles. Incline curl puts the bicep long head in a fully stretched position (research-backed for superior hypertrophy). Overhead extension is the single best tricep exercise — only position where the long head is fully stretched. One DB cupped with both hands for the extension.",
-     tg:{start:`${sw_curl} incline curl. ${sw_tri_ohd} overhead extension (one DB, both hands).`,tooEasy:"Both feel RPE 7 → add 5 lbs each",tooHard:"Second exercise fails → reduce it 5 lbs"}},
-    {exercise:"Zottman Curl + Close-Grip DB Press (Superset)",sets:3,reps:`${reps_curl} + ${reps_tri}`,rest:"50s after pair",sw:`${sw_curl} / ${sw_cgp}`,superset:true,
+     tg:{start:`${sw_curl_inc} incline curl. ${sw_tri_ohd} overhead extension (one DB, both hands).`,tooEasy:"Both feel RPE 7 → add 5 lbs each",tooHard:"Second exercise fails → reduce it 5 lbs"}},
+    {exercise:"Zottman Curl + Close-Grip DB Press (Superset)",sets:3,reps:`${reps_curl} + ${reps_tri}`,rest:"50s after pair",sw:`${sw_curl_zot} / ${sw_cgp}`,superset:true,
      why:"Zottman curl starts fresh — kept separate from incline curl to avoid pre-fatigue. Curl up supinated (palms up), rotate to pronated (palms down) at the top, lower slowly over 3s. The pronated eccentric trains brachioradialis and brachialis uniquely. Close-grip DB press pairs as the tricep complement — lateral and medial head emphasis. Elbows stay tucked throughout the press.",
-     tg:{start:`${sw_curl} Zottman. ${sw_cgp} close-grip press — lighter than regular bench.`,tooEasy:"Zottman: controlled descent → add 5 lbs. Press: 12 reps easy → add 5 lbs",tooHard:"Zottman: wrist discomfort → reduce 5 lbs. Press: elbows flaring → reduce 5 lbs"}},
+     tg:{start:`${sw_curl_zot} Zottman. ${sw_cgp} close-grip press — lighter than regular bench.`,tooEasy:"Zottman: controlled descent → add 5 lbs. Press: 12 reps easy → add 5 lbs",tooHard:"Zottman: wrist discomfort → reduce 5 lbs. Press: elbows flaring → reduce 5 lbs"}},
   ];
 }
 
@@ -316,19 +317,19 @@ function upperB(ph){
   const sets_acc  = ph<=2?3:4;
 
   const reps_pull = ph===1?"12":ph===2?"10":ph===3?"8":"8";
-  const sw_pull   = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"40 lbs":"40–45 lbs";
+  const sw_pull   = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"45 lbs":"45–50 lbs";
 
   const reps_fr   = ph<=2?"12–15":"12";
-  const sw_fr     = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"20 lbs":"20–25 lbs";
+  const sw_fr     = ph===1?"12 lbs":ph===2?"15 lbs":ph===3?"12 lbs":"12–15 lbs";
 
   const reps_tri  = ph===1?"12–15":ph===2?"10–12":ph===3?"10":"10–12";
-  const sw_tri    = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35–40 lbs":"40 lbs";
+  const sw_tri    = ph===1?"30 lbs":ph===2?"35 lbs":ph===3?"35 lbs":"40 lbs";
 
   const reps_xbc = ph===1?"10–12 each":ph===2?"8–10 each":ph===3?"8 each":"8–10 each";
-  const sw_xbc   = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"35 lbs":"35 lbs";
+  const sw_xbc   = ph===1?"25 lbs":ph===2?"30 lbs":ph===3?"25 lbs":"25–30 lbs";
   const reps_skl = ph===1?"10–12":ph===2?"8–10":ph===3?"8":"8–10";
   const sw_skl   = ph===1?"15 lbs":ph===2?"20 lbs":ph===3?"25 lbs":"25 lbs";
-  const sw_conc  = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"30 lbs":"30 lbs";
+  const sw_conc  = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"20 lbs":"25 lbs";
 
   return [
     {exercise:"DB Overhead Press + Chest-Supported Row (Superset)",sets:sets_ohp,reps:`${reps_ohp} + ${reps_csr}`,rest:rest_ohp,sw:`${sw_ohp} / ${sw_csr}`,superset:true,
@@ -337,10 +338,10 @@ function upperB(ph){
     {exercise:"Incline DB Press + Lateral Raise (Superset)",sets:sets_acc,reps:`${reps_inc} + ${reps_lat}`,rest:"50s after pair",sw:`${sw_inc} / ${sw_lat}`,superset:true,
      why:"Upper chest (incline press) + side delt (lateral raise) — completely different muscles. Adding lateral raises to Upper B gives side delts 2x/week frequency at 6 total direct sets. Side delts are the only muscle that cannot be hit by any compound movement — they need direct work both sessions.",
      tg:{start:`${sw_inc} incline press. ${sw_lat} lateral raise — lighter than the press.`,tooEasy:"Press: 12 reps → add 5 lbs. Raises: no burn → add 5 lbs",tooHard:"Press form breaks → reduce press. Raises: traps shrugging → reduce weight"}},
-    {exercise:"DB Flye + Reverse Fly (Superset)",sets:sets_acc,reps:`${reps_fyl} + ${reps_rfb}`,rest:"50s after pair",sw:`${sw_fyl} / ${sw_rfb}`,superset:true,
+    {exercise:"DB Flye + Reverse Fly (Superset)",sets:3,reps:`${reps_fyl} + ${reps_rfb}`,rest:"50s after pair",sw:`${sw_fyl} / ${sw_rfb}`,superset:true,
      why:"Chest stretch (flye) + rear delt (reverse fly) — completely different muscles. Flye keeps weekly chest at 13 sets. Reverse fly here is the dedicated rear delt set for Upper B. Together rear delts get 6 direct sets per week at 2x frequency — essential for posture and shoulder health at 42. Lead with elbows, stop at shoulder height.",
      tg:{start:`${sw_fyl} flye. ${sw_rfb} reverse fly — feel rear delt, not traps.`,tooEasy:"Flye: no pec stretch → add 5 lbs. Reverse fly: no rear delt burn → add 5 lbs",tooHard:"Flye: shoulder discomfort → reduce. Reverse fly: traps dominating → drop to 15 lbs"}},
-    {exercise:"DB Pullover + Front Raise (Superset)",sets:sets_acc,reps:`${reps_pull} + ${reps_fr}`,rest:"60s after pair",sw:`${sw_pull} / ${sw_fr}`,superset:true,
+    {exercise:"DB Pullover + Front Raise (Superset)",sets:3,reps:`${reps_pull} + ${reps_fr}`,rest:"60s after pair",sw:`${sw_pull} / ${sw_fr}`,superset:true,
      why:"Lat (pullover) + front delt (front raise) — completely different muscles. Pullover: arm drops below bench level, full lat stretch unavailable on the floor. Front raise fills the anterior delt gap — it's not hit by any other Upper B movement. Slight elbow bend on the pullover; raise to shoulder height on the front raise, no higher.",
      tg:{start:`${sw_pull} pullover — feel the lat stretch at the bottom. ${sw_fr} front raise — controlled, no swinging.`,tooEasy:"Pullover: 12 reps, no lat sensation → add 5 lbs. Front raise: 15 reps easy → add 5 lbs",tooHard:"Pullover: shoulder discomfort → reduce 5 lbs. Front raise: traps taking over → reduce weight"}},
     {exercise:"Cross-Body Curl + Skull Crusher (Superset)",sets:3,reps:`${reps_xbc} + ${reps_skl}`,rest:"50s after pair",sw:`${sw_xbc} / ${sw_skl}`,superset:true,
@@ -353,11 +354,11 @@ function upperB(ph){
 }
 
 function lowerA(ph){
-  const sets_sq   = ph<=2?4:5;
+  const sets_sq   = 4;
   const sets_acc  = ph<=2?3:4;
   const reps_sq   = ph===1?"12–15":ph===2?"8–10":ph===3?"6–8":"6–8";
   const rest_sq   = ph<=2?"2 min":ph>=3?"2.5 min":"2 min";
-  const sw_sq     = ph===1?"40 lbs":ph===2?"45 lbs":ph===3?"50 lbs":"50–55 lbs";
+  const sw_sq     = ph===1?"25 lbs each":ph===2?"30 lbs each":ph===3?"35 lbs each":"35–40 lbs each";
 
   const sets_bss  = ph<=2?3:4;
   const reps_bss  = ph===1?"10 each":ph===2?"8 each":ph===3?"6–8 each":"6–8 each";
@@ -372,25 +373,20 @@ function lowerA(ph){
 
   const reps_ll   = "10 each";
   const sw_ll     = ph===1?"15 lbs each":ph===2?"20 lbs each":ph===3?"25 lbs each":"25–30 lbs each";
-  const reps_lc   = ph===1?"10–12":ph===2?"10":ph===3?"8":"8";
-  const sw_lc     = ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"30 lbs":"30 lbs";
 
   return [
-    {exercise:"DB Goblet Squat",sets:sets_sq,reps:reps_sq,rest:rest_sq,sw:sw_sq,superset:false,
-     why:"Best squat pattern available with dumbbells. Upright torso, high quad emphasis. Straight sets — primary compound at near-max effort. Hip crease must pass below knee on every rep. 3s eccentric.",
-     tg:{start:`${sw_sq}. Legs are stronger than you think.`,tooEasy:"Top of rep range at RPE 7 → add 5 lbs",tooHard:"Heels rise or depth lost → reduce weight"}},
+    {exercise:"DB Suitcase Squat",sets:sets_sq,reps:reps_sq,rest:rest_sq,sw:sw_sq,superset:false,
+     why:"Suitcase squat (DBs held at sides) removes the upper body load limitation of the goblet squat, allowing heavier leg-focused loading. Same quad-dominant pattern, upright torso, full depth. Hip crease below knee every rep. 3s eccentric. Keep core braced — resist the urge to lean toward the heavier side.",
+     tg:{start:`${sw_sq}. Legs are stronger than you think.`,tooEasy:"Top of rep range → add 5 lbs each hand",tooHard:"Reduce weight, prioritize depth and upright torso"}},
     {exercise:"DB Bulgarian Split Squat",sets:sets_bss,reps:reps_bss,rest:rest_bss,sw:sw_bss,superset:false,
      why:"Comparable quad/glute activation to barbell squat (Speirs et al. 2016). Rear foot on bench. Straight sets — balance demand means pre-fatigue would compromise form. Front shin stays vertical.",
      tg:{start:`${sw_bss}. Start lighter than ego says.`,tooEasy:"Fully controlled reps → add 5 lbs each hand",tooHard:"Balance failing or knee caving → reduce weight"}},
-    {exercise:"DB Romanian Deadlift",sets:sets_acc,reps:reps_rdl,rest:"90s",sw:sw_rdl,superset:false,
+    {exercise:"DB Romanian Deadlift",sets:3,reps:reps_rdl,rest:"90s",sw:sw_rdl,superset:false,
      why:"Hip hinge — hamstrings loaded in lengthened position. Keep DBs close to legs. Feel the hamstring stretch at the bottom; don't rush it.",
      tg:{start:`${sw_rdl}.`,tooEasy:"No hamstring tension → add 5–10 lbs",tooHard:"Lower back rounding → reduce weight"}},
-    {exercise:"DB Hip Thrust + Lateral Lunge (Superset)",sets:sets_acc,reps:`${reps_ht} + ${reps_ll}`,rest:"75s after pair",sw:`${sw_ht} / ${sw_ll}`,superset:true,
+    {exercise:"DB Hip Thrust + Lateral Lunge (Superset)",sets:3,reps:`${reps_ht} + ${reps_ll}`,rest:"75s after pair",sw:`${sw_ht} / ${sw_ll}`,superset:true,
      why:"Glutes (hip thrust) + adductors (lateral lunge) — completely different muscles. Hip thrust fills the glute gap: glutes are NOT maximally contracted in squats or RDLs. Shoulders on bench increases ROM vs floor.",
      tg:{start:`${sw_ht} hip thrust, ${sw_ll} lateral lunge.`,tooEasy:"Hip thrust: add 5 lbs. Lunge: add 5 lbs",tooHard:"Hip thrust: lower back aching → reduce. Lunge: knee caving → reduce or BW"}},
-    {exercise:"DB Leg Curl (Lying) + Single-Leg Calf Raise (Superset)",sets:sets_acc,reps:`${reps_lc} + 15–20 each`,rest:"50s after pair",sw:`${sw_lc} / 20 lbs`,superset:true,
-     why:"Knee-flexion hamstring (leg curl) + calf — different muscles, efficient pair. Leg curl: lie face-down on bench, hold DB vertically between feet (soles pressing against plate). Covers the knee-flexion hamstring pattern that RDL doesn't.",
-     tg:{start:`${sw_lc} leg curl. 20 lbs calf.`,tooEasy:"Leg curl: add 5 lbs. Calf: 20 reps → add 5 lbs",tooHard:"DB slipping → lighter. Calf cramping → reduce weight"}},
   ];
 }
 
@@ -418,13 +414,13 @@ function lowerB(ph){
      tg:{start:`${sw_rdl}. This is your main lift today — treat it accordingly.`,tooEasy:"Top rep range → add 5 lbs",tooHard:"Lower back rounding → reduce weight, prioritize hinge pattern"}},
     {exercise:"Nordic Curl + DB Bulgarian Split Squat (Superset)",sets:sets_acc,reps:`5–8 + ${reps_bss}`,rest:"2 min after pair",sw:`BW / ${sw_bss}`,superset:true,
      why:"Nordic curl (knee-flexion hamstring) + split squat (quad) — opposite muscles. Nordic: anchor feet under bench, lower as slowly as possible — even 2–3 inches is real work. Use hands to push back up. Builds range over weeks.",
-     tg:{start:`BW Nordic — any range is progress. ${sw_bss} split squat.`,tooEasy:"Nordic: more range, slower descent. Split squat: add 5 lbs",tooHard:"Nordic too hard → DB leg curl at 15 lbs instead. Split squat: balance failing → reduce weight"}},
-    {exercise:"DB Hip Thrust + Reverse Nordic Curl (Superset)",sets:sets_acc,reps:`${reps_ht} + 8–10`,rest:"75s after pair",sw:`${sw_ht} / BW`,superset:true,
+     tg:{start:`BW Nordic — any range is progress. ${sw_bss} split squat.`,tooEasy:"Nordic: more range, slower descent. Split squat: add 5 lbs",tooHard:"Nordic too hard → reduce range of motion; use hands to catch yourself at the bottom. Split squat: balance failing → reduce weight"}},
+    {exercise:"DB Hip Thrust + Reverse Nordic Curl (Superset)",sets:3,reps:`${reps_ht} + 8–10`,rest:"75s after pair",sw:`${sw_ht} / BW`,superset:true,
      why:"Glute concentric (hip thrust) + quad eccentric (reverse nordic) — completely different muscles. Reverse nordic: kneel upright on soft surface, lean back as far as you can control. Trains rectus femoris in a lengthened position squats don't reach. Even 10–15° of lean is meaningful.",
      tg:{start:`${sw_ht} hip thrust. BW reverse nordic — any lean at all is productive.`,tooEasy:"Hip thrust: add 5 lbs. Reverse nordic: hold light DB at chest",tooHard:"Hip thrust: lower back aching → reduce. Reverse nordic: shorter lean"}},
-    {exercise:"Lateral Lunge + Single-Leg Calf Raise (Superset)",sets:sets_acc,reps:`10 each + 15–20 each`,rest:"50s after pair",sw:`${ph===1?"15 lbs each / 20 lbs":ph===2?"20 lbs each / 25 lbs":ph===3?"25 lbs each / 25–30 lbs":"25–30 lbs each / 30 lbs"}`,superset:true,
+    {exercise:"Lateral Lunge + Single-Leg Calf Raise (Superset)",sets:3,reps:`10 each + 15–20 each`,rest:"50s after pair",sw:`${ph===1?"15 lbs each / 20 lbs":ph===2?"20 lbs each / 25 lbs":ph===3?"25 lbs each / 20 lbs":"25–30 lbs each / 30 lbs"}`,superset:true,
      why:"Adductors (lateral lunge) + calves (single-leg calf raise) — completely different muscles, no fatigue overlap. Efficient pairing that saves ~3 minutes vs doing them separately. Use a step for the calf raise — full ROM, heel drops below step at the bottom.",
-     tg:{start:`${ph===1?"15 lbs each":ph===2?"20 lbs each":ph===3?"25 lbs each":"25–30 lbs each"} lunge. ${ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"25–30 lbs":"30 lbs"} calf raise.`,tooEasy:"Lunge: add 5 lbs. Calf: 20 reps, no burn → add 5 lbs",tooHard:"Lunge: knee caving → reduce weight. Calf: cramping → reduce weight"}},
+     tg:{start:`${ph===1?"15 lbs each":ph===2?"20 lbs each":ph===3?"25 lbs each":"25–30 lbs each"} lunge. ${ph===1?"20 lbs":ph===2?"25 lbs":ph===3?"20 lbs":"30 lbs"} calf raise.`,tooEasy:"Lunge: add 5 lbs. Calf: 20 reps, no burn → add 5 lbs",tooHard:"Lunge: knee caving → reduce weight. Calf: cramping → reduce weight"}},
   ];
 }
 
@@ -434,15 +430,15 @@ function deloadSessions(){
       why:"Deload week: same exercises, same weight, but only 2 sets per exercise. The goal is to maintain the movement patterns and neuromuscular connections while allowing accumulated fatigue to dissipate. Research shows performance rebounds ABOVE pre-deload levels after a proper deload.",
       sessions:[
         {exercise:"DB Bench Press + Single-Arm Row",sets:2,reps:"10–12 + 10–12",rest:"75s after pair",sw:"Previous Phase weight",superset:true,notes:"2 sets only. Don't add weight. This is recovery, not training."},
-        {exercise:"DB Flye + DB Pullover",sets:2,reps:"12 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
-        {exercise:"Lateral Raise + Front Raise + Reverse Fly",sets:2,reps:"12 + 12 + 12",rest:"60s after triset",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"Incline DB Flye + DB Pullover",sets:2,reps:"12 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:"Set bench to 30–45° for the flye."},
+        {exercise:"Lateral Raise + Reverse Fly",sets:2,reps:"12 + 12",rest:"50s after pair",sw:"Previous Phase weight",superset:true,notes:""},
         {exercise:"Incline DB Curl + Overhead Tricep Ext",sets:2,reps:"10 + 12",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
         {exercise:"Zottman Curl + Close-Grip DB Press",sets:2,reps:"10 + 12",rest:"50s after pair",sw:"Previous Phase weight",superset:true,notes:"2 sets. Same controlled rotation on the Zottman descent."},
       ]},
     lowerA:{day:"Tuesday",label:"Lower A — Deload",type:"deload",estTime:"~28 min",ss:false,
       why:"Deload: 2 sets per exercise. Keep the weight — reduce the volume. Core is on Monday, Wednesday, and Saturday now — Lower A is purely lifting.",
       sessions:[
-        {exercise:"DB Goblet Squat",sets:2,reps:"10",rest:"90s",sw:"Previous Phase weight",superset:false,notes:"2 sets. Full depth, controlled tempo."},
+        {exercise:"DB Suitcase Squat",sets:2,reps:"10",rest:"90s",sw:"Previous Phase weight",superset:false,notes:"2 sets. Full depth, controlled tempo. DBs at sides."},
         {exercise:"DB Bulgarian Split Squat",sets:2,reps:"8 each",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
         {exercise:"DB Romanian Deadlift",sets:2,reps:"10",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
         {exercise:"DB Hip Thrust",sets:2,reps:"12",rest:"75s",sw:"Previous Phase weight",superset:false,notes:""},
@@ -1250,7 +1246,7 @@ function renderNextPreview(container,w){
         fontSize:"11px",letterSpacing:"4px",color:"#333",padding:"4px 0",
       }},"━━━ THEN ━━━"));
     }
-    const lastUsed=S.exerciseWeights[part.name];
+    const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel];
     const isNonNumericWt=!part.weight||part.weight==="BW"||part.weight==="—"||part.weight==="Previous Phase weight";
     const progNum=isNonNumericWt?null:part.weight.match(/(\d+\.?\d*)/);
     const wtSource=lastUsed?lastUsed.weight:(progNum?part.weight:"");
@@ -1297,6 +1293,7 @@ function completeCurrentPart(){
   // Entire set (or superset round) is done in one button press
   w.partIdx=0;
   w.totalSets++;
+  w.completedSetsForCurrent=(w.completedSetsForCurrent||0)+1;
 
   const isLastSet=(w.setNum>=item.sets);
 
@@ -1364,9 +1361,29 @@ function advanceAfterRest(){
   }
 }
 
-function skipExercise(){
+function skipRemainingWork(){
   const w=S.workout;
   if(!w)return;
+  const item=getCurrentItem();
+  const completed=w.completedSetsForCurrent||0;
+  if(item&&completed>0){
+    const logMap={};
+    item.parts.forEach(p=>{
+      const lastLogged=w.loggedWeights[p.name];
+      if(lastLogged)logMap[p.name]=lastLogged;
+      else if(p.weight&&p.weight!=="BW"&&p.weight!=="—"&&p.weight!=="Previous Phase weight"){
+        const m=p.weight.match(/(\d+\.?\d*)/);
+        if(m)logMap[p.name]=m[1];
+      }
+    });
+    if(Object.keys(logMap).length>0){
+      Object.entries(logMap).forEach(([name,weight])=>{
+        w.loggedWeights[name]=weight;
+        if(!w.exerciseSets)w.exerciseSets={};
+        w.exerciseSets[name]=completed;
+      });
+    }
+  }
   advanceToNextExercise();
   render();
 }
@@ -1376,6 +1393,7 @@ function advanceToNextExercise(){
   if(!w)return;
   w.qIdx++;
   w.setNum=1;
+  w.completedSetsForCurrent=0;
   w.partIdx=0;
   if(w.qIdx>=w.queue.length){
     w.phase="done";
@@ -1433,7 +1451,7 @@ function saveSession(){
   // Update exerciseWeights
   const dateStr=new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"});
   Object.entries(w.loggedWeights).forEach(([name,weight])=>{
-    S.exerciseWeights[name]={weight,date:dateStr};
+    S.exerciseWeights[name+"||"+w.dayLabel]={weight,date:dateStr};
   });
   saveXW();
   stopAllTimers();
@@ -1694,7 +1712,7 @@ function renderPlanTab(phase,pk){
     } else {
       if(sw==="Previous Phase weight"){
         const ppParts=parseExerciseEntry(sess);
-        const ppWts=ppParts.map(p=>{const lu=S.exerciseWeights[p.name];return lu?lu.weight:null;});
+        const ppWts=ppParts.map(p=>{const lu=S.exerciseWeights[p.name+"||"+day.label];return lu?lu.weight:null;});
         const ppAllFound=ppWts.every(Boolean);
         wc.appendChild(ppAllFound
           ?sp({cls:"sbadge"},ppWts.join(" / "))
@@ -2010,7 +2028,7 @@ function renderActivePhase(body,w,item){
 
   // Build one horizontal card per exercise part
   function makeExCard(part, label){
-    const lastUsed=S.exerciseWeights[part.name];
+    const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel];
     const rawWt=part.weight||"";
     const isNonNumericWt=!rawWt||rawWt==="BW"||rawWt==="—"||rawWt==="Previous Phase weight";
     const progNum=isNonNumericWt?null:rawWt.match(/(\d+\.?\d*)/);
@@ -2076,7 +2094,7 @@ function renderActivePhase(body,w,item){
   // Button: one press per set (or superset round)
   const btnLabel=isSuperset?`COMPLETE SUPERSET ${w.setNum}`:`COMPLETE SET ${w.setNum}`;
   body.appendChild(bt({cls:"wf-complete-btn",onClick:()=>completeCurrentPart()},btnLabel));
-  body.appendChild(bt({cls:"wf-skip-btn",onClick:()=>{if(confirm("Skip this exercise?"))skipExercise();}},"SKIP EXERCISE"));
+  body.appendChild(bt({cls:"wf-skip-btn",onClick:()=>{if(confirm("Record "+((w.completedSetsForCurrent||0))+" completed sets and skip remaining?"))skipRemainingWork();}},"SKIP REMAINING SETS"));
 }
 
 function renderRestPhase(body,w,item){
@@ -2129,7 +2147,7 @@ function renderLoggingPhase(body,w,item){
     item.parts.forEach(part=>{
       const row=dv({cls:"wf-log-row"});
       row.appendChild(dv({cls:"wf-log-exname"},part.name));
-      const lastUsed=S.exerciseWeights[part.name];
+      const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel];
       const isNonNumericWt=!part.weight||part.weight==="BW"||part.weight==="—"||part.weight==="Previous Phase weight";
       const progNum=isNonNumericWt?null:part.weight.match(/(\d+\.?\d*)/);
       const wtSource=lastUsed?lastUsed.weight:(progNum?part.weight:"");
@@ -2234,7 +2252,7 @@ function renderLoggingPhase(body,w,item){
     item.parts.forEach(part=>{
       const row=dv({cls:"wf-log-row"});
       row.appendChild(dv({cls:"wf-log-exname"},part.name));
-      const lastUsed=S.exerciseWeights[part.name];
+      const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel];
       const isNonNumericWt=!part.weight||part.weight==="BW"||part.weight==="—"||part.weight==="Previous Phase weight";
       const progNum=isNonNumericWt?null:part.weight.match(/(\d+\.?\d*)/);
       const wtSource=lastUsed?lastUsed.weight:(progNum?part.weight:"");
@@ -2330,7 +2348,7 @@ function renderDonePhase(body,w){
     doneBox.appendChild(dv({cls:"bb",style:{fontSize:"10px",color:"#444",letterSpacing:"2px",marginBottom:"8px"}},"LOGGED WEIGHTS"));
     const list=dv({cls:"wf-done-exlist"});
     Object.entries(w.loggedWeights).forEach(([name,weight])=>{
-      const prev=S.exerciseWeights[name];
+      const prev=S.exerciseWeights[name+"||"+w.dayLabel];
       const isPR=prev&&parseFloat(weight)>parseFloat(prev.weight);
       const row=dv({cls:"wf-done-exrow"});
       row.appendChild(dv({cls:"exn"},name));
