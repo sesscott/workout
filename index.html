@@ -430,7 +430,7 @@ function deloadSessions(ph){
     upperA:{day:"Monday",label:"Upper A — Deload",type:"deload",estTime:"~33 min",ss:false,
       why:"Deload week: same exercises, same weight, but only 2 sets per exercise. The goal is to maintain the movement patterns and neuromuscular connections while allowing accumulated fatigue to dissipate. Research shows performance rebounds ABOVE pre-deload levels after a proper deload.",
       sessions:[
-        {exercise:"DB Bench Press + Single-Arm Row",sets:2,reps:ph<=2?"10–12 + 10–12":"5–6 + 5–6 each",rest:"75s after pair",sw:"Previous Phase weight",superset:true,notes:"2 sets only. Don't add weight. This is recovery, not training."},
+        {exercise:"DB Bench Press + Single-Arm Row",sets:2,reps:ph<=2?"10–12 + 10–12":"5–6 + 5–6 each",rest:ph<=2?"75s after pair":"2 min after pair",sw:"Previous Phase weight",superset:true,notes:"2 sets only. Don't add weight. This is recovery, not training."},
         {exercise:"Incline DB Flye + DB Pullover",sets:2,reps:ph<=2?"12 + 12":"8–10 + 8",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:"Set bench to 30–45° for the flye."},
         {exercise:"Lateral Raise + Reverse Fly",sets:2,reps:ph<=2?"12 + 12":"10 + 10",rest:"50s after pair",sw:"Previous Phase weight",superset:true,notes:""},
         {exercise:"Incline DB Curl + Overhead Tricep Ext",sets:2,reps:ph<=2?"10 + 12":"8 + 8",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
@@ -439,8 +439,8 @@ function deloadSessions(ph){
     lowerA:{day:"Tuesday",label:"Lower A — Deload",type:"deload",estTime:"~28 min",ss:false,
       why:"Deload: 2 sets per exercise. Keep the weight — reduce the volume. Core is on Monday, Wednesday, and Saturday now — Lower A is purely lifting.",
       sessions:[
-        {exercise:"DB Suitcase Squat",sets:2,reps:ph<=2?"10":"6–8",rest:"90s",sw:"Previous Phase weight",superset:false,notes:"2 sets. Full depth, controlled tempo. DBs at sides."},
-        {exercise:"DB Bulgarian Split Squat",sets:2,reps:ph<=2?"8 each":"6–8 each",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"DB Suitcase Squat",sets:2,reps:ph<=2?"10":"6–8",rest:ph<=2?"90s":"2.5 min",sw:"Previous Phase weight",superset:false,notes:"2 sets. Full depth, controlled tempo. DBs at sides."},
+        {exercise:"DB Bulgarian Split Squat",sets:2,reps:ph<=2?"8 each":"6–8 each",rest:ph<=2?"90s":"2 min",sw:"Previous Phase weight",superset:false,notes:""},
         {exercise:"DB Romanian Deadlift",sets:2,reps:ph<=2?"10":"6–8",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
         {exercise:"DB Hip Thrust",sets:2,reps:ph<=2?"12":"8–10",rest:"75s",sw:"Previous Phase weight",superset:false,notes:""},
       ]},
@@ -452,7 +452,7 @@ function deloadSessions(ph){
     upperB:{day:"Thursday",label:"Upper B — Deload",type:"deload",estTime:"~35 min",ss:false,
       why:"Deload: 2 sets only. Same weight as previous phase.",
       sessions:[
-        {exercise:"DB Overhead Press + Chest-Supported Row",sets:2,reps:ph<=2?"10 + 10":"5–6 + 5–6 each",rest:"75s after pair",sw:"Previous Phase weight",superset:true,notes:""},
+        {exercise:"DB Overhead Press + Chest-Supported Row",sets:2,reps:ph<=2?"10 + 10":"5–6 + 5–6 each",rest:ph<=2?"75s after pair":"2 min after pair",sw:"Previous Phase weight",superset:true,notes:""},
         {exercise:"Incline DB Press + Lateral Raise",sets:2,reps:ph<=2?"10 + 12":"8 + 10",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
         {exercise:"DB Flye + Reverse Fly",sets:2,reps:ph<=2?"12 + 12":"8–10 + 10",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
         {exercise:"DB Pullover + Front Raise",sets:2,reps:ph<=2?"12 + 12":"8 + 10",rest:"60s after pair",sw:"Previous Phase weight",superset:true,notes:""},
@@ -462,8 +462,8 @@ function deloadSessions(ph){
     lowerB:{day:"Friday",label:"Lower B — Deload",type:"deload",estTime:"~30 min",ss:false,
       why:"Deload: 2 sets only. If you feel fresh, resist the urge to add sets.",
       sessions:[
-        {exercise:"DB Romanian Deadlift",sets:2,reps:ph<=2?"8":"5–6",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
-        {exercise:"DB Bulgarian Split Squat",sets:2,reps:ph<=2?"8 each":"6–8 each",rest:"90s",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"DB Romanian Deadlift",sets:2,reps:ph<=2?"8":"5–6",rest:ph<=2?"90s":"2.5 min",sw:"Previous Phase weight",superset:false,notes:""},
+        {exercise:"DB Bulgarian Split Squat",sets:2,reps:ph<=2?"8 each":"6–8 each",rest:ph<=2?"90s":"2 min",sw:"Previous Phase weight",superset:false,notes:""},
         {exercise:"DB Hip Thrust",sets:2,reps:ph<=2?"12":"8–10",rest:"75s",sw:"Previous Phase weight",superset:false,notes:""},
         {exercise:"Nordic Curl (assisted)",sets:2,reps:ph<=2?"5":"5–6",rest:"90s",sw:"BW",superset:false,notes:"Easier range — just maintain the pattern."},
       ]},
@@ -2163,6 +2163,31 @@ function renderRestPhase(body,w,item){
   }},"SKIP REST"));
   restBox.appendChild(rbtns);
   body.appendChild(restBox);
+
+  // Target weight for next set
+  const wtCards=dv({style:{display:"flex",flexDirection:"column",gap:"6px",margin:"12px 0 4px 0"}});
+  item.parts.forEach(part=>{
+    const _dlMap={"Upper A — Deload":"Upper A — Chest & Back","Lower A — Deload":"Lower A — Quad & Glute Primary","Upper B — Deload":"Upper B — Shoulders & Back","Lower B — Deload":"Lower B — Hamstring Primary"};
+    const _lbl=_dlMap[w.dayLabel]||w.dayLabel;
+    let lu=S.exerciseWeights[part.name+"||"+_lbl];
+    if(!lu){const fb=Object.keys(S.exerciseWeights).find(k=>k.startsWith(part.name+"||"));if(fb)lu=S.exerciseWeights[fb];}
+    const isNonNumeric=!part.weight||part.weight==="BW"||part.weight==="—"||part.weight==="Previous Phase weight";
+    const progNum=isNonNumeric?null:part.weight.match(/(\d+\.?\d*)/);
+    const wtSource=lu?lu.weight:(progNum?part.weight:null);
+    const numMatch=wtSource?wtSource.match(/(\d+\.?\d*)/):null;
+    const wtNum=numMatch?numMatch[1]:null;
+    if(wtNum){
+      const row=dv({style:{display:"flex",justifyContent:"space-between",alignItems:"center",background:"#13151b",border:"1px solid #1e2028",borderRadius:"6px",padding:"8px 12px"}});
+      row.appendChild(dv({style:{fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",fontSize:"14px",color:"#888",fontWeight:"600"}},part.name));
+      row.appendChild(dv({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"28px",color:"#e8c547",letterSpacing:"1px"}},wtNum+" lbs"));
+      wtCards.appendChild(row);
+    }
+  });
+  if(wtCards.children.length>0){
+    body.appendChild(dv({style:{fontFamily:"Impact,'Arial Narrow',Arial,sans-serif",fontSize:"10px",letterSpacing:"3px",color:"#444",textAlign:"center",marginTop:"14px"}},"NEXT SET TARGET"));
+    body.appendChild(wtCards);
+  }
+
   renderNextPreview(body,w);
 }
 
@@ -2181,7 +2206,8 @@ function renderLoggingPhase(body,w,item){
     item.parts.forEach(part=>{
       const row=dv({cls:"wf-log-row"});
       row.appendChild(dv({cls:"wf-log-exname"},part.name));
-      const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel];
+      const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel]||
+        (()=>{const fb=Object.keys(S.exerciseWeights).find(k=>k.startsWith(part.name+"||"));return fb?S.exerciseWeights[fb]:null;})();
       const isNonNumericWt=!part.weight||part.weight==="BW"||part.weight==="—"||part.weight==="Previous Phase weight";
       const progNum=isNonNumericWt?null:part.weight.match(/(\d+\.?\d*)/);
       const wtSource=lastUsed?lastUsed.weight:(progNum?part.weight:"");
@@ -2286,7 +2312,8 @@ function renderLoggingPhase(body,w,item){
     item.parts.forEach(part=>{
       const row=dv({cls:"wf-log-row"});
       row.appendChild(dv({cls:"wf-log-exname"},part.name));
-      const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel];
+      const lastUsed=S.exerciseWeights[part.name+"||"+w.dayLabel]||
+        (()=>{const fb=Object.keys(S.exerciseWeights).find(k=>k.startsWith(part.name+"||"));return fb?S.exerciseWeights[fb]:null;})();
       const isNonNumericWt=!part.weight||part.weight==="BW"||part.weight==="—"||part.weight==="Previous Phase weight";
       const progNum=isNonNumericWt?null:part.weight.match(/(\d+\.?\d*)/);
       const wtSource=lastUsed?lastUsed.weight:(progNum?part.weight:"");
