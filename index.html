@@ -549,7 +549,7 @@ function buildSchedule(phaseNum, schedMode, bwMode){
 
   const coreBlock = [
     {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:2,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Same as Wednesday. Slow bicycle crunch — 2s per rep, full rotation. Hollow body: lower back stays flat."},
-    {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"45 crunches: 15 standard, 15 left oblique, 15 right oblique. Leg raise: control the descent — don't drop."},
+    {exercise:"Crunch + Lying Leg Raise (Superset)",sets:2,reps:"45 total + 20",rest:"45s after pair",sw:"10 lbs / BW",superset:true,notes:"45 crunches: 15 standard, 15 left oblique, 15 right oblique — all holding 10 lb DB at chest. Leg raise: bodyweight, control the descent — don't drop."},
     {exercise:"Dead Bug + Plank (Superset)",sets:2,reps:"10 each side + 45s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Dead bug: lower back pressed to floor throughout. Plank: actively squeeze glutes and abs. Then get on the bike."},
   ];
   let sat;
@@ -580,9 +580,23 @@ function buildSchedule(phaseNum, schedMode, bwMode){
   return schedMode==="mf" ? full.slice(0,5) : full;
 }
 
+const deloadCoreBlock = [
+  {exercise:"Bicycle Crunch + Hollow Body Hold (Superset)",sets:1,reps:"40 total + 30s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Deload: 1 set only. Same cues — slow bicycle crunch, lower back flat on hollow hold."},
+  {exercise:"Crunch + Lying Leg Raise (Superset)",sets:1,reps:"45 total + 20",rest:"45s after pair",sw:"10 lbs / BW",superset:true,notes:"Deload: 1 set only. 15 standard, 15 left oblique, 15 right oblique — all holding 10 lb DB at chest. Leg raise: bodyweight, control the descent."},
+  {exercise:"Dead Bug + Plank (Superset)",sets:1,reps:"10 each side + 30s",rest:"45s after pair",sw:"BW / BW",superset:true,notes:"Deload: 1 set only. Plank drops to 30s. Lower back pressed to floor on dead bug throughout."},
+];
+
 function buildDeloadSchedule(schedMode, phaseNum){
   const dl = deloadSessions(phaseNum||1);
-  const full = [dl.upperA, dl.lowerA, dl.peloton, dl.upperB, dl.lowerB, {...rest_day,day:"Saturday",label:"Rest"}, {...rest_day}];
+  const full = [
+    dl.upperA,
+    dl.lowerA,
+    {day:"Wednesday",label:"Core + Peloton — Easy Zone 2",type:"cardio",estTime:"~60 min",ss:false,sessions:[...deloadCoreBlock,...dl.peloton.sessions]},
+    dl.upperB,
+    dl.lowerB,
+    {day:"Saturday",label:"Core + Rest",type:"lift",estTime:"~15 min",ss:false,why:"Deload Saturday: core only, 1 set per superset. Maintains movement patterns without meaningful fatigue. No Peloton — full rest after the core circuit.",sessions:[...deloadCoreBlock]},
+    {...rest_day},
+  ];
   return schedMode==="mf" ? full.slice(0,5) : full;
 }
 
