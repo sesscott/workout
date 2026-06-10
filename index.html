@@ -588,15 +588,30 @@ const deloadCoreBlock = [
 
 function buildDeloadSchedule(schedMode, phaseNum){
   const dl = deloadSessions(phaseNum||1);
-  const full = [
-    dl.upperA,
-    dl.lowerA,
-    {day:"Wednesday",label:"Core + Peloton — Easy Zone 2",type:"cardio",estTime:"~60 min",ss:false,sessions:[...deloadCoreBlock,...dl.peloton.sessions]},
-    dl.upperB,
-    dl.lowerB,
-    {day:"Saturday",label:"Core + Rest",type:"lift",estTime:"~15 min",ss:false,why:"Deload Saturday: core only, 1 set per superset. Maintains movement patterns without meaningful fatigue. No Peloton — full rest after the core circuit.",sessions:[...deloadCoreBlock]},
-    {...rest_day},
-  ];
+  const deloadWed = {
+    day:"Wednesday",
+    label:"Core + Peloton — Easy Zone 2",
+    type:"lift",
+    estTime:"~60 min",
+    ss:false,
+    sessions:[
+      ...deloadCoreBlock,
+      {exercise:"Peloton Power Zone Endurance Ride",sets:1,reps:"35 min",rest:"—",sw:"—",peloton:true,notes:"Easy Zone 2. Low end of Zone 2 — this is active recovery, genuinely easy."},
+      {exercise:"Post-ride Stretch",sets:1,reps:"5 min",rest:"—",sw:"—",peloton:true,notes:"Hip flexors, quads, lower back."},
+    ]
+  };
+  const deloadSat = {
+    day:"Saturday",
+    label:"Core + Rest",
+    type:"lift",
+    estTime:"~15 min",
+    ss:false,
+    why:"Deload Saturday: core only, 1 set per superset. Maintains movement patterns without meaningful fatigue. No Peloton — full rest after the core circuit.",
+    sessions:[
+      ...deloadCoreBlock,
+    ]
+  };
+  const full = [dl.upperA, dl.lowerA, deloadWed, dl.upperB, dl.lowerB, deloadSat, {...rest_day}];
   return schedMode==="mf" ? full.slice(0,5) : full;
 }
 
@@ -1342,14 +1357,27 @@ function completeCurrentPart(){
     w.setNum=item.sets;
     const isLastExercise=(w.qIdx===w.queue.length-1);
     if(w.coreDay){
-      if(isLastExercise){
-        // Last set of last exercise on core day — skip rest, go straight to summary
+      const hasWeightedPart=item.parts.some(p=>{
+        if(!p.weight||p.weight==="BW"||p.weight==="—"||p.weight==="Previous Phase weight")return false;
+        return /\d/.test(p.weight);
+      });
+      if(hasWeightedPart){
+        w.phase="logging";
+        w._logSaved=false;
+        if(isLastExercise){
+          w.logRestSecs=0;
+          render();
+        } else {
+          w.logRestSecs=item.restSecs;
+          render();
+          startLogTimer(item.restSecs);
+        }
+      } else if(isLastExercise){
         w.phase="done";
         stopAllTimers();
         releaseWakeLock();
         render();
       } else {
-        // More exercises remain — rest then advance
         w.restAdvancesQueue=true;
         w.phase="resting";
         startRestTimer(item.restSecs);
